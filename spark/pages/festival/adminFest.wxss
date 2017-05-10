@@ -1,0 +1,9 @@
+view.avatar-area {
+  text-align: left;
+}
+image.avatar {
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: 5px;
+}

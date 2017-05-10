@@ -1,0 +1,1 @@
+<map longitude="{{map.longitude}}" latitude="{{map.latitude}}" style=""></map>

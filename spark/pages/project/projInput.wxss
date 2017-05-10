@@ -1,0 +1,17 @@
+view.form-item {
+  padding: 8px 0;
+  background-color: #fff;
+}
+view.form-item .item-title {
+  font-weight: normal;
+  line-height: 50px;
+}
+view.cmnt-box {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 10px;
+  margin: 10px 0;
+}
+textarea {
+  width: 100%;
+}

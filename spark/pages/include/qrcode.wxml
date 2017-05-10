@@ -1,0 +1,4 @@
+<view class="container-white qr-container">
+  <image class="qrcode" src="https://www.kingco.tech/static/qrcode/{{name}}.png"></image>
+  <text>微信扫一扫，{{str}}</text>
+</view>

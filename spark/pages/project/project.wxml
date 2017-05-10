@@ -1,0 +1,58 @@
+<import src="../include/template.wxml" />
+
+<view class="container" wx:if="{{projid}}"> 
+  <view class="page-title">
+    <navigator url="/pages/project/projInput?projid={{projid}}&field=title&content={{title}}" hover-class="navigator-hover">
+      <text>{{title}}</text>
+    </navigator>
+  </view>
+  <view class="interval-title">
+    项目简介
+  </view>
+  <view class="para content-area">
+    <navigator url="/pages/project/projInput?projid={{projid}}&field=intro&content={{intro}}" hover-class="navigator-hover">{{intro}}</navigator>
+  </view>
+  <view class="interval-title">
+    项目成员
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{members}}"> 
+      <image class="avatar" src="{{item.avatar}}"></image>
+      <view class="del-box">
+        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/tinydel.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
+      </view>
+      {{item.nickName}}
+    </view>
+    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
+      <image class="avatar icon" src="../../img/iconadd.png" bindtap="toMemberAdd"></image>
+      添加队员
+    </view>
+    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
+      <image class="avatar icon" src="../../img/icondel.png" bindtap="toMemberDel"></image>
+      删除队员
+    </view>
+  </view>
+  <template is="comment" data="{{comments}}"/>
+  <view class="btn-area">
+    <navigator url="/pages/project/projProgress?projid={{projid}}" hover-class="navigator-hover">
+      <button type="primary">火种节流程</button>
+    </navigator>
+  </view>
+</view>
+
+<view class="container-white" wx:else >
+  <view class="noproj-text">
+    <text>暂无项目，扫一扫管理员提供的二维码创建项目</text>
+    <text>或扫一扫CEO提供的二维码加入项目</text>
+  </view>
+  <view class="noproj-box create" wx:if="{{isCaptain==1 || festid === 1}}" >
+    <navigator url="/pages/project/newProj" hover-class="navigator-hover">
+      <image mode="aspectFit" src="../../img/iconadd.png"></image>
+    </navigator>
+    <text>点击创建项目吧!</text>
+  </view>
+  <view class="noproj-box scan" wx:else >
+    <image mode="aspectFit" src="../../img/scan.png" bindtap="scanCode"></image>
+    <text>扫一扫</text>
+  </view>
+</view>
