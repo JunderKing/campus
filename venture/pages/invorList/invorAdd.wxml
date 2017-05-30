@@ -1,0 +1,42 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="area-title">
+      个人信息(必填)
+    </view>
+    <view class="form-area column">
+      <view class="form-item border big">
+        <view class="item-title">
+          姓名
+        </view>
+        <view class="item-content">
+          <input name="realName" type="text" placeholder="请输入真实姓名"/>
+        </view>
+      </view>
+      <view class="form-item border big">
+        <view class="item-title">
+          公司
+        </view>
+        <view class="item-content">
+          <input name="company" type="text" placeholder="请输入所在公司"/>
+        </view>
+      </view>
+      <view class="form-item border big">
+        <view class="item-title">
+          职位
+        </view>
+        <view class="item-content">
+          <input name="position" type="text" placeholder="请输入职位"/>
+        </view>
+      </view>
+    </view>
+    <view class="area-title">
+      个人简介(必填)
+    </view>
+    <view class="form-area">
+      <textarea name="intro" auto-height placeholder="请填写不少于15字的个人简介" max-length="500"/>
+    </view>
+    <view class="btn-area">
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+</view>

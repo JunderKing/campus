@@ -1,33 +1,14 @@
 Page({
   data: {
-    avatar: '',
-    nickName: 'JunderKing',
+    avatarUrl: '',
+    nickName: '',
     role: '开始创业者'
   },
 
-  onShow: function(){
-    var that = this
-    getApp().updateUserInfo(function(){
-      that.setData({
-        cpRole: getApp().globalData.cpRole
-      })
-    })
-    var role = '开始创业者'
-    var appData = getApp().globalData
-    if (appData.sfRole === 2) {
-      role = '管理员'
-    } else if (appData.sfRole === 1) {
-      role = "组织者"
-    } else if (appData.isMentor === 1) {
-      role = '创业导师'
-    } else if (appData.isCaptain === 1) {
-      role = 'CEO'
-    }
+  onLoad: function(){
     this.setData({
-      avatar: appData.avatar,
-      nickName: appData.nickName,
-      role: role,
-      cpRole: appData.cpRole
+      avatarUrl: getApp().gdata.avatarUrl,
+      nickName: getApp().gdata.nickName
     })
   },
 
@@ -39,19 +20,19 @@ Page({
   },
 
   toOrgerAdd: function(){
-    wx.showLoading({
+    wx.showToast({
       title: '请稍后……',
-      mask: true
+      icon: 'loading'
     })
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/getQrcode',
+      url: 'http://www.campus.com/api/spark/getQrcode',
       method: 'POST',
       data: {
         path: '/pages/include/start?role=4',
         name: 'orger'
       },
       success: function(res){
-        wx.hideLoading();
+        wx.hideToast();
         if (res.data) {
           wx.navigateTo({
             url: '/pages/include/qrcode?role=4'
@@ -60,38 +41,54 @@ Page({
       }
     })
   },
-  getWxcode: function(){
-    wx.showLoading({
-      title: '数据加载中...',
-      mask: true
+
+  toWxcode: function(e){
+    var type = parseInt(e.currentTarget.dataset.type)
+    var fileName = 'wxcode' + type
+    var that = this
+    wx.showToast({
+      title: '数据加载中',
+      icon: 'loading',
+      duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/getWxcode',
-      method: 'POST',
+      url: 'http://www.campus.com/api/common/getWxcode',
+      method: 'GET',
       data: {
-        path: '/pages/include/start',
-        name: 'wxcode'
+        type: type,
+        name: fileName,
+        path: '/pages/include/start'
       },
       success: function(res){
-        if (res.data) {
-          wx.downloadFile({
-            url: 'https://www.kingco.tech/static/qrcode/wxcode.png',
-            success: function(res){
-              wx.hideLoading();
-              if (res.tempFilePath) {
-                wx.previewImage({
-                  urls: [res.tempFilePath],
-                  success: function(){
-                    wx.showToast({
-                      title: '分享给好友吧！',
-                      icon: 'success'
-                    })
-                  }
-                })
-              }
-            }
-          })
+        console.log('getWxcode=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
         }
+        var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
+        var title = '小程序'
+        if (type === 1) {
+          title = '火种节小程序'
+        } else if (type === 2) {
+          title = '加速营小程序'
+        } else {
+          title = '创投会小程序'
+        }
+        wx.showModal({
+          title: title,
+          content: '页面跳转后，点击右上角菜单，选择『识别图中二维码』即可打开小程序',
+          showCancel: false,
+          success: function(){
+            wx.previewImage({
+              urls: [url]
+            })
+          }
+        })
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
       }
     })
   }

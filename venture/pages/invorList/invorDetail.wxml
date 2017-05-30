@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="info-area">
+    <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
+    <text class="info-name">{{realName}}</text>
+    <text class="info-tag">{{company}}|{{position}}</text>
+  </view>
+  <view class="content-area">
+    {{intro}}
+  </view>
+</view>

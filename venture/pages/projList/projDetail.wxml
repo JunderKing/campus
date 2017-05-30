@@ -1,0 +1,42 @@
+<import src="../include/template.wxml" />
+
+<view class="container" wx:if="{{projId}}"> 
+  <view class="page-title-area">
+    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
+    <view class="title-info-box">
+      <text class="info-name">{{name}}</text>
+      <text class="info-province">{{province}}</text>
+      <text class="info-tag">{{tag}}</text>
+    </view>
+  </view>
+  <view class="para content-area">
+    <navigator hover-class="navigator-hover">{{intro}}</navigator>
+  </view>
+  <view class="interval-title">
+    项目成员
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{members}}"> 
+      <image class="avatar" src="{{item.avatarUrl}}"></image>
+      <view class="del-box">
+        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
+      </view>
+      <text class="avatar-nickName">{{item.nickName}}</text>
+    </view>
+  </view>
+  <!--<template is="comment" data="{{comments}}"/>-->
+  <view class="footer-anchor">
+    <view class="page-footer">
+      <view class="footer-item">
+        <image mode="scaleToFill" src="/img/icon/spark_cur.png"></image>
+        <text>评论</text>
+      </view>
+      <view class="footer-item">
+        <image mode="scaleToFill" src="/img/icon/spark_cur.png"></image>
+        <text>打分</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+

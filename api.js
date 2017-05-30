@@ -1,9 +1,14 @@
+CampusVc({
+  'login': {},
+  'getQrcode': {}
+})
 SparkFestival({
   'login': {
     post: {
       code: 'string',
       rawData: 'string',
       iv: 'string'
+      type: 'spark|speedup|venture|campus'
     },
     success: {
       errcode: 0,
@@ -58,9 +63,10 @@ SparkFestival({
     success: {
       errcode: 0,
       errmsg: 'success'
+      curFestid: 'int'
     }
   },
-  'addOrger': {
+  'addSfOrger': {
     post: {
       uid: 'int'
     },
@@ -69,7 +75,7 @@ SparkFestival({
       errmsg: 'success'
     }
   },
-  'delOrger': {
+  'delSfOrger': {
     post: {
       uid: 'int'
     },
@@ -176,6 +182,7 @@ SparkFestival({
   },
   'addFest': {
     post: {
+      uid: 'int',
       title: 'string',
       intro: 'string',
       addr: 'string',
@@ -190,7 +197,6 @@ SparkFestival({
   },
   'getFestInfo': {
     post: {
-      uid: 'int',
       festid: 'int'
     },
     success: {
@@ -201,6 +207,7 @@ SparkFestival({
         intro: 'string',
         addr: 'string',
         logos: [{
+          logoid: 'int',
           url: 'string'
         }],
         stime: 'int',
@@ -208,7 +215,7 @@ SparkFestival({
       }
     }
   },
-  'getAllFestInfo': {
+  'getAllFests': {
     get: null,
     success: {
       errcode: '0',

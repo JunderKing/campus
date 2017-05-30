@@ -2,31 +2,31 @@
   <view class="anchor">
     <view class="prog-area">
       <view class="prog-item">
-        <image class="star" src="/img/icon/star-{{stepInfo[0].url&&stepInfo[0].content ? 'yellow' : 'gray'}}.png" mode="aspectFit" data-stepid="step1" bindtap="toStep">
+        <image class="star" src="/img/icon/star-{{progInfo[0].imageUrl&&progInfo[0].content ? 'yellow' : 'gray'}}.png" mode="aspectFit" data-stepid="step1" bindtap="toStep">
           <text>组队</text>
         </image>
       </view>
       <view class="prog-item">
-        <image class="hexagen" src="/img/icon/hexl-{{stepInfo[1].url&&stepInfo[1].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step2" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[1].imageUrl&&progInfo[1].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step2" bindtap="toStep">
           <text>理解</text>
         </image>
-        <image class="hexagen" src="/img/icon/hexr-{{stepInfo[2].url&&stepInfo[2].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step3" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[2].imageUrl&&progInfo[2].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step3" bindtap="toStep">
           <text class="right" >定义</text>
         </image>
       </view>
       <view class="prog-item">
-        <image class="hexagen" src="/img/icon/hexl-{{stepInfo[3].url&&stepInfo[3].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step4" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[3].imageUrl&&progInfo[3].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step4" bindtap="toStep">
           <text>发散</text>
         </image>
-        <image class="hexagen" src="/img/icon/hexr-{{stepInfo[4].url&&stepInfo[4].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step5" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[4].imageUrl&&progInfo[4].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step5" bindtap="toStep">
           <text class="right">决定</text>
         </image>
       </view>
       <view class="prog-item">
-        <image class="hexagen" src="/img/icon/hexl-{{stepInfo[5].url&&stepInfo[5].desc ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step6" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[5].imageUrl&&progInfo[5].content ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step6" bindtap="toStep">
           <text>原型</text>
         </image>
-        <image class="hexagen" src="/img/icon/hexr-{{stepInfo[6].url&&stepInfo[6].desc ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step7" bindtap="toStep">
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[6].imageUrl&&progInfo[6].content ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step7" bindtap="toStep">
           <text class="right">验证</text>
         </image>
       </view>
@@ -47,25 +47,27 @@
     </view>
   </view>
   <scroll-view class="container" scroll-y scroll-with-animation enable-back-to-top scroll-into-view="{{scroll}}" bindscroll="onScroll">
-    <view class="step-card" id="step{{item.stepid}}" wx:for="{{stepInfo}}" wx:key="stepid">
+    <view class="step-card" id="step{{item.stepNum}}" wx:for="{{progInfo}}" wx:key="stepNum">
       <view class="card-title">
         {{stepTitle[index]}}
       </view>
       <view class="sub-title">
         {{stepText[index]}}
       </view>
-      <image class="step-image" wx:if="{{item.url}}" mode="aspectFill" src="{{item.url}}" data-url="{{item.url}}" bindtap="preview">
-        <view class="change-image" data-stepid="{{item.stepid}}" catchtap="chooseImage">
+      <image class="step-image" wx:if="{{item.imageUrl}}" mode="aspectFill" src="{{item.imageUrl}}" data-url="{{item.imageUrl}}" bindtap="preview">
+        <view class="change-image" data-stepid="{{item.stepNum}}" catchtap="chooseImage">
           重新选择
         </view>
       </image>
-      <view class="noimage" data-stepid="{{item.stepid}}" wx:else bindtap="chooseImage"> 点击选择图片 </view>
-      <navigator url="/pages/project/progInput?projid={{projid}}&stepid={{item.stepid}}&content={{item.content}}" class="step-content para" wx:if="{{item.content}}"> {{item.content}} </navigator>
-      <navigator class="nocontent" wx:else url="/pages/project/progInput?projid={{projid}}&stepid={{item.stepid}}&content={{item.content}}">
+      <view class="noimage" data-stepid="{{item.stepNum}}" wx:else bindtap="chooseImage"> 点击选择图片 </view>
+      <navigator class="step-content para" url="/pages/include/comnForm?type=progress&projId={{projId}}&stepNum={{item.stepNum}}&content={{item.content}}" wx:if="{{item.content}}">
+        {{item.content}}
+      </navigator>
+      <navigator class="nocontent" url="/pages/include/comnForm?type=progress&projId={{projId}}&stepNum={{item.stepNum}}&content={{item.content}}" wx:else >
         点击填写内容
       </navigator>
     </view>
-    <view class="noproj-text">
+    <view class="main-hint">
       已经到底啦！
     </view>
   </scroll-view> 

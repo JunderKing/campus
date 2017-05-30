@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="page-title">
+    {{title}}
+  </view>
+  <view class="sponsor-area">
+    <view class="avatar-box" wx:for="{{logos}}"> 
+      <image class="logo" src="{{item}}" mode="aspectFit"></image>
+    </view>
+  </view>
+  <view class="interval-title">
+    简介
+  </view>
+  <view class="para content-area">
+    {{intro}}
+  </view>
+  <view class="interval-title">
+    时间安排
+  </view>
+  <view class="para content-area time-box">
+    <text>开始时间：{{stime}}</text>
+    <text>结束时间：{{etime}}</text>
+  </view>
+  <view class="interval-title" >
+    地址
+  </view>
+  <view class="para content-area">
+    {{addr}}
+  </view>
+  <view class="btn-area">
+    <navigator url="/pages/festival/newFest" hover-class="navigator-hover">
+      <button type="primary" size="default" wx:if="{{sfRole>0 || cpRole > 0}}">创建加速营</button>
+    </navigator>
+    <navigator url="/pages/festival/adminFest?title={{title}}" hover-class="navigator-hover">
+      <button type="default" size="default" wx:if="{{orgerid===uid || cpRole > 0}}">管理加速营</button>
+    </navigator>
+    <picker class="btn-style" mode="selector" range="{{fests}}" range-key="title" bindchange="onFestChange">切换加速营</picker>
+  </view>
+</view>

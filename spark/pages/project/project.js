@@ -1,132 +1,205 @@
 Page({
-  data: {
-    title: "",
-    intro: "",
-    projid: 0,
-    festid: 0,
-    isCaptain: 0,
-    members: [],
-    isHidden: true
+  data:{
+    userId: 0,
+    projId: 0,
+    title: '项目标题',
+    intro: '项目简介',
+    delHidden: true,
+    //comments: [{
+      //avatar: '../../img/icon/spark_cur.png',
+      //nickName: 'Jun.K',
+      //content: '评论',
+      //ctime: '20150606',
+      //replies: [{
+        //nickName: 'HelloWorld',
+        //content: '回复'
+      //}]
+    //}],
   },
 
-  onShow: function(){
-    var that = this
-    getApp().updateUserInfo(function(){
-      that.setData({
-        isCaptain: getApp().globalData.isCaptain
-      })
-    })
-    this.updateProjInfo()
-  },
-
-  onShareAppMessage: function(){
-    return {
-      title: '火种节小程序',
-      path: '/pages/project/project'
-    }
-  },
-
-  updateProjInfo: function(){
-    console.log('updateProjInfo')
+  onLoad: function(){
     this.setData({
-      isCaptain: getApp().globalData.isCaptain
+      userId: getApp().gdata.userId
     })
-    var uid = getApp().globalData.uid
-    var festid = getApp().globalData.curFestid
-    if (festid === 0) return
-    if (this.data.festid !== festid) {
-      this.setData({festid: festid})
-      //wx.showLoading({
-        //title: '数据加载中...',
-        //mask: true
-      //})
-    }
+  },
+
+  onShow: function(options){
+    this.getProjInfo()
+    this.getProjList()
+  },
+
+  getProjInfo: function(){
     var that = this
+    if (getApp().gdata.curProjId !== this.data.projId) {
+      wx.showToast({
+        title: '数据加载中',
+        icon: 'loading',
+        duration: 10000
+      })
+    }
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/project/getMyProjInfo',
-      method: 'POST',
+      url: 'http://www.campus.com/api/spark/getUserProjInfo',
+      method: 'GET',
       data: {
-        uid: uid,
-        festid: festid
+        userId: getApp().gdata.userId
       },
       success: function(res){
-        console.log('getMyProjInfo=>')
-        console.log(res.data)
-        if (res.data.errcode === 1) {
-          that.setData({projid: 0})
-        } else {
-          res.data.members.map(function(item){
-            if (item.nickName.length >= 4) {
-              item.nickName = item.nickName.substr(0, 4)
-            }
-            return item
-          })
-          that.setData({
-            projid: res.data.projid,
-            title: res.data.title,
-            intro: res.data.intro,
-            members: res.data.members,
-            comments: res.data.comments,
-            captainid: res.data.captainid,
-            uid: getApp().globalData.uid
-          })
+        console.log('getUserProjInfo=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
         }
+        var cityCode = parseInt(res.data.projInfo.province)
+        res.data.projInfo.province = getApp().getCityStr(cityCode)
+        that.setData(res.data.projInfo)
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
       }
-      //complete: function(){
-        //wx.hideLoading()
-      //}
+    })
+  },
+
+  getProjList: function(){
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/getUserProjList',
+      method: 'GET',
+      data: {
+        userId: getApp().gdata.userId
+      },
+      success: function(res){
+        console.log('getUserProjList=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        that.setData({
+          projList: res.data.projList
+        })
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
+      }
+    })
+  },
+
+  onProjChange: function(e){
+    var index = e.detail.value
+    var projId = this.data.projList[index].projId
+    if (projId === this.data.projId) { return }
+    wx.showToast({
+      title: '数据加载中...',
+      icon: 'loading',
+      duration: 10000
+    })
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/chgCurProject',
+      method: 'POST',
+      data: {
+        userId: getApp().gdata.userId,
+        projId: projId
+      },
+      success: function(res){
+        wx.hideToast()
+        console.log('chgCurProject=>')
+        console.log(res)
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        that.getProjInfo()
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
+      }
     })
   },
 
   toMemberAdd: function(){
-    var projid = this.data.projid
-    wx.showLoading({
-      title: '请稍后……',
-      mask: true
+    var projId = this.data.projId
+    if (projId === 0) {
+      return wx.showToast({
+        title: '没有项目',
+        icon: 'loading'
+      })
+    }
+    var fileName = 'spark_proj_member_' + projId
+    var that = this
+    wx.showToast({
+      title: '数据加载中',
+      icon: 'loading',
+      duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/getQrcode',
-      method: 'POST',
+      url: 'http://www.campus.com/api/common/getQrcode',
+      method: 'GET',
       data: {
-        path: '/pages/include/start?role=1&projid=' + projid,
-        name: 'member' + projid
+        type: 1,
+        name: fileName,
+        path: '/pages/include/start?role=1&projId=' + projId
       },
       success: function(res){
-        wx.hideLoading();
-        if (res.data) {
-          wx.navigateTo({
-            url: '/pages/include/qrcode?role=1&projid=' + projid,
-          })
+        console.log('getQrcode=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
         }
+        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+        wx.previewImage({
+          urls: [url]
+        })
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
       }
     })
   },
 
-  toMemberDel: function(){
-    var isHidden = this.data.isHidden
-    if (isHidden) {
-      this.setData({isHidden: false})
+  showDel: function(){
+    var delHidden = this.data.delHidden
+    if (delHidden) {
+      this.setData({delHidden: false})
     } else {
-      this.setData({isHidden: true})
+      this.setData({delHidden: true})
     }
   },
 
   delMember: function(e){
-    var projid = this.data.projid
-    var uid = e.currentTarget.dataset.uid
+    var projId = this.data.projId
+    var userId = e.currentTarget.dataset.userId
     console.log('delMember')
-    console.log(uid)
     var that = this
+    wx.showToast({
+      title: '数据加载中',
+      icon: 'loading',
+      duration: 10000
+    })
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/deleteMemberByProj',
-      method: 'POST',
+      url: 'http://www.campus.com/api/spark/delProjMember',
+      method: 'GET',
       data: {
-        projid: projid,
-        uid: uid
+        projId: projId,
+        userId: userId
       },
-      success: function(res) {
+      success: function(res){
+        console.log('delProjMember=>')
         console.log(res)
-        that.updateProjInfo()
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        that.getProjInfo()
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
       }
     })
   },
@@ -134,42 +207,9 @@ Page({
   scanCode: function(){
     var projPointer = this
     getApp().qrScan(function(){
-      projPointer.updateProjInfo()
+      projPointer.getProjInfo()
+      projPointer.getProjList()
     })
   },
-
-  showCmntMenu: function(e){
-    var cmntid = e.currentTarget.dataset.cmntid
-    var cmntorid = e.currentTarget.dataset.cmntorid
-    var uid = getApp().globalData.uid
-    var that = this
-    if (uid === cmntorid) {
-      wx.showActionSheet({
-        itemList: ['删除该评论'],
-        success: function(res){
-          if (res.tapIndex === 0) {
-            that.delCmnt(cmntid)
-          }
-        }
-      })
-    }
-  },
-
-  delCmnt: function(cmntid) {
-    var that = this
-    wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/comment/delCmnt',
-      method: 'POST',
-      data: {cmntid: cmntid},
-      success: function(res){
-        if (res.data) {
-          wx.showToast({
-            title: '评论已删除',
-            icon: 'success'
-          })
-          that.updateProjInfo()
-        }
-      }
-    })
-  }
 })
+

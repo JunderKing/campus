@@ -1,11 +1,15 @@
 App({
+  onLaunch: function (options) {
+    console.log('AppOnLaunch')
+    console.log(options)
+  },
+
   login: function (options) {
     var that = this
     wx.login({
       success: function (res) {
         if (!res.code) {
-          console.log("Login Refused!:" + res.errMsg)
-          return
+          return that.showError(1)
         }
         var loginData = {}
         loginData.code = res.code
@@ -14,12 +18,13 @@ App({
           success: function (res) {
             loginData.iv = res.iv
             loginData.rawData = res.encryptedData
+            loginData.type = 1
             that.getUserInfo(loginData, options)
           }
         })
       },
       fail: function(res){
-        console.log("Login Failed!")
+        return that.showError(2)
       }
     })
   },
@@ -29,13 +34,16 @@ App({
     console.log('loginData')
     console.log(loginData)
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/login',
+      url: 'http://www.campus.com/api/spark/login',
       method: 'POST',
       data: loginData,
       success: function (res) {
         console.log('UserInfo=>')
         console.log(res)
-        that.globalData = res.data;
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return that.showError(3)
+        }
+        that.gdata = res.data.userInfo
         if (options.role) {
           that.checkOption(options, true)
         } else {
@@ -43,22 +51,49 @@ App({
             url: '/pages/project/project'
           })
         }
+      },
+      fail: function(){
+        return that.showError(2)
       }
+    })
+  },
+
+  showError: function(errcode){
+    var errmsg = ''
+    switch (errcode) {
+      case 1:
+        errmsg = '获取授权失败，请重试'
+        break;
+      case 2:
+        errmsg = '接口调用失败，请重试'
+        break;
+      case 3:
+        errmsg = '网络错误，请重试'
+        break;
+      case 4:
+        errmsg = '数据错误，请重试'
+        break;
+      default:
+        errmsg = '未知错误'
+    }
+    wx.showToast({
+      title: errmsg,
+      icon: 'loading'
     })
   },
 
   updateUserInfo: function(callback){
     var that = this;
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/getUserInfo',
+      url: 'http://www.campus.com/api/spark/getUserInfo',
       method: 'POST',
       data: {
-        uid: that.globalData.uid,
+        userId: this.gdata.userId,
       },
       success: function(res){
-        console.log('updateUserinfo=>')
+        console.log('getUserInfo=>')
         console.log(res.data)
-        that.globalData = res.data;
+        that.gdata = res.data.userInfo;
         if (callback) { callback() }
       }
     })
@@ -66,17 +101,16 @@ App({
 
   checkOption: function(options, isLoading, callback){
     options.role = parseInt(options.role)
-    options.festid = parseInt(options.festid)
-    options.projid = parseInt(options.projid)
-    console.log(options)
+    options.festId = parseInt(options.festId)
+    options.projId = parseInt(options.projId)
     if (options.role === 4) {
-      this.beOrganizer(isLoading, callback)
-    } else if (options.role === 3 && options.festid > 0) {
-      this.beMentor(options.festid, isLoading, callback)
-    } else if (options.role === 2 && options.festid > 0) {
-      this.beCaptain(options.festid, isLoading, callback)
-    } else if (options.role === 1 && options.projid > 0) {
-      this.beMember(options.projid, isLoading, callback)
+      this.addOrger(isLoading, callback)
+    } else if (options.role === 3 && options.festId > 0) {
+      this.addMentor(options.festId, isLoading, callback)
+    } else if (options.role === 2 && options.festId > 0) {
+      this.addProject(options.festId, isLoading, callback)
+    } else if (options.role === 1 && options.projId > 0) {
+      this.addMember(options.projId, isLoading, callback)
     } else {
       wx.switchTab({
         url: '/pages/project/project'
@@ -84,147 +118,162 @@ App({
     }
   },
 
-  beOrganizer: function(isLoading, callback){
-    var uid = this.globalData.uid
-    var that = this
-    wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/addOrganizer',
-      method: 'POST',
-      data: {uid: uid},
-      success: function(res){
-        //that.updateUserInfo()
-        if (res.data) {
-          console.log('Become organizer')
-          that.globalData.sfRole = 1
-          if (callback) {
-            callback()
-          }
-          wx.switchTab({
-            url: '/pages/festival/festival'
-          })
-          wx.showToast({
-            title: '成功成为组织者!',
-            icon: 'success'
-          })
-        }
-      }
+  addOrger: function(isLoading, callback){
+    wx.showToast({
+      title: '数据处理中...',
+      icon: 'loading',
+      duration: 10000
     })
-  },
-
-  beMentor: function(festid, isLoading, callback){
-    var reqData = {
-      festid: festid,
-      uid: this.globalData.uid
-    }
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/addMentor',
-      method: 'POST',
-      data: reqData,
+      url: 'http://www.campus.com/api/spark/addOrger',
+      method: 'GET',
+      data: {
+        userId: this.gdata.userId
+      },
       success: function(res){
-        //that.updateUserInfo()
-        if (res.data) {
-          console.log('Become Mentor!')
-          that.globalData.isMentor = 1
-          if (callback) {
-            callback()
-          }
-          if (isLoading) {
-            wx.switchTab({
-              url: '/pages/project/project'
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return that.showError(3)
+        }
+        that.gdata.festRole = 1
+        if (callback) {
+          callback()
+        }
+        wx.switchTab({
+          url: '/pages/project/project',
+          success: function(){
+            wx.showToast({
+              title: '恭喜您成为组织者!',
+              icon: 'success'
             })
           }
-          wx.showToast({
-            title: '恭喜您成为火种节导师!',
-            icon: 'success'
-          })
-        }
+        })
       }
-
     })
   },
 
-  beCaptain: function(festid, isLoading, callback){
-    var reqData = {
-      festid: festid,
-      uid: this.globalData.uid
-    }
-    console.log('beCaptain')
-    console.log(reqData)
+  addMentor: function(festId, isLoading, callback){
+    console.log('addMentor')
+    wx.showToast({
+      title: '数据处理中...',
+      icon: 'loading',
+      duration: 10000
+    })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/addCaptain',
+      url: 'http://www.campus.com/api/spark/addFestMentor',
       method: 'POST',
-      data: reqData,
+      data: {
+        userId: this.gdata.userId,
+        festId: festId
+      },
       success: function(res){
-        //that.updateUserInfo()
-        if (res.data) {
-          console.log('Become Captain!')
-          console.log(res)
-          that.globalData.isCaptain = 1
-          that.globalData.curFestid = festid
-          if (callback) {
-            callback()
-          }
-          if (isLoading) {
-            wx.switchTab({
-              url: '/pages/project/project'
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return that.showError(3)
+        }
+        wx.switchTab({
+          url: '/pages/project/project',
+          success: function(){
+            wx.showToast({
+              title: '恭喜您成为火种节导师!'
             })
           }
-          wx.navigateTo({
-            url: '/pages/project/newProj'
-          })
-          wx.showToast({
-            title: '恭喜您成为项目负责人!',
-            icon: 'success'
-          })
-        }
+        })
       }
     })
   },
 
-  beMember: function(projid, isLoading, callback){
-    var reqData = {
-      uid: this.globalData.uid,
-      projid: projid
-    }
+  addProject: function(festId, isLoading, callback){
+    wx.showToast({
+      title: '数据处理中...',
+      icon: 'loading',
+      duration: 10000
+    })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/addMember',
-      method: 'POST',
-      data: reqData,
+      url: 'http://www.campus.com/api/spark/getAvlProjList',
+      method: 'GET',
+      data: {
+        userId: getApp().gdata.userId,
+        festId: festId
+      },
       success: function(res){
-        console.log('beMember=>')
+        console.log('getUserProjList=>')
         console.log(res)
-        if (res.data.festid) {
-          console.log('Become Member!')
-          that.globalData.curFestid = res.data.festid
-          if (callback) {
-            callback()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        var projList = res.data.projList
+        wx.switchTab({
+          url: '/pages/project/project',
+          success: function(){
+            if (projList.length === 0) {
+              wx.navigateTo({
+                url: '/pages/project/projAdd?festId=' + festId
+              })
+            } else {
+              that.gdata.avlProjList = projList
+              wx.navigateTo({
+                url: '/pages/project/projChoose?festId=' + festId
+              })
+            }
           }
-          if (isLoading) {
-            wx.switchTab({
-              url: '/pages/project/project'
+        })
+      },
+      fail: function(){
+        return getApp().showError(2)
+      }
+    })
+  },
+
+  addMember: function(projId, isLoading, callback){
+    wx.showToast({
+      title: '数据处理中...',
+      icon: 'loading',
+      duration: 10000
+    })
+    var reqData = {
+      userId: this.gdata.userId,
+      projId: projId
+    }
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/addProjMember',
+      method: 'POST',
+      data: reqData,
+      success: function(res){
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return that.showError(3)
+        }
+        if (callback) {
+          callback()
+        }
+        wx.switchTab({
+          url: '/pages/project/project',
+          success: function(){
+            wx.showToast({
+              title: '成功加入项目!',
+              icon: 'success'
             })
           }
-          wx.showToast({
-            title: '成功加入项目!',
-            icon: 'success'
-          })
-        }
+        })
       }
     })
   },
 
   qrScan: function(callback){
+    console.log('qrScan')
     var that = this
     wx.scanCode({
       success: function(res){
-        wx.showLoading({
+        wx.showToast({
           title: '数据处理中...',
-          mask: true
+          icon: 'loading',
+          duration: 10000
         })
         var data = that.queryString(res.path)
+        console.log('qrScan=>')
+        console.log(data)
         that.checkOption(data, false, callback)
       }
     })
@@ -244,14 +293,20 @@ App({
     }
   },
 
-  globalData: {
-    uid: 0,
-    avatar: '',
+  getCityStr: function(index){
+    var provinceList = ['北京市','天津市','上海市','重庆市','河北省','山西省','辽宁省','吉林省','黑龙江省','江苏省','浙江省','安徽省','福建省','江西省','山东省','河南省','湖北省','湖南省','广东省','海南省','四川省','贵州省','云南省','陕西省','甘肃省','青海省','台湾省','内蒙古自治区','广西壮族自治区','西藏自治区','宁夏回族自治区','新疆维吾尔自治区','香港特别行政区','澳门特别行政区']
+    return provinceList[index]
+  },
+
+  gdata: {
+    userId: 1,
+    avatarUrl: '',
     nickName: '',
-    cpRole: 0,
-    sfRole: 0,
-    curFestid: 0,
-    isCaptain: 0,
-    isMentor: 0
+    role: 0,
+    festRole: 0,
+    curFestId: 0,
+    curProjId: 0,
+    avlProjList: []
   }
 })
+

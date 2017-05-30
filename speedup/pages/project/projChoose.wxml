@@ -1,0 +1,8 @@
+<view class="container">
+  <view class="page-title">
+    请选择加入加速营的项目
+  </view>
+  <view class="proj-list choose" data-projid="{{item.projId}}" wx:for="{{projList}}" bindtap="addCampProject">
+    {{item.name}}
+  </view>
+</view>

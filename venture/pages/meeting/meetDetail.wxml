@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="page-title">
+    {{name}}
+  </view>
+  <view class="interval-title">
+    导师
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{mentors}}"> 
+      <image class="avatar" src="{{item.avatar}}"></image>
+      <image class="tiny-del" hidden="{{mentorHide}}" data-uid="{{item.uid}}" src="../../img/icon/del.png" bindtap="delMentor"></image>
+      {{item.nickName}}
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/add.png" bindtap="toMentorAdd"></image>
+      添加
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="mentor" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="interval-title">
+    项目负责人
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{captains}}"> 
+      <image class="avatar" src="{{item.avatar}}"></image>
+      <image class="tiny-del" hidden="{{captainHide}}" data-uid="{{item.uid}}" src="../../img/icon/del.png" bindtap="delCaptain"></image>
+      {{item.nickName}}
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/add.png" bindtap="toProjAdd"></image>
+      添加
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="captain" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="interval-title">
+    项目成员
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{members}}"> 
+      <image class="avatar" src="{{item.avatar}}"></image>
+      <image class="tiny-del" hidden="{{memberHide}}" data-uid="{{item.uid}}" src="../../img/icon/del.png" bindtap="delMember"></image>
+      {{item.nickName}}
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="member" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="btn-area">
+    <button type="primary" bindtap="toProjAdd">添加项目</button>
+    <button type="default" bindtap="toMentorAdd">添加导师</button>
+  </view>
+</view>

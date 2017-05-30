@@ -2,22 +2,17 @@
   "pages": [
     "pages/include/start",
     "pages/project/project",
-    "pages/include/qrcode",
-    "pages/project/progInput",
-    "pages/project/projInput",
-    "pages/project/newProj",
+    "pages/project/projChoose",
+    "pages/project/projAdd",
     "pages/project/projProgress",
-    "pages/include/mentorCmnt",
-    "pages/include/cmntInput",
-    "pages/projList/projList",
+    "pages/festival/projScoreAdd",
+    "pages/include/comnForm",
     "pages/festival/festival",
     "pages/info/info",
-    "pages/include/map",
-    "pages/festival/newFest",
-    "pages/festival/adminFest",
-    "pages/projList/projDetailProg",
-    "pages/projList/projDetail",
-    "pages/include/replyInput"
+    "pages/festival/festAdd",
+    "pages/festival/festDetail",
+    "pages/festival/projDetailProg",
+    "pages/festival/projDetail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#000",
@@ -40,12 +35,6 @@
         "selectedIconPath": "img/project2.png"
       },
       {
-        "pagePath": "pages/projList/projList",
-        "text": "项目列表",
-        "iconPath": "img/list.png",
-        "selectedIconPath": "img/list2.png"
-      },
-      {
         "pagePath": "pages/festival/festival",
         "text": "火种节",
         "iconPath": "img/festival.png",
@@ -57,7 +46,6 @@
         "iconPath": "img/info.png",
         "selectedIconPath": "img/info2.png"
       }
-
     ],
     "position": "bottom"
   }

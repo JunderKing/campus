@@ -1,6 +1,6 @@
 Page({
   data: {
-    projid: 0,
+    projId: 0,
     scroll: 0,
     cur: 0,
     stepTitle: ['组队','理解', '定义', '发散', '决定', '原型', '验证'],
@@ -13,129 +13,109 @@ Page({
       '为『对的主意』，用最短的时间，去做一个产品原型',
       '找五个用户来，让他们体验原型过程中发声思考，进行验证'
     ],
-    stepInfo: [{
-      id: 1,
-      title: "组队",
-      url: "",
-      desc: ""
-    },{
-      id: 2,
-      title: "理解",
-      url: "",
-      desc: ""
-    },{
-      id: 3,
-      title: "定义",
-      url: "",
-      desc: ""
-    },{
-      id: 4,
-      title: "发散",
-      url: "",
-      desc: ""
-    },{
-      id: 5,
-      title: "决定",
-      url: "",
-      desc: ""
-    },{
-      id: 6,
-      title: "原型",
-      url: "",
-      desc: ""
-    },{
-      id: 7,
-      title: "验证",
-      url: "",
-      desc: ""
-    }]
+    progInfo: [
+      { stepNum: 1, title: "组队", imageUrl: "", content: "" },
+      { stepNum: 2, title: "理解", imageUrl: "", content: "" },
+      { stepNum: 3, title: "定义", imageUrl: "", content: "" },
+      { stepNum: 4, title: "发散", imageUrl: "", content: "" },
+      { stepNum: 5, title: "决定", imageUrl: "", content: "" },
+      { stepNum: 6, title: "原型", imageUrl: "", content: "" },
+      { stepNum: 7, title: "验证", imageUrl: "", content: "" }
+    ]
   },
+
   onLoad: function(options){
     this.setData({
-      projid: options.projid
+      projId: options.projId
     })
   },
+
   onShow: function(){
-    this.updateData()
+    this.getProgInfo()
   },
-  updateData: function(){
-    var projid = this.data.projid
-    var reqData = {
-      projid: projid
-    }
+
+  getProgInfo: function(){
+    console.log('getProgInfo')
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/project/getProgInfo',
-      method: 'POST',
-      data: reqData,
+      url: 'http://www.campus.com/api/spark/getProgInfo',
+      method: 'GET',
+      data: {
+        projId: this.data.projId
+      },
       success: function(res){
+        console.log('getProgInfo=>')
         console.log(res)
-        that.setData({
-          stepInfo: res.data
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        res.data.progInfo.forEach(function(item){
+          var index = item.stepNum -1
+          var progInfo = that.data.progInfo
+          progInfo[index].imageUrl = item.imageUrl
+          progInfo[index].content = item.content
+          that.setData({
+            progInfo: progInfo
+          })
         })
       }
     })
   },
+
   toStep: function(e){
     this.setData({
       scroll:e.currentTarget.dataset.stepid,
     })
   },
+
   chooseImage: function(e){
-    var stepid = e.currentTarget.dataset.stepid
-    var projid = this.data.projid
-    var index = stepid - 1
+    var stepNum = e.currentTarget.dataset.stepid
+    var projId = this.data.projId
+    var index = stepNum - 1
     var that = this
-    var reqData = {
-      projid: projid,
-      stepid: stepid
-    }
     wx.chooseImage({
       count: 1,
       success: function(res){
         var url = res.tempFilePaths[0]
-        wx.showLoading({
+        wx.showToast({
           title: '图片上传中……',
-          mask: true
+          icon: 'loading'
         })
         wx.uploadFile({
-          url: 'https://www.kingco.tech/index.php?s=/spark/project/uploadProgImage',
+          url: 'http://www.campus.com/api/spark/updProgImage',
           filePath: url,
-          name: 'file',
-          formData: reqData,
+          name: 'progImage',
+          formData: {
+            projId: that.data.projId,
+            stepNum: stepNum
+          },
           success: function(res){
-            console.log('success')
+            console.log('updProgImage=>')
             console.log(res)
-            if (res.data > 0) {
-              wx.showToast({
-                title: '图片上传成功!',
-                icon: 'success'
-              })
-              that.updateData()
-            } else {
-              wx.showToast({
-                title: '图片上传失败，请重试!',
-                icon: 'loading'
-              })
+            wx.hideToast()
+            res.data = JSON.parse(res.data)
+            if (res.statusCode !== 200 || res.data.errcode !== 0) {
+              return getApp().showError(3)
             }
+            wx.showToast({
+              title: '图片上传成功!'
+            })
+            that.getProgInfo()
           },
           fail: function(res){
             console.log('fail')
             console.log(res)
             wx.showToast({
-                title: '图片上传失败，请重试!',
-                icon: 'loading'
-              })
-          },
-          complete: function(res){
-            console.log('complete')
-            console.log(res)
-            wx.hideLoading()
+              title: '图片上传失败，请重试!',
+              icon: 'loading'
+            })
           }
         })
       }
     })
   },
+
   preview: function(e){
     var url = e.currentTarget.dataset.url
     wx.previewImage({
@@ -145,8 +125,8 @@ Page({
       }
     })
   },
+
   onScroll: function(e) {
-    console.log(e)
     var areaHeight = e.detail.scrollHeight / 7
     var top = e.detail.scrollTop
     if (this.data.scroll !== top / areaHeight) {

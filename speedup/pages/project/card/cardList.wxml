@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="page-title">
+    <text>实验列表</text>
+  </view>
+  <view class="test-card-box content-area" wx:if="{{cardList[0]}}">
+    <navigator class="test-card state{{item.status}}" wx:for="{{cardList}}" wx:key="card-order" url="/pages/project/card/cardDetail?cardId={{item.cardId}}&isUser={{isUser}}">
+      <view class="marker" wx:if="{{item.marker==0}}"></view>
+      <view class="card-title">
+        <text>{{item.title}}</text>
+      </view>
+      <view class="card-footer">
+        <text>{{item.createdAt}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class="noproj-text">
+    <text>来自画布格子进行中的实验</text>
+  </view>
+</view>

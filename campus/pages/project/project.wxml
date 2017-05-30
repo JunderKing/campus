@@ -1,0 +1,58 @@
+<!--<import src="../include/template.wxml" />-->
+
+<!--<view class="container"> -->
+  <!--<view class="page-title">-->
+    <!--<navigator url="/pages/project/projInput?projid={{projid}}&field=title&content={{title}}" hover-class="navigator-hover">-->
+      <!--<text>{{title}}</text>-->
+    <!--</navigator>-->
+  <!--</view>-->
+  <!--<view class="interval-title">-->
+    <!--项目简介-->
+  <!--</view>-->
+  <!--<view class="para content-area">-->
+    <!--<navigator url="/pages/project/projInput?projid={{projid}}&field=intro&content={{intro}}" hover-class="navigator-hover">{{intro}}</navigator>-->
+  <!--</view>-->
+  <!--<view class="interval-title">-->
+    <!--项目成员-->
+  <!--</view>-->
+  <!--<view class="avatar-area">-->
+    <!--<view class="avatar-box" wx:for="{{members}}"> -->
+      <!--<image class="avatar" src="{{item.avatar}}"></image>-->
+      <!--<view class="del-box">-->
+        <!--<image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>-->
+      <!--</view>-->
+      <!--{{item.nickName}}-->
+    <!--</view>-->
+    <!--<view class="avatar-box" wx:if="{{captainid === uid}}"> -->
+      <!--<image class="avatar icon" src="../../img/icon/add.png" bindtap="toMemberAdd"></image>-->
+      <!--添加队员-->
+    <!--</view>-->
+    <!--<view class="avatar-box" wx:if="{{captainid === uid}}"> -->
+      <!--<image class="avatar icon" src="../../img/icon/del.png" bindtap="toMemberDel"></image>-->
+      <!--删除队员-->
+    <!--</view>-->
+  <!--</view>-->
+  <!--<view class="interval-title">-->
+    <!--项目菜单-->
+  <!--</view>-->
+  <!--<view class="menu-box content-area">-->
+    <!--<navigator class="menu-item" url="/pages/project/projRecord" hover-class="navigator-hover">-->
+      <!--<image mode="aspectToFill" src="/img/icon/report.png"></image>-->
+      <!--<text>项目周报</text>-->
+    <!--</navigator>-->
+    <!--<navigator class="menu-item" url="/pages/project/projCanvas" hover-class="navigator-hover">-->
+      <!--<image mode="aspectToFill" src="/img/icon/canvas.png"></image>-->
+      <!--<text>项目画布</text>-->
+    <!--</navigator>-->
+    <!--<navigator class="menu-item" url="/pages/project/projCard" hover-class="navigator-hover">-->
+      <!--<image mode="aspectToFill" src="/img/icon/plan.png"></image>-->
+      <!--<text>项目实验</text>-->
+    <!--</navigator>-->
+  <!--</view>-->
+  <!--<template is="comment" data="{{comments}}"/>-->
+  <!--<view class="btn-area">-->
+    <!--<navigator url="/pages/project/projProgress?projid={{projid}}" hover-class="navigator-hover">-->
+      <!--<button type="primary">新建项目</button>-->
+    <!--</navigator>-->
+  <!--</view>-->
+<!--</view>-->

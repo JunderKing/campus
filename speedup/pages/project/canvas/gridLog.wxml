@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="page-title">
+    <text>历史记录</text>
+  </view>
+  <view class="">
+    <view class="content-area border-box" wx:for="{{logList}}" wx:key="">
+      <text class="para content-text">{{item.content}}</text>
+      <text class="foot-text">编辑时间：{{item.createdAt}}</text>
+    </view>
+  </view>
+</view>

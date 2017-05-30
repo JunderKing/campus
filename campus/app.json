@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/project/project",
+    "pages/list/list",
+    "pages/list/projDetail",
+    "pages/speed/speed",
+    "pages/info/info"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#00913A",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "加速营",
+    "backgroundColor": "#00913A",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": "true"
+  },
+  "tabBar": {
+    "color": "#888",
+    "selectedColor": "#00913A",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/project/project",
+        "text": "项目投递",
+        "iconPath": "img/icon/proj_def.png",
+        "selectedIconPath": "img/icon/proj_cur.png"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "项目列表",
+        "iconPath": "img/icon/list_def.png",
+        "selectedIconPath": "img/icon/list_cur.png"
+      },{
+        "pagePath": "pages/info/info",
+        "text": "小程序",
+        "iconPath": "img/icon/info_def.png",
+        "selectedIconPath": "img/icon/info_cur.png"
+      }
+
+    ],
+    "position": "bottom"
+  }
+}

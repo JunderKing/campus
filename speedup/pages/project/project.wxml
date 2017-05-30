@@ -1,0 +1,77 @@
+<import src="../include/template.wxml" />
+
+<view class="container" wx:if="{{projId}}"> 
+  <view class="page-title-area">
+    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
+    <view class="title-info-box">
+      <text class="info-name">{{name}}</text>
+      <text class="info-province">{{province}}</text>
+      <text class="info-tag">{{tag}}</text>
+    </view>
+  </view>
+  <view class="para content-area">
+    <navigator url="/pages/project/projInput?projId={{projId}}&field=intro&content={{intro}}" hover-class="navigator-hover">{{intro}}</navigator>
+  </view>
+  <view class="interval-title">
+    项目成员
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{members}}"> 
+      <image class="avatar" src="{{item.avatarUrl}}"></image>
+      <view class="del-box">
+        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
+      </view>
+      <text class="avatar-nickName">{{item.nickName}}</text>
+    </view>
+    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
+      <image class="avatar icon" src="../../img/icon/add.png" bindtap="toMemberAdd"></image>
+      添加队员
+    </view>
+    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
+      <image class="avatar icon" src="../../img/icon/del.png" bindtap="toMemberDel"></image>
+      删除队员
+    </view>
+  </view>
+  <view class="interval-title">
+    项目菜单
+  </view>
+  <view class="menu-box content-area">
+    <navigator class="menu-item" url="/pages/project/record/recList?projId={{projId}}&isUser=1" hover-class="navigator-hover">
+      <view class="image-button report">
+        <image mode="aspectToFill" src="/img/icon/report_white.png"></image>
+      </view>
+      <text>项目周报</text>
+    </navigator>
+    <navigator class="menu-item" url="/pages/project/canvas/canvas?projId={{projId}}&isUser=1" hover-class="navigator-hover">
+      <view class="image-button canvas">
+        <image mode="aspectToFill" src="/img/icon/canvas_white.png"></image>
+      </view>
+      <text>项目画布</text>
+    </navigator>
+    <navigator class="menu-item" url="/pages/project/card/cardList?projId={{projId}}&isUser=1" hover-class="navigator-hover">
+      <view class="image-button card">
+        <image mode="aspectToFill" src="/img/icon/plan_white.png"></image>
+      </view>
+      <text>项目实验</text>
+    </navigator>
+  </view>
+  <!--<template is="comment" data="{{comments}}"/>-->
+  <view class="btn-area">
+    <navigator url="/pages/project/projAdd" hover-class="navigator-hover">
+      <button type="primary">新建项目</button>
+    </navigator>
+    <button type="default" bindtap="scanCode">扫一扫</button>
+    <picker class="btn-style" mode="selector" range="{{projList}}" range-key="name" bindchange="onProjChange">切换项目</picker>
+  </view>
+</view>
+
+<view class="container" wx:else >
+  <navigator url="/pages/project/projAdd" class="half-box">
+    <image class="noproj-icon" src="/img/icon/add2.png"></image>
+    <text class="text">创建项目</text>
+  </navigator>
+  <view class="half-box">
+    <image class="noproj-icon" src="/img/icon/scan.png" bindtap="scanCode"></image>
+    <text class="text">扫一扫加入项目</text>
+  </view>
+</view>

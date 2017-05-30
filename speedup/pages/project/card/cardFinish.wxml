@@ -1,0 +1,25 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="area-title">
+      请填写实验结果
+    </view>
+    <view class="form-area column">
+      <view class="form-item big border">
+        <view class="item-title">成功与否</view>
+        <view class="item-content">
+          <radio-group name="status" value="{{status}}">
+            <radio value="2" checked="false">实验成功</radio>
+            <radio value="1" checked="true">实验失败</radio>
+          </radio-group>
+        </view>
+      </view>
+      <view class="form-item big">
+        <view class="item-title">实验结果</view>
+        <textarea class="item-content" name="result" placeholder="请输入实验结果" auto-height value="{{result}}"/>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+</view>

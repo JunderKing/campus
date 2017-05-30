@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="page-title">
+    <text>周报列表</text>
+  </view>
+  <view class="list-box content-area" wx:if="{{recList[0]}}">
+    <navigator class="item-box record-item" wx:for="{{recList}}" wx:key="pulse-no" url="/pages/project/record/recDetail?recId={{item.recId}}&isUser={{isUser}}&projId={{projId}}">
+      <view class="marker" wx:if="{{item.marker==0}}"></view>
+      <view class="text-box">
+        <text class="nick-name">{{index + 1}}</text>
+      </view>
+      <text class="content pulse-content">{{item.content}}</text>
+      <text class="record-date">周报日期：{{item.date}}</text>
+    </navigator>
+  </view>
+  <view class="noproj-text" wx:else >
+    还没有周报记录，赶紧添加周报吧！
+  </view>
+  <view class="btn-area" wx:if="{{isUser}}">
+    <button type="primary" size="default" bindtap="addRecord">填写周报</button>
+  </view>
+</view>

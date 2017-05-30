@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="page-title">
+    投资人列表
+  </view>
+  <view class="noproj-text" wx:if="{{!invorList[0]}}">
+    暂无投资人
+  </view>
+  <view class="list-container">
+    <navigator url='/pages/invorList/invorDetail?invorId={{item.userId}}' class="angle-info-box" wx:for="{{invorList}}">
+      <view class="avatar-box">
+        <image src="{{item.avatarUrl}}"></image>
+      </view>
+      <view class="info-box">
+        <text>{{item.realName}}|{{item.position}}</text>
+        <text>{{item.company}}</text>
+        <text>stars</text>
+      </view>
+    </navigator>
+  </view>
+</view>

@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="page-title">
+    <text>周报</text>
+  </view>
+  <view class="content-area">
+    <text class="para">{{content}}</text>
+    <view class="para">
+      周报时间：{{date}}
+    </view>
+  </view>
+  <view class="btn-area">
+    <navigator url="/pages/project/record/recForm?recId={{recId}}&date={{date}}&content={{content}}" hover-class="navigator-hover">
+      <button type="primary">编辑</button>
+    </navigator>
+    <button type="warn" bindtap="delRecord">删除</button>
+  </view>
+</view>

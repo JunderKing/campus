@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="page-title">
+    项目列表
+  </view>
+  <view class="noproj-text" wx:if="{{!projList[0]}}">
+    本次活动还没有人创建项目哦
+  </view>
+  <view class="proj-list content-area">
+    <navigator url="/pages/projList/projDetail?projId={{item.projId}}" wx:for="{{projList}}" hover-class="navigator-hover">
+      <view class="proj-info">
+        <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
+        <text class="nick-name">{{item.nickName}}</text>
+        <text class="proj-title">{{item.name}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class="btn-area">
+    <button type="primary" bindtap="scanCode">扫一扫</button>
+  </view>
+</view>

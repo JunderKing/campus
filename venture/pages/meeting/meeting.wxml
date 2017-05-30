@@ -1,0 +1,36 @@
+<view class="container">
+  <view class="page-title">
+    {{name}}
+  </view>
+  <view class="sponsor-area">
+      <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+  </view>
+  <view class="interval-title">
+    简介
+  </view>
+  <view class="para content-area">
+    {{intro}}
+  </view>
+  <view class="interval-title">
+    时间安排
+  </view>
+  <view class="para content-area time-box">
+    <text>开始时间：{{startTime}}</text>
+    <text>结束时间：{{endTime}}</text>
+  </view>
+  <view class="interval-title" >
+    地址
+  </view>
+  <view class="para content-area">
+    {{addr}}
+  </view>
+  <view class="btn-area">
+    <navigator url="/pages/meeting/meetAdd" hover-class="navigator-hover">
+      <button type="primary" size="default" >创建创投会</button>
+    </navigator>
+    <navigator url="/pages/meeting/meetDetail?meetId={{meetId}}" hover-class="navigator-hover">
+      <button type="default" size="default" wx:if="{{orgerId===userId || role > 0}}">管理创投会</button>
+    </navigator>
+    <picker class="btn-style" mode="selector" range="{{meetList}}" range-key="name" bindchange="onMeetChange">切换创投会</picker>
+  </view>
+</view>

@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/include/start",
+    "pages/project/projAdd",
+    "pages/project/project",
+    "pages/project/canvas/canvas",
+    "pages/project/canvas/gridDetail",
+    "pages/project/canvas/gridLog",
+    "pages/project/card/cardList",
+    "pages/project/card/cardDetail",
+    "pages/project/record/recList",
+    "pages/project/record/recDetail",
+    "pages/project/record/recForm",
+    "pages/project/projChoose",
+    "pages/project/card/cardAdd",
+    "pages/project/card/cardFinish",
+    "pages/camp/camp",
+    "pages/camp/campDetail",
+    "pages/camp/campAdd",
+    "pages/camp/projDetail",
+    "pages/info/info",
+    "pages/include/comnForm"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#E28428",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": "false"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#E28428",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/project/project",
+        "text": "我的项目",
+        "iconPath": "img/icon/proj_def.png",
+        "selectedIconPath": "img/icon/proj_cur.png"
+      },
+      {
+        "pagePath": "pages/camp/camp",
+        "text": "加速营",
+        "iconPath": "img/icon/speed_def.png",
+        "selectedIconPath": "img/icon/speed_cur.png"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "text": "我的信息",
+        "iconPath": "img/icon/info_def.png",
+        "selectedIconPath": "img/icon/info_cur.png"
+      }
+
+    ],
+    "position": "bottom"
+  }
+}

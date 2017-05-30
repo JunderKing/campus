@@ -1,0 +1,32 @@
+view.list-container {
+  padding: 0 10px;
+  background-color: #fff;
+}
+.angle-info-box{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.angle-info-box>view.avatar-box{
+  width: 60px;
+  display: flex;
+  justify-content: space-around;
+}
+view.avatar-box image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+view.info-box {
+  padding: 5px;
+  width: calc(100% - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 15px;
+  line-height: 20px;
+}
+/*view.info-box>text*/

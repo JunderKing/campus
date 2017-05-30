@@ -1,0 +1,28 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="area-title">
+      请填写周报信息
+    </view>
+    <view class="form-area column">
+      <view class="form-item border big">
+        <view class="item-title">
+          周报日期
+        </view>
+        <view class="item-content">
+          <picker mode="date" value="{{date}}" bindchange="onDateChange"> 
+            {{date}}
+          </picker>
+        </view>
+      </view>
+      <view class="form-item big">
+        <view class="item-title">
+          周报内容
+        </view>
+        <textarea class="item-content" name="content" placeholder="请输入周报内容" auto-height value="{{content}}" maxlength="-1"/>
+      </view>
+    </view>
+    <view class="btn-area">
+      <button formType="submit" type="primary">提交</button>
+    </view>
+  </form>
+</view>

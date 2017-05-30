@@ -1,0 +1,100 @@
+/*
+ * form表单
+ */
+.no-border {
+  border: none!important
+}
+view.form-title {
+  font-size: 14px;
+  padding: 20px 20px 8px;
+  color: #888;
+}
+view.form-area {
+  background-color: #fff;
+  padding:0 15px;
+}
+view.form-item {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 40px;
+  border-bottom: 1px solid #f0f0f0;
+}
+view.form-item .item-title {
+  display: inline-block;
+  width: 85px;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 40px;
+}
+view.form-item .item-content {
+  display: inline-block;
+  width: calc(100% - 90px);
+  font-size: 16px;
+  line-height: 40px;
+  position: relative;
+  top: 0;
+  left: 95px;
+}
+view.form-item .item-content.picker {
+  width: calc(50% - 50px);
+}
+view.form-item input.item-content {
+  top: 7px;
+}
+textarea.item-content {
+  padding: 10px 0;
+}
+picker.item-content {
+  width: 100px;
+  position: relative;
+}
+view.form-item image.item-content {
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+}
+view.item-content image.tiny-logo {
+  width: 35px;
+  height: 35px;
+  margin: 5px 5px 0 0;
+}
+view.item-content text.reset {
+  color: blue;
+  position: absolute;
+  right: 15px;
+  top: 4px;
+}
+
+
+
+
+
+
+
+
+view.form-item {
+  padding: 8px 0;
+  background-color: #fff;
+}
+view.form-item .item-title {
+  font-weight: normal;
+  line-height: 50px;
+}
+view.cmnt-box {
+  font-size: 16px;
+  line-height: 18px;
+  padding: 10px;
+  margin: 10px 0;
+}
+textarea {
+  width: 100%;
+}
+image.item-content {
+  width: 30px;
+  height: 30px;
+  margin: 3px;
+}
+

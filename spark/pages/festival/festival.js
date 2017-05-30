@@ -1,43 +1,17 @@
 Page({
   data: {
-    uid: 0,
-    orgerid: 0,
-    cpRole: 0,
-    sfRole: 0,
-    festid: 0,
-    title: '',
+    userId: 0,
+    orgerId: 0,
+    role: 0,
+    festRole: 0,
+    festId: 0,
+    name: '',
     intro: '',
-    stime: '',
-    etime: '',
+    startTime: '',
+    endTime: '',
     addr: '',
-    logos: [],
-    fests: [{
-      title: 'test1'
-    },{
-      title: 'test2'
-    }]
-  },
-  onLoad: function(){
-    console.log('Festonload!')
-  },
-
-  onShow: function(){
-    this.setData({
-      uid: getApp().globalData.uid,
-      cpRole: getApp().globalData.cpRole,
-      sfRole: getApp().globalData.sfRole
-    })
-    this.updateFestInfo()
-    var that = this
-    wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/festival/getAllFestInfo',
-      method: 'POST',
-      success: function(res){
-        console.log('getAllFestInfo=>')
-        console.log(res.data)
-        that.setData({fests: res.data})
-      }
-    })
+    logo: '',
+    festList: []
   },
 
   onShareAppMessage: function(){
@@ -47,77 +21,102 @@ Page({
     }
   },
 
-  updateFestInfo: function(){
-    var uid = getApp().globalData.uid
-    var curFestid = getApp().globalData.curFestid
-    if (curFestid === 0) { return }
-    if (curFestid !== this.data.festid) {
-      this.setData({festid: curFestid})
-      wx.showLoading({
+  onLoad: function(){
+    console.log('Festonload!')
+  },
+
+  onShow: function(){
+    this.setData({
+      userId: getApp().gdata.userId,
+      role: getApp().gdata.role,
+      festRole: getApp().gdata.festRole
+    })
+    this.getFestInfo()
+    //this.getAllFestList()
+  },
+
+  getFestInfo: function(){
+    var userId = getApp().gdata.userId
+    var curFestId = getApp().gdata.curFestId
+    if (curFestId !== this.data.festId) {
+      this.setData({
+        festId: curFestId
+      })
+      wx.showToast({
         title: '数据加载中...',
-        mask: true
+        icon: 'loading',
+        duration: 10000
       })
     }
-    var reqData = {
-      festid: curFestid,
-      uid: uid
-    }
-    console.log(reqData)
     var that = this
     wx.request({
-      url: "https://www.kingco.tech/index.php?s=/spark/festival/getFestInfo",
+      url: "http://www.campus.com/api/spark/getUserFestInfo",
       method: 'POST',
-      data: reqData,
-      success: function(res){
-        console.log('getFestInfo=>')
-        console.log(res.data)
-        if (!res.data) {
-          return
-        }
-        var stime = new Date(res.data.stime * 1000).toLocaleString()
-        var etime = new Date(res.data.etime * 1000).toLocaleString()
-        that.setData({
-          title: res.data.title,
-          intro: res.data.intro,
-          orgerid: res.data.orgerid,
-          stime: stime,
-          etime: etime,
-          addr: res.data.addr,
-          logos: res.data.logos
-        })
+      data: {
+        userId: getApp().gdata.userId
       },
-      complete: function(){
-        wx.hideLoading()
+      success: function(res){
+        wx.hideToast()
+        console.log('getUserFestInfo=>')
+        console.log(res.data)
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }        
+        res.data.festInfo.startTime = new Date(res.data.festInfo.startTime * 1000).toLocaleString()
+        res.data.festInfo.endTime = new Date(res.data.festInfo.endTime * 1000).toLocaleString()
+        res.data.festInfo.projList.map(function(item){
+          item.tag = item.tag.split(' ')
+          return item
+        })
+        that.setData(res.data.festInfo)
+      },
+      fail: function(){
+        wx.hideToast()
       }
     })
   },
+
+  getAllFestList: function(){
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/getAllFestList',
+      method: 'GET',
+      success: function(res){
+        console.log('getAllFestList=>')
+        console.log(res.data)
+        that.setData({
+          festList: res.data.festList
+        })
+      }
+    })
+  },
+
   showMap: function(){
     wx.navigateTo({
       url: "/pages/include/map"
     })
   },
+
   onFestChange: function(e){
     var index = e.detail.value
-    var festid = this.data.fests[index].festid
-    if (festid === this.data.festid) { return }
-    wx.showLoading({
+    var festId = this.data.festList[index].festId
+    if (festId === this.data.festId) { return }
+    wx.showToast({
       title: '数据加载中...',
-      mask: true
+      icon: 'loading'
     })
-    var pointer = this
+    var that = this
     wx.request({
-      url: 'https://www.kingco.tech/index.php?s=/spark/user/changeCurFest',
-      method: 'POST',
+      url: 'http://www.campus.com/api/spark/chgCurFestival',
+      method: 'GET',
       data: {
-        festid: festid,
-        uid: getApp().globalData.uid
+        userId: getApp().gdata.userId,
+        festId: festId
       },
       success: function(res){
-        console.log('changeCurFest=>')
+        console.log('chgCurFest=>')
         console.log(res.data)
-        getApp().updateUserInfo(function(){
-          pointer.updateFestInfo()
-        })
+        that.getFestInfo();
       }
     })
   }

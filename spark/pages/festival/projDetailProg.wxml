@@ -1,0 +1,67 @@
+<view class="container">
+  <view class="anchor">
+    <view class="prog-area">
+      <view class="prog-item">
+        <image class="star" src="/img/icon/star-{{progInfo[0].imageUrl&&progInfo[0].content ? 'yellow' : 'gray'}}.png" mode="aspectFit" data-stepid="step1" bindtap="toStep">
+          <text>组队</text>
+        </image>
+      </view>
+      <view class="prog-item">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[1].imageUrl&&progInfo[1].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step2" bindtap="toStep">
+          <text>理解</text>
+        </image>
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[2].imageUrl&&progInfo[2].content ? 'blue' : 'gray'}}.png" mode="aspectFit" data-stepid="step3" bindtap="toStep">
+          <text class="right" >定义</text>
+        </image>
+      </view>
+      <view class="prog-item">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[3].imageUrl&&progInfo[3].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step4" bindtap="toStep">
+          <text>发散</text>
+        </image>
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[4].imageUrl&&progInfo[4].content ? 'green' : 'gray'}}.png" mode="aspectFit" data-stepid="step5" bindtap="toStep">
+          <text class="right">决定</text>
+        </image>
+      </view>
+      <view class="prog-item">
+        <image class="hexagen" src="/img/icon/hexl-{{progInfo[5].imageUrl&&progInfo[5].content ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step6" bindtap="toStep">
+          <text>原型</text>
+        </image>
+        <image class="hexagen" src="/img/icon/hexr-{{progInfo[6].imageUrl&&progInfo[6].content ? 'red' : 'gray'}}.png" mode="aspectFit" data-stepid="step7" bindtap="toStep">
+          <text class="right">验证</text>
+        </image>
+      </view>
+      <view class="prog-title">
+        <view class="text" data-stepid="step1" bindtap="toStep">
+          <text class="{{cur<1 ? 'cur' : ''}}">组建团队</text>
+        </view>
+        <view class="text" data-stepid="step2" bindtap="toStep">
+          <text class="{{cur>=1 && cur<3 ? 'cur' : ''}}">对的问题</text>
+        </view>
+        <view class="text" data-stepid="step4" bindtap="toStep">
+          <text class="{{cur>=3 &&cur<5 ? 'cur' : ''}}">对的主意</text>
+        </view>
+        <view class="text" data-stepid="step6" bindtap="toStep">
+          <text class="{{cur>=5 ? 'cur' : ''}}">对的产品</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <scroll-view class="container" scroll-y scroll-with-animation enable-back-to-top scroll-into-view="{{scroll}}" bindscroll="onScroll">
+    <view class="step-card" id="step{{item.stepNum}}" wx:for="{{progInfo}}" wx:key="stepNum">
+      <view class="card-title">
+        {{stepTitle[index]}}
+      </view>
+      <view class="sub-title">
+        {{stepText[index]}}
+      </view>
+      <image class="step-image" wx:if="{{item.imageUrl}}" mode="aspectFill" src="{{item.imageUrl}}" data-url="{{item.imageUrl}}" bindtap="preview"></image>
+      <view class="noimage" data-stepid="{{item.stepid}}" wx:else > 未提交 </view>
+      <view class="step-content para" wx:if="{{item.content}}"> {{item.content}} </view>
+      <view class="nocontent" wx:else > 未提交 </view>
+    </view>
+    <view class="main-hint">
+      已经到底啦！
+    </view>
+  </scroll-view> 
+</view>
+

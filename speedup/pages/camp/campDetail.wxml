@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="page-title">
+    {{title}}
+  </view>
+  <view class="interval-title">
+    导师
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{mentors}}"> 
+      <image class="avatar" src="{{item.avatarUrl}}"></image>
+      <image class="tiny-del" hidden="{{mentorDelHide}}" data-userId="{{item.userId}}" src="../../img/icon/del.png" bindtap="delMentor"></image>
+      <text class="avatar-nickName">{{item.nickName}}</text>
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/add.png" bindtap="toMentorAdd"></image>
+      添加
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="mentor" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="interval-title">
+    项目负责人
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{leaders}}"> 
+      <image class="avatar" src="{{item.avatarUrl}}"></image>
+      <image class="tiny-del" hidden="{{leaderDelHide}}" data-userId="{{item.userId}}" src="../../img/icon/del.png" bindtap="delLeader"></image>
+      <text class="avatar-nickName">{{item.nickName}}</text>
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/add.png" bindtap="toProjAdd"></image>
+      添加
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="leader" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="interval-title">
+    项目成员
+  </view>
+  <view class="avatar-area">
+    <view class="avatar-box" wx:for="{{members}}"> 
+      <image class="avatar" src="{{item.avatarUrl}}"></image>
+      <image class="tiny-del" hidden="{{memberDelHide}}" data-userId="{{item.userId}}" src="../../img/icon/del.png" bindtap="delMember"></image>
+      <text class="avatar-nickName">{{item.nickName}}</text>
+    </view>
+    <view class="avatar-box"> 
+      <image class="avatar" src="../../img/icon/del.png" data-key="member" bindtap="showDel"></image>
+      删除
+    </view>
+  </view>
+  <view class="btn-area">
+    <button type="primary" bindtap="toProjAdd">添加项目</button>
+    <button type="default" bindtap="toMentorAdd">添加导师</button>
+  </view>
+</view>

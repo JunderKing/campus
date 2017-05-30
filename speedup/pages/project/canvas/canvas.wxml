@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="page-title">
+    项目画布
+  </view>
+  <view class="canvas-area">
+    <view class="canvas-row">
+      <navigator class="canvas-item detail-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=1&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.detail}}"></view>
+        <text>①用户细分</text>
+      </navigator>
+      <view class="canvas-item title">
+        <text>对的问题</text>
+      </view>
+      <navigator class="canvas-item painpoiont-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=2&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.painpoint}}"></view>
+        <text>②痛点问题</text>
+      </navigator>
+    </view>
+    <view class="canvas-row">
+      <navigator class="canvas-item detail-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=3&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.value}}"></view>
+        <text>③价值主张</text>
+      </navigator>
+      <view class="canvas-item title">
+        <text>对的产品</text>
+      </view>
+      <navigator class="canvas-item painpoiont-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=4&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.scheme}}"></view>
+        <text>④解决方案</text>
+      </navigator>
+    </view>
+    <view class="canvas-row">
+      <navigator class="canvas-item detail-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=5&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.indicator}}"></view>
+        <text>⑤衡量指标</text>
+      </navigator>
+      <view class="canvas-item title">
+        <text>有人付钱</text>
+      </view>
+      <navigator class="canvas-item painpoiont-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=6&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.income}}"></view>
+        <text>⑥收入模型</text>
+      </navigator>
+    </view>
+    <view class="canvas-row">
+      <navigator class="canvas-item detail-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=7&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.channel}}"></view>
+        <text>⑦渠道通路</text>
+      </navigator>
+      <view class="canvas-item title">
+        <text>付很多钱</text>
+      </view>
+      <navigator class="canvas-item painpoiont-canvas" url="/pages/project/canvas/gridDetail?projId={{projId}}&gridNum=8&isUser={{isUser}}">
+        <view class="marker" wx:if="{{marker.growth}}"></view>
+        <text>⑧增长引擎</text>
+      </navigator>
+    </view>
+  </view>
+</view>

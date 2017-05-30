@@ -1,0 +1,41 @@
+<view class="container" wx:if="{{true}}">
+  <view class="page-title">
+    <text>{{title}}</text>
+  </view>
+  <view class="noproj-text" wx:if="{{!cardList[0] && !content && !isUser}}" >
+    空空如也，神马都木有~
+  </view>
+  <view class="canvas-content content-area" wx:if="{{isUser || content}}">
+    <view wx:if="{{!isUser}}">
+      <text class="para"  wx:if="{{content}}">{{content}}</text>
+    </view>
+    <view wx:else >
+      <navigator wx:if="{{content}}" url="/pages/include/comnForm?type=grid&content={{content}}&gridId={{gridId}}">
+        <text class="para">{{content}}</text>
+      </navigator>
+      <navigator wx:else class="canvas-edit nav-btn" url="/pages/include/comnForm?type=grid&content={{content}}&gridId={{gridId}}">
+        <text>点击添加画格内容</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="test-card-box content-area" wx:if="{{cardList[0]}}">
+    <navigator class="test-card state{{item.status}}" wx:for="{{cardList}}" wx:key="card-order" url="/pages/project/card/cardDetail?cardId={{item.cardId}}&isUser={{isUser}}">
+      <view class="marker" wx:if="{{item.marker==0}}"></view>
+      <view class="card-title">
+        <text>{{item.title}}</text>
+      </view>
+      <view class="card-footer">
+        <text>{{item.createdAt}}</text>
+      </view>
+    </navigator>
+  </view>
+  <view class="btn-area" wx:if="{{isUser}}">
+    <navigator url="/pages/project/card/cardAdd?gridId={{gridId}}" hover-class="navigator-hover">
+      <button type="primary" size="default">添加实验</button>
+    </navigator>
+    <navigator url="/pages/project/canvas/gridLog?gridId={{gridId}}" hover-class="navigator-hover">
+      <button type="default" size="default">查看编辑记录</button>
+    </navigator>
+  </view>
+</view>
+
