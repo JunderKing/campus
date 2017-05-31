@@ -1,82 +1,134 @@
 Page({
   data: {
     userId: 0,
-    orgerid: 1,
-    role: 1,
-    meetRole: 1,
-    meetId: 1,
-    name: 'title',
-    intro: 'intro',
-    startTime: 'stime',
-    endTime: 'etime',
-    addr: 'addr',
-    logoUrl: '../../img/icon/speed_cur.png',
-    meetList: []
+    orgerId: 0,
+    role: 0,
+    festRole: 0,
+    festId: 0,
+    name: '',
+    intro: '',
+    startTime: '',
+    endTime: '',
+    addr: '',
+    logo: '',
+    festList: []
+  },
+
+  onShareAppMessage: function(){
+    return {
+      title: '火种节小程序',
+      path: '/pages/project/project'
+    }
   },
 
   onLoad: function(){
-    this.setData({
-      userId: getApp().gdata.userId,
-      role: getApp().gdata.role
-    })
+    console.log('Festonload!')
   },
 
   onShow: function(){
-    this.updateMeetInfo()
+    this.setData({
+      userId: getApp().gdata.userId,
+      role: getApp().gdata.role,
+      festRole: getApp().gdata.festRole
+    })
+    this.getFestInfo()
+    //this.getAllFestList()
   },
 
-  updateMeetInfo: function(){
+  getFestInfo: function(){
+    var userId = getApp().gdata.userId
+    var curFestId = getApp().gdata.curFestId
+    if (curFestId !== this.data.festId) {
+      this.setData({
+        festId: curFestId
+      })
+      wx.showToast({
+        title: '数据加载中...',
+        icon: 'loading',
+        duration: 10000
+      })
+    }
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/getUserMeetInfo',
-      method: 'GET',
+      url: "http://www.campus.com/api/spark/getUserFestInfo",
+      method: 'POST',
       data: {
         userId: getApp().gdata.userId
       },
       success: function(res){
-        console.log('getUserMeetInfo =>')
-        console.log(res)
+        wx.hideToast()
+        console.log('getUserFestInfo=>')
+        console.log(res.data)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
-        }
-        that.setData(res.data.meetInfo)
+        }        
+        res.data.festInfo.startTime = new Date(res.data.festInfo.startTime * 1000).toLocaleString()
+        res.data.festInfo.endTime = new Date(res.data.festInfo.endTime * 1000).toLocaleString()
+        res.data.festInfo.projList.map(function(item){
+          item.tag = item.tag.split(' ')
+          return item
+        })
+        that.setData(res.data.festInfo)
+        getApp().gdata.curFestId = res.data.festInfo.festId
+        //getApp().gdata.isMentor = res.data.festInfo.isMentor
       },
       fail: function(){
-        return getApp().showError(2)
+        wx.hideToast()
       }
     })
   },
 
-  onMeetChange: function(e){
+  getAllFestList: function(){
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/getAllFestList',
+      method: 'GET',
+      success: function(res){
+        console.log('getAllFestList=>')
+        console.log(res.data)
+        that.setData({
+          festList: res.data.festList
+        })
+      }
+    })
+  },
+
+  showMap: function(){
+    wx.navigateTo({
+      url: "/pages/include/map"
+    })
+  },
+
+  onFestChange: function(e){
     var index = e.detail.value
-    var meetId = this.data.meetList[index].meetId
-    if (meetId === this.data.meetId) { return }
+    var festId = this.data.festList[index].festId
+    if (festId === this.data.festId) { return }
     wx.showToast({
       title: '数据加载中...',
-      icon: 'loading',
-      duration: 10000
+      icon: 'loading'
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/chgCurMeeting',
-      method: 'POST',
+      url: 'http://www.campus.com/api/spark/chgCurFestival',
+      method: 'GET',
       data: {
         userId: getApp().gdata.userId,
-        meetId: meetId
+        festId: festId
       },
       success: function(res){
-        wx.hideToast()
-        console.log('chgCurMeeting=>')
+        console.log('chgCurFestival=>')
         console.log(res)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
+        }        
+        getApp().gdata.isMentor = res.data.isMentor
+        getApp().gdata.curFestId = festId
+        if (res.data.curProjId) {
+          getApp().gdata.curProjId = res.data.curProjId
         }
-        that.updateMeetInfo()
-      },
-      fail: function(){
-        wx.hideToast()
-        return getApp().showError(2)
+        that.getFestInfo();
       }
     })
   }
 })
+

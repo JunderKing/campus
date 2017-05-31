@@ -53,16 +53,21 @@ class CampController extends Controller
       return self::$ERROR2;
     }
     $campInfo = Model\ScCamp::select('camp_id', 'orger_id', 'name', 'intro', 'sponsor', 'logo_url')->find($campId)->toArray();
+    $campList = Model\ScCamp::select('camp_id', 'name')->get()->toArray();
+    $campInfo['campList'] = $campList;
     $projIds = Model\ScCampProject::where('camp_id', $campId)->pluck('proj_id');
-    if (count($projIds) === 0) {
-      $campInfo['projList'] = [];
-      return $this->output(['campInfo' => $campInfo]);
-    }
+    $isMember = Model\ScProjMember::where('user_id', $userId)->whereIn('proj_id', $projIds)->count();
+    $isMentor = Model\ScCampMentor::where([['camp_id', $campId], ['user_id', $userId]])->count();
+    $campInfo['hidden'] = $isMember||$isMentor ? 0 : 1;
     $projList = Model\User::join('project', 'user.user_id', '=', 'project.leader_id')
       ->whereIn('project.proj_id', $projIds)
-      ->select('user.avatar_url', 'user.nick_name', 'project.proj_id', 'project.name', 'project.logo_url')
-      ->get();
-    $campInfo['projList'] = is_object($projList) ? $projList->toArray() : [];
+      ->select('user.avatar_url', 'user.nick_name', 'project.proj_id', 'project.name', 'project.tag', 'project.logo_url')
+      ->get()->toArray();
+    foreach ($projList as &$value) {
+      $projId = $value['proj_id'];
+      $value['isMember'] = Model\ScProjMember::where([['proj_id', $projId], ['user_id', $userId]])->count();
+    }
+    $campInfo['projList'] = $projList;
     return $this->output(['campInfo' => $campInfo]);
   }
 
@@ -121,11 +126,10 @@ class CampController extends Controller
       return self::$ERROR1;
     }
     extract($params);
-    $result = DB::transaction(function(){
-      Model\ScCamp::where('camp_id', $campId)->delete();
-      Model\ScCampProject::where('camp_id', $campId)->delete();
-      Model\ScCampMentor::where('camp_id', $campId)->delete();
-    });
+    $result = Model\ScCamp::where('camp_id', $campId)->delete();
+    Model\ScCampProject::where('camp_id', $campId)->delete();
+    Model\ScCampMentor::where('camp_id', $campId)->delete();
+    Model\ScUser::where('cur_camp_id', $campId)->update(['cur_camp_id' => 0]);
     return $this->output(['deleted' => $result]);
   }
 

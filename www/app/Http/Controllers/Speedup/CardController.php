@@ -78,7 +78,8 @@ class CardController extends Controller
     }
     extract($params);
     $gridIds = Model\ScProjGrid::where('proj_id', $projId)->pluck('grid_id');
-    $cardList = Model\ScProjCard::whereIn('grid_id', $gridIds)
+    $cardList = Model\ScProjCard::where('status', 0)
+      ->whereIn('grid_id', $gridIds)
       ->select('card_id', 'title', 'assumption', 'status', 'created_at')
       ->orderBy('created_at', 'desc')
       ->get()->toArray();

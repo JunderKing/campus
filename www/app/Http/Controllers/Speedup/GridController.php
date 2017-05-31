@@ -37,9 +37,8 @@ class GridController extends Controller
       ['proj_id', '=', $projId],
       ['grid_num', '=', $gridNum]
     ];
-    $gridInfo = Model\ScProjGrid::where($map)
-      ->select('grid_id', 'content')
-      ->first()->toArray();
+    $gridObj = Model\ScProjGrid::firstOrCreate(['proj_id' => $projId, 'grid_num' => $gridNum]);
+    $gridInfo = ['gridId' => $gridObj->grid_id, 'content' => $gridObj->content];
     return $this->output(['gridInfo' => $gridInfo]);
   }
 

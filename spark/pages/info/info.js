@@ -2,13 +2,25 @@ Page({
   data: {
     avatarUrl: '',
     nickName: '',
-    role: '开始创业者'
+    roleStr: '',
+    role: 0
   },
 
-  onLoad: function(){
+  onShow: function(){
+    var gdata = getApp().gdata
+    var roleStr = '创业者'
+    if (gdata.role === 1) {
+      roleStr = '管理员'
+    } else if (gdata.festRole === 1){
+      roleStr = '组织者'
+    } else if (gdata.isMentor === 1) {
+      roleStr = '创业导师'
+    }
     this.setData({
-      avatarUrl: getApp().gdata.avatarUrl,
-      nickName: getApp().gdata.nickName
+      avatarUrl: gdata.avatarUrl,
+      nickName: gdata.nickName,
+      roleStr: roleStr,
+      role: gdata.role
     })
   },
 
@@ -20,24 +32,35 @@ Page({
   },
 
   toOrgerAdd: function(){
+    var that = this
     wx.showToast({
-      title: '请稍后……',
-      icon: 'loading'
+      title: '数据加载中...',
+      icon: 'loading',
+      duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/spark/getQrcode',
-      method: 'POST',
+      url: 'http://www.campus.com/api/common/getQrcode',
+      method: 'GET',
       data: {
-        path: '/pages/include/start?role=4',
-        name: 'orger'
+        type: 1,
+        name: 'spark_orger',
+        path: '/pages/include/start?role=4'
       },
       success: function(res){
-        wx.hideToast();
-        if (res.data) {
-          wx.navigateTo({
-            url: '/pages/include/qrcode?role=4'
-          })
+        console.log('getQrcode=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
         }
+        var url = 'http://www.campus.com/static/qrcode/spark_orger.png'
+        wx.previewImage({
+          urls: [url]
+        })
+      },
+      fail: function(){
+        wx.hideToast()
+        return getApp().showError(2)
       }
     })
   },

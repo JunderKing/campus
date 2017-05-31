@@ -88,12 +88,12 @@ App({
       url: 'http://www.campus.com/api/speedup/getUserInfo',
       method: 'POST',
       data: {
-        userId: that.gdata.userId,
+        userId: this.gdata.userId,
       },
       success: function(res){
-        console.log('updateUserinfo=>')
+        console.log('getUserInfo=>')
         console.log(res.data)
-        that.gdata = res.data;
+        that.gdata = res.data.userInfo;
         if (callback) { callback() }
       }
     })
@@ -103,15 +103,14 @@ App({
     options.role = parseInt(options.role)
     options.campId = parseInt(options.campId)
     options.projId = parseInt(options.projId)
-    console.log(options)
     if (options.role === 4) {
-      this.beOrganizer(isLoading, callback)
+      this.addOrger(isLoading, callback)
     } else if (options.role === 3 && options.campId > 0) {
-      this.beMentor(options.campId, isLoading, callback)
+      this.addMentor(options.campId, isLoading, callback)
     } else if (options.role === 2 && options.campId > 0) {
-      this.beLeader(options.campId, isLoading, callback)
+      this.addProject(options.campId, isLoading, callback)
     } else if (options.role === 1 && options.projId > 0) {
-      this.beMember(options.projId, isLoading, callback)
+      this.addMember(options.projId, isLoading, callback)
     } else {
       wx.switchTab({
         url: '/pages/project/project'
@@ -119,7 +118,7 @@ App({
     }
   },
 
-  beOrganizer: function(isLoading, callback){
+  addOrger: function(isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -153,7 +152,8 @@ App({
     })
   },
 
-  beMentor: function(campId, isLoading, callback){
+  addMentor: function(campId, isLoading, callback){
+    console.log('addMentor')
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -171,16 +171,12 @@ App({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        //that.gdata.isMentor = 1
-        //if (callback) {
-        //callback()
-        //}
+        that.gdata.isMentor = 1
         wx.switchTab({
           url: '/pages/project/project',
           success: function(){
             wx.showToast({
-              title: '恭喜您成为加速营导师!',
-              icon: 'success'
+              title: '恭喜您成为加速营导师!'
             })
           }
         })
@@ -188,7 +184,7 @@ App({
     })
   },
 
-  beLeader: function(campId, isLoading, callback){
+  addProject: function(campId, isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -196,15 +192,15 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/speedup/getUserProjList',
+      url: 'http://www.campus.com/api/speedup/getAvlProjList',
       method: 'GET',
       data: {
-        userId: getApp().gdata.userId
+        userId: getApp().gdata.userId,
+        campId: campId
       },
       success: function(res){
         console.log('getUserProjList=>')
         console.log(res)
-        //wx.hideToast()
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
@@ -216,34 +212,8 @@ App({
               wx.navigateTo({
                 url: '/pages/project/projAdd?campId=' + campId
               })
-            } else if (projList.length === 1) {
-              var projId = projList[0].projId
-              wx.request({
-                url: 'http://www.campus.com/api/speedup/addCampProject',
-                method: 'POST',
-                data: {
-                  userId: that.gdata.userId,
-                  campId: campId,
-                  projId: projId
-                },
-                success: function(res){
-                  if (res.statusCode !== 200 || res.data.errcode !== 0) {
-                    return that.showError(3)
-                  }
-                  wx.showToast({
-                    title: '成功加入加速营!',
-                    icon: 'success'
-                  })
-                  if (callback) {
-                    callback()
-                  }
-                },
-                fail: function(){
-                  wx.hideToast()
-                  return getApp().showError(2)
-                }
-              })
             } else {
+              that.gdata.avlProjList = projList
               wx.navigateTo({
                 url: '/pages/project/projChoose?campId=' + campId
               })
@@ -252,13 +222,12 @@ App({
         })
       },
       fail: function(){
-        wx.hideToast()
         return getApp().showError(2)
       }
     })
   },
 
-  beMember: function(projId, isLoading, callback){
+  addMember: function(projId, isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -277,7 +246,6 @@ App({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        //that.gdata.campRole = 1
         if (callback) {
           callback()
         }
@@ -295,6 +263,7 @@ App({
   },
 
   qrScan: function(callback){
+    console.log('qrScan')
     var that = this
     wx.scanCode({
       success: function(res){
@@ -337,6 +306,8 @@ App({
     role: 0,
     campRole: 0,
     curCampId: 0,
-    curProjId: 0
+    curProjId: 0,
+    isMentor: 0,
+    avlProjList: []
   }
 })

@@ -18,14 +18,17 @@ class UserController extends Controller
     }
     $userId = $cmUserInfo->user_id;
     $sfUserInfo = Model\SfUser::firstOrCreate(['user_id' => $userId]);
+    $curFestId = is_null($sfUserInfo->cur_fest_id) ? 0 : $sfUserInfo->cur_fest_id;
+    $isMentor = Model\SfFestMentor::where([['fest_id', $curFestId], ['user_id', $userId]])->count();
     return $this->output(['userInfo' => [
       'userId' => $userId,
       'avatarUrl' => $cmUserInfo->avatar_url,
       'nickName' => $cmUserInfo->nick_name,
       'role' => is_null($cmUserInfo->role) ? 0 : $cmUserInfo->role,
       'festRole' => is_null($sfUserInfo->fest_role) ? 0 : $sfUserInfo->fest_role,
-      'curFestId' => is_null($sfUserInfo->cur_fest_id) ? 0 : $sfUserInfo->cur_fest_id,
-      'curProjId' => is_null($sfUserInfo->cur_proj_id) ? 0 : $sfUserInfo->cur_proj_id
+      'curFestId' => $curFestId,
+      'curProjId' => is_null($sfUserInfo->cur_proj_id) ? 0 : $sfUserInfo->cur_proj_id,
+      'isMentor' => $isMentor
     ]]);
   }
 
@@ -42,6 +45,8 @@ class UserController extends Controller
       ->where('user.user_id', $userId)
       ->select('user.user_id', 'user.avatar_url', 'user.nick_name', 'user.role', 'sf_user.fest_role', 'sf_user.cur_fest_id', 'sf_user.cur_proj_id')
       ->first()->toArray();
+    $festId = $userInfo['cur_fest_id'];
+    $userInfo['isMentor'] = Model\SfFestMentor::where([['fest_id', $festId], ['user_id', $userId]])->count();
     return $this->output(['userInfo' => $userInfo]);
   }
 
@@ -85,14 +90,15 @@ class UserController extends Controller
     if (!$exist) {
       return self::$ERROR2;
     }
-    $result = Model\SfUser::where('user_id', $userId)->update(['cur_fest_id' => $festId]);
+    Model\SfUser::where('user_id', $userId)->update(['cur_fest_id' => $festId]);
+    $resArr['isMentor'] = Model\SfFestMentor::where([['fest_id', $festId], ['user_id', $userId]])->count();
     $projIds = Model\SfFestProject::where('fest_id', $festId)->pluck('proj_id');
     $myProjIds = Model\SfProjMember::whereIn('proj_id', $projIds)->where('user_id', $userId)->pluck('proj_id');
     if (count($myProjIds) > 0) {
-      $projId = Model\SfUser::where('user_id', $userId)->update(['cur_proj_id' => $myProjIds[0]]);
-      return $this->output(['projId' => $projId]);
+      Model\SfUser::where('user_id', $userId)->update(['cur_proj_id' => $myProjIds[0]]);
+      $resArr['curProjId'] = $myProjIds[0];
     } 
-    return $this->output(['updated' => $result]);
+    return $this->output($resArr);
   }
 
   public function chgCurProject(Request $request)

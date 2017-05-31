@@ -5,14 +5,17 @@ Page({
     projId: 0,
     festId: 0,
     isMentor: 0,
+    isMember: 0,
     members: [],
     comnts: [],
+    scores: []
   },
 
   onLoad: function(options) {
     this.setData({
       projId: parseInt(options.projId),
-      isMentor: getApp().gdata.isMentor,
+      isMentor: parseInt(options.isMentor),
+      isMember: parseInt(options.isMember),
       role: getApp().gdata.role
     })
   },
@@ -107,9 +110,9 @@ Page({
   },
 
   toProgress: function(){
-    if (getApp().gdata.projId === this.data.projId) {
+    if (this.data.isMember) {
       wx.navigateTo({
-        url: "/pages/project/projProgress?projId=" + getApp().gdata.projId
+        url: "/pages/project/projProgress?projId=" + this.data.projId
       })
     } else {
       wx.navigateTo({

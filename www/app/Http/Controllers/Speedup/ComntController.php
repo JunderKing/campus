@@ -73,5 +73,25 @@ class ComntController extends Controller
       return self::$ERROR1;
     }
     extract($params);
+    $comnts = Model\ScComnt::where([['tar_type', $tarType], ['tar_id', $tarId]])
+      ->join('user', 'sc_comnt.comntor_id', '=', 'user.user_id')
+      ->select('user.avatar_url', 'user.nick_name', 'sc_comnt.comnt_id', 'sc_comnt.content', 'sc_comnt.created_at')
+      ->orderBy('sc_comnt.created_at', 'desc')
+      ->get()->toArray();
+    $comntIds = Model\ScComnt::where([['tar_type', $tarType], ['tar_id', $tarId]])->pluck('comnt_id');
+    $replies = Model\ScReply::whereIn('comnt_id', $comntIds)
+      ->join('user', 'sc_reply.replier_id', '=', 'user.user_id')
+      ->select('user.nick_name', 'sc_reply.comnt_id', 'sc_reply.content')
+      ->orderBy('sc_reply.created_at', 'desc')
+      ->get()->toArray();
+    for ($index= 0; $index < count($comnts); $index++) {
+      $comnts[$index]['replies'] = array();
+      foreach($replies as $item) {
+        if ($comnts[$index]['comnt_id']===$item['comnt_id']) {
+          $comnts[$index]['replies'][] = $item;
+        }
+      }
+    }      
+    return $this->output(['comnts' => $comnts]);
   }
 }

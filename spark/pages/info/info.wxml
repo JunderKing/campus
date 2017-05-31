@@ -3,7 +3,7 @@
     <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
     <view class="info-text">
       <text class="text-big">{{nickName}}</text>
-      <text class="text-def">{{role}}</text>
+      <text class="text-def">{{roleStr}}</text>
     </view>
   </view>
   <view class="interval-title">
@@ -41,7 +41,7 @@
     <view class="app-box" data-type="2" bindtap="toWxcode">
       <image mode="widthFix" src="../../img/freeman.png"></image>
       <text class="app-status gray">未参与</text>
-      创-自由人
+      创-加速营
     </view>
     <view class="app-box" data-type="3" bindtap="toWxcode">
       <image mode="widthFix" src="../../img/venture.png"></image>
@@ -53,6 +53,6 @@
     我的徽章
   </view>
   <view class="btn-area">
-    <button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>
+    <button type="primary" bindtap="toOrgerAdd" wx:if="{{true || role}}">添加组织者</button>
   </view>
 </view>

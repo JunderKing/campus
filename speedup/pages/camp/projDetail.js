@@ -1,23 +1,17 @@
 Page({
   data:{
     projId: 0,
-    title: '项目标题',
-    intro: '项目简介',
-    isHidden: true,
-    comments: [{
-      avatar: '../../img/icon/spark_cur.png',
-      nickName: 'Jun.K',
-      content: '评论',
-      ctime: '20150606',
-      replies: [{
-        nickName: 'HelloWorld',
-        content: '回复'
-      }]
-    }],
+    isUser: 0,
+    title: '',
+    intro: '',
+    hidden: 1,
   },
+
   onLoad: function(options){
     this.setData({
-      projId: options.projId
+      projId: parseInt(options.projId),
+      isUser: parseInt(options.isMember),
+      hidden: parseInt(options.hidden)
     })
   },
 

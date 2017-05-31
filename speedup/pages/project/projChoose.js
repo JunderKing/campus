@@ -5,39 +5,14 @@ Page({
   },
 
   onLoad: function(options){
-    this.data.campId = options.campId
-    this.getProjList()
-  },
-
-  getProjList: function(){
-    var that = this
-    wx.request({
-      url: 'http://www.campus.com/api/speedup/getUserProjList',
-      method: 'GET',
-      data: {
-        userId: getApp().gdata.userId
-      },
-      success: function(res){
-        console.log('getUserProjList=>')
-        console.log(res)
-        wx.hideToast()
-        if (res.statusCode !== 200 || res.data.errcode !== 0) {
-          return getApp().showError(3)
-        }
-        that.setData({
-          projList: res.data.projList
-        })
-      },
-      fail: function(){
-        wx.hideToast()
-        return getApp().showError(2)
-      }
+    this.setData({
+      campId: options.campId,
+      projList: getApp().gdata.avlProjList
     })
   },
 
   addCampProject: function(e){
-    console.log('addCampProject=>')
-    console.log(e)
+    var that = this
     var projId = e.currentTarget.dataset.projid
     wx.request({
       url: 'http://www.campus.com/api/speedup/addCampProject',
@@ -49,7 +24,7 @@ Page({
       },
       success: function(res){
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
-          return that.showError(3)
+          return getApp().showError(3)
         }
         wx.navigateBack()
         wx.showToast({
@@ -62,5 +37,17 @@ Page({
         return getApp().showError(2)
       }
     })
+  },
+
+  toProjAdd: function(){
+    wx.switchTab({
+      url: '/pages/project/project',
+      success: function(){
+        wx.navigateTo({
+          url: '/pages/project/projAdd?campId=' + this.data.campId
+        })
+      }
+    })
   }
 })
+

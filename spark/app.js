@@ -171,6 +171,7 @@ App({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
+        that.gdata.isMentor = 1
         wx.switchTab({
           url: '/pages/project/project',
           success: function(){
@@ -306,6 +307,7 @@ App({
     festRole: 0,
     curFestId: 0,
     curProjId: 0,
+    isMentor: 0,
     avlProjList: []
   }
 })

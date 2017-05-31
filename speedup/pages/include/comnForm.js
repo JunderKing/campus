@@ -84,7 +84,7 @@ Page({
   addCmnt: function(formData){
     formData.projid = this.data.projid
     wx.request({
-      url: 'http://www.campus.com/spark/comment/addCmnt',
+      url: 'http://www.campus.com/speedup/comment/addCmnt',
       method: 'POST',
       data: formData,
       success: function(res){
@@ -97,7 +97,7 @@ Page({
   addReply: function(formData){
     formData.cmntid = this.data.cmntid
     wx.request({
-      url: 'http://www.campus.com/spark/comment/addReply',
+      url: 'http://www.campus.com/speedup/comment/addReply',
       method: 'POST',
       data: formData,
       success: function(res){

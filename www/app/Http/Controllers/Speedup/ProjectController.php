@@ -34,18 +34,10 @@ class ProjectController extends Controller
       'origin' => 2
     ]);
     $projId = $projObj->proj_id;
+    Model\SfProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
     Model\ScProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
+    Model\VmProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
     Model\ScUser::where('user_id', $userId)->update(['cur_proj_id' => $projId]);
-    Model\ScProjGrid::create([
-      ['proj_id' => $projId, 'grid_num' => 1],
-      ['proj_id' => $projId, 'grid_num' => 2],
-      ['proj_id' => $projId, 'grid_num' => 3],
-      ['proj_id' => $projId, 'grid_num' => 4],
-      ['proj_id' => $projId, 'grid_num' => 5],
-      ['proj_id' => $projId, 'grid_num' => 6],
-      ['proj_id' => $projId, 'grid_num' => 7],
-      ['proj_id' => $projId, 'grid_num' => 8]
-    ]);
     if ($campId > 0) {
       Model\ScCampProject::create(['camp_id' => $campId, 'proj_id' => $projId]);
       Model\ScUser::where('user_id', $userId)->update(['cur_camp_id' => $campId]);
@@ -67,7 +59,7 @@ class ProjectController extends Controller
       return $this->output(['projInfo' => ['proj_id' => 0]]);
     }
     $projInfo = Model\Project::where('proj_id', $projId[0])
-      ->select('proj_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')
+      ->select('proj_id', 'leader_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')
       ->first()->toArray();
     $memberIds = Model\ScProjMember::where('proj_id', $projId)->orderBy('is_leader', 'desc')->pluck('user_id');
     $members = Model\User::whereIn('user_id', $memberIds)->select('user_id', 'avatar_url', 'nick_name')->get()->toArray();
@@ -85,7 +77,7 @@ class ProjectController extends Controller
     }
     extract($params);
     $projInfo = Model\Project::where('proj_id', $projId)
-      ->select('proj_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')
+      ->select('proj_id', 'leader_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')
       ->first()->toArray();
     $memberIds = Model\ScProjMember::where('proj_id', $projId)->orderBy('is_leader', 'desc')->pluck('user_id');
     $members = Model\User::whereIn('user_id', $memberIds)->select('user_id', 'avatar_url', 'nick_name')->get()->toArray();
@@ -134,6 +126,24 @@ class ProjectController extends Controller
     }
     extract($params);
     $projList = Model\Project::where('leader_id', $userId)->select('proj_id', 'name')->get()->toArray();
+    return $this->output(['projList' => $projList]);
+  }
+
+  public function getAvlProjList(Request $request)
+  {
+    $params = $this->validation($request, [
+      'userId' => 'required|numeric',
+      'campId' => 'required|numeric'
+    ]);
+    if ($params === false) {
+      return self::$ERROR1;
+    }
+    extract($params);
+    $campProjIds = Model\ScCampProject::where('camp_id', $campId)->pluck('proj_id');
+    $projList = Model\Project::where('leader_id', $userId)
+      ->whereNotIn('proj_id', $campProjIds)
+      ->select('proj_id', 'name')
+      ->get()->toArray();
     return $this->output(['projList' => $projList]);
   }
 

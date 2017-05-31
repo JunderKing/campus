@@ -7,12 +7,23 @@
  * 绿色#09bb07
  * 红色#e64340
  */
+/*#####################################################################*/
+/*###################################Global############################*/
+/*#####################################################################*/
 button[type="primary"] {
   /*background-color: #E28428;*/
 }
 view {
   box-sizing: border-box;
 }
+.ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;  
+}
+/*
+ *******************************************************main
+ */
 view.container {
   width: 100%;
   min-height: 100vh;
@@ -29,6 +40,7 @@ view.container-white {
   min-height: 100vh;
   background-color: #fff;
 }
+
 view.page-title {
   width: 100%;
   padding: 20px;
@@ -52,6 +64,13 @@ view.interval-title {
   color: #fff;
   background-color: #000;
 }
+view.main-hint {
+  padding: 5px;
+  width: 100%;
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+}
 view.page-footer {
   position: fixed;
   bottom: 0;
@@ -62,41 +81,87 @@ view.page-footer {
   background-color: #fff;
   border-top: 1px solid #cdcdcd;
 }
-/*noproj-box*/
-.half-box {
-  margin: 10px;
-  border-radius: 5px;
-  background-color: #fff;
-  width: calc(100% - 20px);
-  height: calc(50vh - 15px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.half-box>text.text {
-  font-size: 14px;
-  color: #bfbfbf;
-  display: block;
-}
-image.noproj-icon {
-  width: 70px;
-  height: 70px;
-}
-view.main-hint {
+/*
+ * content area
+ */
+.content-area{
   padding: 5px;
+  background-color: #fff;
+  min-height: 50px;
+}
+.para {
+  display: block;
+  margin: 5px;
+  font-size: 16px;
+  line-height: 18px;
+  color: #353535;
+}
+/*
+ * button area
+ */
+view.btn-area{
+  padding-bottom: 1px;
+  padding: 10px 10px 1px;
+}
+view.btn-area button{
+  margin-bottom: 9px;
+}
+picker.btn-style{
+  margin-bottom: 9px;
   width: 100%;
-  font-size: 14px;
-  color: #888;
+  color: #000;
+  background-color: #f8f8f8;
+  font-size: 18px;
+  line-height: 2.55;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  text-align: center;
+  box-sizing: border-box;
+}
+picker.btn-style.primary {
+  color: #fff;
+  background-color: #1AAD19;
+}
+/*
+ * **************************************************bottom-float
+ */
+view.bottom-anchor{
+  width: 100%;
+  height: 8vh;
+}
+view.bottom-float{
+  width: 100%;
+  height: 9vh;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  color: #bfbfbf;
+  border-top: 1px solid #bfbfbf;
+  font-size: 10px;
   text-align: center;
 }
-
+view.bottom-float text{
+  display: block;
+  line-height: 16px;
+}
+navigator.icon-box.float-btn{
+  width: 65%;
+}
+navigator.icon-box.float-btn text{
+  background-color: #09bb07;
+  color: #fff;
+  font-size: 14px;
+  line-height: 6vh;
+  border-radius: 5px;
+}
 /*
- * avatar area
+ * ******************************************************avatar area
  */
 view.avatar-area {
   padding: 5px;
-  /*margin-top: -10px;*/
   text-align: left;
   background-color: #fff;
   display: flex;
@@ -107,7 +172,6 @@ view.avatar-area {
 view.avatar-box {
   display: inline-block;
   width: 60px;
-  /*padding: 2px 0;*/
   text-align: center;
   font-size: 12px;
   line-height: 14px;
@@ -147,8 +211,246 @@ view.del-icon>view{
   border-radius: 1px;
   background-color: #fff;
 }
+/*
+ * ******************************************************form表单
+ */
+view.group-title {
+  font-size: 14px;
+  color: #888;
+  padding: 10px 10px 3px;
+}
+view.form-group {
+  background-color: #fff;
+  padding: 0 10px;
+}
+view.form-group.small {
+  display: inline-block;
+  width: calc(100% - 80px);
+  padding-left: 0;
+}
+view.form-item-logo {
+  width: 80px;
+  height: 70px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 2px;
+  border-left: 1px solid #f0f0f0;
+}
+view.form-item-logo>.item-title {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+view.form-item-logo>image {
+  width: 55px;
+  height: 55px;
+  position: relative;
+  top: 6px;
+}
+view.form-item {
+  display: flex;
+  font-size: 16px;
+  line-height: 40px;
+  min-height: 40px;
+}
+view.form-item.border {
+  border-bottom: 1px solid #f0f0f0;
+}
+view.form-item.border-top {
+  border-top: 1px solid #f0f0f0;
+}
+view.form-item>.item-title {
+  min-width: 64px;
+  font-weight: bold;
+  height: 40px;
+}
+view.form-item>view.item-content {
+  padding-left: 10px;
+  flex: 1 1 auto;
+  height: 40px;
+}
+view.item-content>input {
+  width: 100%;
+  height: 40px;
+}
+view.item-content>picker {
+  width: 50%;
+  height: 40px;
+  display: inline-block;
+}
+view.item-content>image.score {
+  width: 30px;
+  height: 30px;
+  margin: 5px 3px;
+}
+view.item-content>picker.big {
+  width: 100%;
+}
+view.item-content>picker.def {
+  color: #888;
+}
+view.form-item>textarea {
+  width: 100%;
+  min-height: 80px;
+  font-size: 16px;
+  line-height: 18px;
+  padding-top: 5px;
+}
+view.form-item>input {
+  width: 100%;
+}
 
-view.sponsor-area {
+/*
+ * ***************************************************comment-area
+ */
+view.comment-area{
+  padding: 10px;
+  background-color: #fff;
+  margin: 10px 0;
+}
+view.comment-title{
+  font-size: 14px;
+  line-height: 22px;
+  position: relative;
+}
+view.comment-box{
+  min-height: 55px;
+  margin-bottom: 10px;
+  position: relative;
+  border-top: 1px solid #f0f0f0;
+  color: #535353;
+}
+view.comment-box>image{
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  margin: 5px;
+}
+view.comment-box>view.content-box{
+  margin: -55px 0 0 55px;
+  font-size: 14px;
+  line-height: 15px;
+  position: relative;
+}
+view.content-box>text.nick-name{
+  font-size: 16px;
+  line-height: 20px;
+  display: block;
+  padding: 2px;
+  color: #606398;
+}
+
+view.score-bar{
+  background-color: #bfbfbf;
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  width: 90px;
+  height: 20px;
+}
+view.score-bar>view.score-red{
+  background-color: #e64340;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+view.score-bar view.score-star-box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/*view.content-box>text.score{*/
+  /*font-size: 16px;*/
+  /*color: orange;*/
+  /*display: block;*/
+  /*position: absolute;*/
+  /*right: 5px;*/
+  /*top: 5px;*/
+/*}*/
+view.comment-btn-box{
+  margin: 3px;
+  font-size: 12px;
+  line-height: 15px;
+  position: relative;
+  color: #A4A4A4;
+}
+view.comment-btn-box>navigator.reply-btn{
+  display: block;
+  position: absolute;
+  font-weight: bold;
+  font-size: 14px;
+  top: 0;
+  right: 5px;
+  color:#8393B4;
+}
+view.reply-area{
+  margin: 5px 0 0;
+}
+view.reply-box{
+  background-color: rgba(238, 238, 238, 0.5);
+  padding:3px;
+}
+view.reply-box>text.nick-name{
+  color: #606398;
+}
+/*#####################################################################*/
+/*###################################Start#############################*/
+/*#####################################################################*/
+/* 
+ * start-page
+ */
+view.start-page{
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  font-size: 25px;
+  line-height: 100vh;
+}
+
+/*#####################################################################*/
+/*###################################Project###########################*/
+/*#####################################################################*/
+/*
+ * half-box
+ */
+.half-box {
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  width: calc(100% - 20px);
+  height: calc(50vh - 15px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.half-box>text.text {
+  font-size: 14px;
+  color: #bfbfbf;
+  display: block;
+}
+image.noproj-icon {
+  width: 70px;
+  height: 70px;
+}
+
+
+/*#####################################################################*/
+/*###################################Festival##########################*/
+/*#####################################################################*/
+/*
+ * *********************************************logo-area
+ */
+view.logo-area {
   padding-bottom: 5px;
   text-align: center;
   background-color: #fff;
@@ -159,84 +461,8 @@ image.logo {
   width: 60px;
   height: 60px;
 }
-
 /*
- * content area
- */
-.content-area{
-  padding: 5px;
-  background-color: #fff;
-  min-height: 50px;
-}
-.para {
-  display: block;
-  margin: 5px;
-  font-size: 16px;
-  line-height: 18px;
-  color: #353535;
-}
-
-/*
- * button area
- */
-view.btn-area{
-  padding-bottom: 1px;
-  padding: 10px 10px 1px;
-}
-view.btn-area button{
-  margin-bottom: 9px;
-}
-picker.btn-style{
-  margin-bottom: 9px;
-  width: 100%;
-  color: #000;
-  background-color: #f8f8f8;
-  font-size: 18px;
-  line-height: 2.55;
-  border: 1px solid #dcdcdc;
-  border-radius: 5px;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-/*
- * bottom-float
- */
-view.bottom-anchor{
-  width: 100%;
-  height: 8vh;
-}
-view.bottom-float{
-  width: 100%;
-  height: 9vh;
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #fff;
-  color: #bfbfbf;
-  border-top: 1px solid #bfbfbf;
-  font-size: 10px;
-  text-align: center;
-}
-view.bottom-float text{
-  display: block;
-  line-height: 16px;
-}
-navigator.icon-box.float-btn{
-  width: 65%;
-}
-navigator.icon-box.float-btn text{
-  background-color: #09bb07;
-  color: #fff;
-  font-size: 14px;
-  line-height: 6vh;
-  border-radius: 5px;
-}
-/*
- * festival
- * projListItem
+ * *****************************************************projListItem
  */
 .proj-list-item {
   width: 100%;
@@ -291,9 +517,6 @@ view.info-extra {
   width: 100%;
   height: 20px;
   position: relative;
-  /*bottom: 5px;*/
-  /*border-top: 1px dashed #f2f2f2;*/
-  /*padding-bottom: 5px;*/
 }
 view.info-extra>view.tag-box {
   height: 14px;
@@ -301,11 +524,12 @@ view.info-extra>view.tag-box {
   max-width: 60%;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
 }
 view.tag-box>text {
   display: inline-block;
   padding: 2px;
+  margin: 0 2px;
   border-radius: 3px;
   font-size: 10px;
   color: #f0f0f0;
@@ -319,9 +543,61 @@ view.info-extra>view.score-bar {
 view.score-bar.project>view.score-red {
   height: 16px;
 }
-
 /*
- * proj-progress-bar
+ * ******************************************************proj-list
+ */
+view.proj-list.content-area{
+  padding-bottom: 0;
+  padding-top: 0;
+}
+view.proj-info{
+  padding: 10px 0;
+  border-top: 1px solid #dcdcdc;
+  position: relative;
+}
+view.proj-info>image{
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+}
+view.proj-info>text.nick-name{
+  position: absolute;
+  left: 55px;
+  top: 14px;
+  font-size: 16px;
+  color: #888;
+}
+view.proj-info>text.proj-title{
+  position: absolute;
+  left: 55px;
+  top: 34px;
+  font-size: 16px;
+  color: #353535;
+  width: calc(100% - 55px);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+view.proj-info>view.del-btn {
+  position: absolute;
+  right: 5px;
+  top: 15px;
+}
+/* proj-choose*/
+view.proj-list.choose {
+  background-color: #fff;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 10px;
+}
+
+/*#####################################################################*/
+/*###################################projProgress##########################*/
+/*#####################################################################*/
+/*
+ * *********************************progress-headbar
  */
 view.prog-area {
   background-color: #fff;
@@ -387,46 +663,8 @@ image.star text{
   line-height: 85px;
   text-align: center;
 }
-
 /*
- * progress-bar-2
- */
-view.progress-bar {
-  background-color: #fff;
-  width: 100%;
-  height: 35px;
-  /*margin: 5px 0;*/
-  margin-bottom: -5px;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 5px 20px;
-  box-sizing: border-box;
-}
-view.progress-bar.prog-mini {
-  width: 100%;
-  height: 15px;
-  border: none;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-view.rect-block {
-  display: inline-block;
-  width: calc((100% - 168px) / 6);
-  height: 5px;
-  background: #b2b2b2;
-  margin-bottom: 9px;
-}
-view.rect-block.prog-mini {
-  width: calc((100% - 84px) / 6);
-  height: 2px;
-  margin-bottom: 5px;
-}
-icon.progress-icon {
-  display: inline-block;
-}
-
-
-/*
- * step-card
+ * *****************************************step-card
  */
 view.step-card {
   margin-top: 5px;
@@ -465,7 +703,6 @@ view.noimage {
   line-height: 200px;
 }
 .nocontent {
-  /*width: calc(100% - 10px); */
   width: 100%;
   box-sizing: border-box;
   text-align: center;
@@ -497,282 +734,18 @@ image.step-image .change-image{
   width: 80px;
   height: 80px;
   border-radius: 40px;
-  background-color: rgba(152, 245, 255, 0.8);
+  background-color: #d81e06;
   color: #fff;
   text-align: center;
   line-height: 80px;
   font-size: 16px;
 }
 
+/*#####################################################################*/
+/*###################################info##################################*/
+/*#####################################################################*/
 /*
- * project-card
- */
-view.proj-card {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 10px;
-  background-color: #fff;
-}
-view.proj-title {
-  width: 100%;
-  font-size: 18px;
-  text-align: center;
-  margin: 5px;
-}
-
-/*
- * proj-list
- */
-view.proj-list.content-area{
-  padding-bottom: 0;
-  padding-top: 0;
-}
-view.proj-info{
-  padding: 10px 0;
-  border-top: 1px solid #dcdcdc;
-  position: relative;
-}
-view.proj-info>image{
-  width: 45px;
-  height: 45px;
-  border-radius: 5px;
-}
-view.proj-info>text.nick-name{
-  position: absolute;
-  left: 55px;
-  top: 14px;
-  font-size: 16px;
-  color: #888;
-}
-view.proj-info>text.proj-title{
-  position: absolute;
-  left: 55px;
-  top: 34px;
-  font-size: 16px;
-  color: #353535;
-  width: calc(100% - 55px);
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-view.proj-info>view.del-btn {
-  position: absolute;
-  right: 5px;
-  top: 15px;
-}
-
-/*
- * form表单
- */
-view.group-title {
-  font-size: 14px;
-  color: #888;
-  padding: 10px 10px 5px;
-}
-view.form-group {
-  background-color: #fff;
-  padding: 0 10px;
-}
-view.form-group.small {
-  display: inline-block;
-  width: calc(100% - 80px);
-  padding-left: 0;
-}
-view.form-item-logo {
-  width: 80px;
-  height: 70px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 2px;
-  border-left: 1px solid #f0f0f0;
-}
-view.form-item-logo>.item-title {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  color: #888;
-}
-view.form-item-logo>image {
-  width: 55px;
-  height: 55px;
-  position: relative;
-  top: 6px;
-}
-view.form-item {
-  display: flex;
-  font-size: 16px;
-  line-height: 40px;
-  min-height: 40px;
-}
-view.form-item.border {
-  border-bottom: 1px solid #f0f0f0;
-}
-view.form-item.border-top {
-  border-top: 1px solid #f0f0f0;
-}
-view.form-item>.item-title {
-  min-width: 64px;
-  font-weight: bold;
-}
-view.form-item>view.item-content {
-  padding-left: 10px;
-  flex: 1 1 auto;
-}
-view.item-content>input {
-  width: 100%;
-  height: 40px;
-}
-view.item-content>picker {
-  width: 50%;
-  height: 40px;
-  display: inline-block;
-}
-view.item-content>picker.big {
-  width: 100%;
-}
-view.item-content>picker.def {
-  color: #888;
-}
-view.form-item>textarea {
-  width: 100%;
-  min-height: 80px;
-  font-size: 16px;
-  line-height: 18px;
-  padding-top: 5px;
-}
-
-/*
- * comment-area
- */
-view.comment-area{
-  padding: 10px;
-  background-color: #fff;
-  margin: 10px 0;
-}
-view.comment-title{
-  font-size: 14px;
-  line-height: 22px;
-  position: relative;
-}
-view.comment-title>button{
-  position: absolute;
-  width: 50px;
-  height: 25px;
-  line-height: 25px;
-  text-align:center;
-  padding: 0;
-  right: 0;
-  top: 0px;
-}
-view.comment-box{
-  min-height: 55px;
-  margin-bottom: 10px;
-  position: relative;
-  border-top: 1px solid #f0f0f0;
-  color: #535353;
-}
-view.comment-box>image{
-  width: 45px;
-  height: 45px;
-  border-radius: 5px;
-  margin: 5px;
-}
-view.comment-box>view.content-box{
-  margin: -55px 0 0 55px;
-  font-size: 14px;
-  line-height: 15px;
-  position: relative;
-}
-view.content-box>text.nick-name{
-  font-size: 16px;
-  line-height: 20px;
-  display: block;
-  padding: 2px;
-  color: rgba(96, 99, 152, 1);
-}
-
-view.score-bar{
-  background-color: #bfbfbf;
-  position: absolute;
-  right: 5px;
-  top: 2px;
-  width: 90px;
-  height: 20px;
-}
-view.score-bar>view.score-red{
-  background-color: #e64340;
-  height: 20px;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-view.score-bar view.score-star-box{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-
-view.content-box>text.score{
-  font-size: 16px;
-  color: orange;
-  display: block;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
-view.comment-btn-box{
-  margin: 3px;
-  font-size: 12px;
-  line-height: 15px;
-  position: relative;
-  color: rgba(164,164,164,1);
-}
-view.comment-btn-box>navigator.reply-btn{
-  display: block;
-  position: absolute;
-  font-weight: bold;
-  font-size: 14px;
-  top: 0;
-  right: 5px;
-  color: rgba(131,147,180,1);
-}
-view.reply-area{
-  margin: 5px 0 0;
-}
-view.reply-box{
-  background-color: rgba(238, 238, 238, 0.5);
-  padding:3px;
-}
-view.reply-box>text.nick-name{
-  color: rgba(96, 99, 152, 1);
-}
-
-
-
-
-view.proj-list.choose {
-  background-color: #fff;
-  width: 100%;
-  height: 50px;
-  line-height: 50px;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 0 10px;
-}
-
-
-
-
-
-
-
-/*
- * info-area
+ * ***********************************************info-area
  */
 view.info-area {
   width: 100%;
@@ -801,4 +774,94 @@ view.info-text>text {
 view.info-text>text.text-big {
   font-size: 20px;
   line-height: 35px;
+}
+/*
+ * ******************************************growth-line
+ */
+view.growth-line {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 2px;
+  margin-top: 10px;
+}
+view.growth-cursor {
+  margin-bottom: -18px;
+}
+view.growth-cursor image{
+  height: 30px;
+  width: 30px;
+  transform: translate(43px);
+}
+view.growth-line view.dot {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: black;
+}
+view.growth-line view.line {
+  position: relative;
+  bottom: 3px;
+  box-sizing: border-box;
+  display: inline-block;
+  width: calc(16.6% - 6.66px);
+  height: 2px;
+  background-color: #353535;
+}
+view.growth-scale {
+  margin-top: -8px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 25px;
+}
+text.scale {
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  font-size: 10px;
+}
+view.growth-line view.active {
+  background-color: #09bb07;
+}
+/*
+ * ************************************************app-list
+ */
+view.app-list {
+  margin: 2px 0 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center
+}
+view.app-box {
+  display: inline-block;
+  text-align: center;
+  width: 33%;
+  height: 60px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #353535;
+  position: relative;
+}
+view.app-box image{
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 calc(50% - 20px);
+}
+text.app-status {
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  font-size: 10px;
+  line-height: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 2px;
+  padding: 2px;
+  color: #fff;
+}
+text.app-status.gray {
+  background-color: #b2b2b2;
 }

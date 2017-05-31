@@ -1,36 +1,39 @@
 <import src="../include/template.wxml" />
 
 <view class="container" wx:if="{{projId}}"> 
-  <view class="page-title-area">
-    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
-    <view class="title-info-box">
-      <text class="info-name">{{name}}</text>
-      <text class="info-province">{{province}}</text>
-      <text class="info-tag">{{tag}}</text>
-    </view>
+  <view class="page-title">
+      <text>{{name}}</text>
   </view>
-  <view class="para content-area">
-    <navigator url="/pages/project/projInput?projId={{projId}}&field=intro&content={{intro}}" hover-class="navigator-hover">{{intro}}</navigator>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
   </view>
+  <view class="interval-title">
+    项目简介
+  </view>
+  <view class="content-area">
+    <text class="para">{{intro}}</text>
+  </view>
+
   <view class="interval-title">
     项目成员
   </view>
   <view class="avatar-area">
     <view class="avatar-box" wx:for="{{members}}"> 
       <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="del-box">
-        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
+      <view class="del-icon" data-userid="{{item.userId}}" catchtap="delMember" wx:if="{{item.userId !== leaderId && !delHidden}}">
+        <view class=""></view>
       </view>
-      <text class="avatar-nickName">{{item.nickName}}</text>
+      <text>{{item.nickName}}</text>
     </view>
-    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
-      <image class="avatar icon" src="../../img/icon/add.png" bindtap="toMemberAdd"></image>
-      添加队员
+    <view class="avatar-box" wx:if="{{leaderId === userId}}"> 
+      <image class="avatar cube" src="../../img/icon/iconadd.png" bindtap="toMemberAdd"></image>
+      <text>添加组员</text>
     </view>
-    <view class="avatar-box" wx:if="{{captainid === uid}}"> 
-      <image class="avatar icon" src="../../img/icon/del.png" bindtap="toMemberDel"></image>
-      删除队员
+    <view class="avatar-box" wx:if="{{leaderId === userId}}" catchtap="showDel"> 
+      <image class="avatar cube" src="../../img/icon/icondel.png"></image>
+      <text>删除组员</text>
     </view>
+    <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
   </view>
   <view class="interval-title">
     项目菜单
@@ -54,8 +57,10 @@
       </view>
       <text>项目实验</text>
     </navigator>
-  </view>
-  <!--<template is="comment" data="{{comments}}"/>-->
+  </view>  
+
+  <template is="comment" data="{{comnts:comnts}}"/>
+
   <view class="btn-area">
     <navigator url="/pages/project/projAdd" hover-class="navigator-hover">
       <button type="primary">新建项目</button>
@@ -75,3 +80,4 @@
     <text class="text">扫一扫加入项目</text>
   </view>
 </view>
+

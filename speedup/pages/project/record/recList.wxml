@@ -9,10 +9,10 @@
         <text class="nick-name">{{index + 1}}</text>
       </view>
       <text class="content pulse-content">{{item.content}}</text>
-      <text class="record-date">周报日期：{{item.date}}</text>
+      <text class="record-date">日期：{{item.date}}</text>
     </navigator>
   </view>
-  <view class="noproj-text" wx:else >
+  <view class="main-hint" wx:else >
     还没有周报记录，赶紧添加周报吧！
   </view>
   <view class="btn-area" wx:if="{{isUser}}">

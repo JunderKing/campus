@@ -69,6 +69,8 @@ Page({
           return item
         })
         that.setData(res.data.festInfo)
+        getApp().gdata.curFestId = res.data.festInfo.festId
+        //getApp().gdata.isMentor = res.data.festInfo.isMentor
       },
       fail: function(){
         wx.hideToast()
@@ -114,8 +116,16 @@ Page({
         festId: festId
       },
       success: function(res){
-        console.log('chgCurFest=>')
-        console.log(res.data)
+        console.log('chgCurFestival=>')
+        console.log(res)
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }        
+        getApp().gdata.isMentor = res.data.isMentor
+        getApp().gdata.curFestId = festId
+        if (res.data.curProjId) {
+          getApp().gdata.curProjId = res.data.curProjId
+        }
         that.getFestInfo();
       }
     })

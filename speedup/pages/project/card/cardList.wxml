@@ -13,7 +13,7 @@
       </view>
     </navigator>
   </view>
-  <view class="noproj-text">
+  <view class="main-hint">
     <text>来自画布格子进行中的实验</text>
   </view>
 </view>

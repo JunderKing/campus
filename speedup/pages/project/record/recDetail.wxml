@@ -2,11 +2,17 @@
   <view class="page-title">
     <text>周报</text>
   </view>
+  <view class="interval-title">
+    内容
+  </view>
   <view class="content-area">
     <text class="para">{{content}}</text>
-    <view class="para">
-      周报时间：{{date}}
-    </view>
+  </view>
+  <view class="interval-title">
+    日期
+  </view>
+  <view class="content-area">
+    <text>{{date}}</text>
   </view>
   <view class="btn-area">
     <navigator url="/pages/project/record/recForm?recId={{recId}}&date={{date}}&content={{content}}" hover-class="navigator-hover">

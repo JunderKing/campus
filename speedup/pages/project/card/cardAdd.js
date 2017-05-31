@@ -10,7 +10,11 @@ Page({
   },
 
   formSubmit: function(e){
+    console.log('form submit')
+    console.log(e)
     var formData = e.detail.value
+    var isCorrect = this.checkForm(formData)
+    if (!isCorrect) { return }
     var that = this
     wx.showToast({
       title: '数据加载中',
@@ -39,6 +43,15 @@ Page({
         return getApp().showError(2)
       }
     })
+  },
 
+  checkForm: function(data){
+    if (!data.title) {
+      wx.showToast({title: '请填写实验标题!'})
+    } else if (!data.assumption) {
+      wx.showToast({title: '请填写实验假设!'})
+    } else {
+      return true
+    }
   }
 })

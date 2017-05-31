@@ -5,16 +5,8 @@ Page({
     title: '项目标题',
     intro: '项目简介',
     delHidden: true,
-    //comments: [{
-      //avatar: '../../img/icon/spark_cur.png',
-      //nickName: 'Jun.K',
-      //content: '评论',
-      //ctime: '20150606',
-      //replies: [{
-        //nickName: 'HelloWorld',
-        //content: '回复'
-      //}]
-    //}],
+    comnts: [],
+    scores: []
   },
 
   onLoad: function(){
@@ -53,10 +45,35 @@ Page({
         var cityCode = parseInt(res.data.projInfo.province)
         res.data.projInfo.province = getApp().getCityStr(cityCode)
         that.setData(res.data.projInfo)
+        getApp().gdata.curProjId = res.data.projInfo.projId
+        that.getComnt()
       },
       fail: function(){
         wx.hideToast()
         return getApp().showError(2)
+      }
+    })
+  },
+
+  getComnt: function(){
+    var that = this
+    wx.request({
+      url: 'http://www.campus.com/api/spark/getComnt',
+      method: 'POST',
+      data: {
+        projId: this.data.projId
+      },
+      success: function(res){
+        wx.hideToast()
+        console.log('getComnt=>')
+        console.log(res)
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        that.setData({
+          comnts: res.data.comnts,
+          scores: res.data.scores
+        })
       }
     })
   },
@@ -111,6 +128,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
+        getApp().gdata.curProjId = projId
         that.getProjInfo()
       },
       fail: function(){
@@ -173,7 +191,7 @@ Page({
 
   delMember: function(e){
     var projId = this.data.projId
-    var userId = e.currentTarget.dataset.userId
+    var userId = e.currentTarget.dataset.userid
     console.log('delMember')
     var that = this
     wx.showToast({

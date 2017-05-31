@@ -9,13 +9,12 @@ Page({
 
   onLoad: function(options){
     if (options.recId) {
-      this.setData({
+      return this.setData({
         recId: options.recId,
         date: options.date,
         content: options.content,
         type: 2
       })
-      return
     }
     var date = new Date();
     var year = date.getFullYear()
@@ -39,8 +38,6 @@ Page({
     this.setData({
       date: e.detail.value
     })
-    var timestamp = Date.parse(new Date(this.data.date))
-    console.log(timestamp/1000)
   },
 
   formSubmit: function(e){

@@ -18,7 +18,7 @@ App({
           success: function (res) {
             loginData.iv = res.iv
             loginData.rawData = res.encryptedData
-            loginData.type = 3
+            loginData.type = 1
             that.getUserInfo(loginData, options)
           }
         })
@@ -34,7 +34,7 @@ App({
     console.log('loginData')
     console.log(loginData)
     wx.request({
-      url: 'http://www.campus.com/api/venture/login',
+      url: 'http://www.campus.com/api/spark/login',
       method: 'POST',
       data: loginData,
       success: function (res) {
@@ -48,7 +48,7 @@ App({
           that.checkOption(options, true)
         } else {
           wx.switchTab({
-            url: '/pages/projList/projList'
+            url: '/pages/project/project'
           })
         }
       },
@@ -85,15 +85,15 @@ App({
   updateUserInfo: function(callback){
     var that = this;
     wx.request({
-      url: 'http://www.campus.com/api/venture/getUserInfo',
+      url: 'http://www.campus.com/api/spark/getUserInfo',
       method: 'POST',
       data: {
-        userId: that.gdata.userId,
+        userId: this.gdata.userId,
       },
       success: function(res){
-        console.log('updateUserinfo=>')
+        console.log('getUserInfo=>')
         console.log(res.data)
-        that.gdata = res.data;
+        that.gdata = res.data.userInfo;
         if (callback) { callback() }
       }
     })
@@ -101,25 +101,24 @@ App({
 
   checkOption: function(options, isLoading, callback){
     options.role = parseInt(options.role)
-    options.meetId = parseInt(options.meetId)
+    options.festId = parseInt(options.festId)
     options.projId = parseInt(options.projId)
-    console.log(options)
     if (options.role === 4) {
-      this.beOrganizer(isLoading, callback)
-    } else if (options.role === 3 && options.meetId > 0) {
-      this.beInvor(options.meetId, isLoading, callback)
-    } else if (options.role === 2 && options.meetId > 0) {
-      this.beLeader(options.meetId, isLoading, callback)
+      this.addOrger(isLoading, callback)
+    } else if (options.role === 3 && options.festId > 0) {
+      this.addMentor(options.festId, isLoading, callback)
+    } else if (options.role === 2 && options.festId > 0) {
+      this.addProject(options.festId, isLoading, callback)
     } else if (options.role === 1 && options.projId > 0) {
-      this.beMember(options.projId, isLoading, callback)
+      this.addMember(options.projId, isLoading, callback)
     } else {
       wx.switchTab({
-        url: '/pages/projList/projList'
+        url: '/pages/project/project'
       })
     }
   },
 
-  beOrganizer: function(isLoading, callback){
+  addOrger: function(isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -127,7 +126,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/addOrger',
+      url: 'http://www.campus.com/api/spark/addOrger',
       method: 'GET',
       data: {
         userId: this.gdata.userId
@@ -136,12 +135,12 @@ App({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        that.gdata.meetRole = 1
+        that.gdata.festRole = 1
         if (callback) {
           callback()
         }
         wx.switchTab({
-          url: '/pages/projList/projList',
+          url: '/pages/project/project',
           success: function(){
             wx.showToast({
               title: '恭喜您成为组织者!',
@@ -153,7 +152,8 @@ App({
     })
   },
 
-  beInvor: function(meetId, isLoading, callback){
+  addMentor: function(festId, isLoading, callback){
+    console.log('addMentor')
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -161,38 +161,30 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/addMeetInvor',
+      url: 'http://www.campus.com/api/spark/addFestMentor',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
-        meetId: meetId
+        festId: festId
       },
       success: function(res){
-        console.log('addMeetInvor=>')
-        console.log(res)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
+        that.gdata.isMentor = 1
         wx.switchTab({
-          url: '/pages/invorList/invorList',
+          url: '/pages/project/project',
           success: function(){
-            if (res.data.isInvor === 1) {
-              wx.showToast({
-                title: '成功加入加速营',
-                icon: 'success'
-              })
-            } else {
-              wx.navigateTo({
-                url: '/pages/invorList/invorAdd?meetId=' + meetId
-              })
-            }
+            wx.showToast({
+              title: '恭喜您成为火种节导师!'
+            })
           }
         })
       }
     })
   },
 
-  beLeader: function(meetId, isLoading, callback){
+  addProject: function(festId, isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -200,69 +192,42 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/getMeetProjList',
+      url: 'http://www.campus.com/api/spark/getAvlProjList',
       method: 'GET',
       data: {
-        userId: getApp().gdata.userId
+        userId: getApp().gdata.userId,
+        festId: festId
       },
       success: function(res){
         console.log('getUserProjList=>')
         console.log(res)
-        //wx.hideToast()
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
         var projList = res.data.projList
         wx.switchTab({
-          url: '/pages/projList/projList',
+          url: '/pages/project/project',
           success: function(){
             if (projList.length === 0) {
               wx.navigateTo({
-                url: '/pages/projList/projAdd?meetId=' + meetId
-              })
-            } else if (projList.length === 1) {
-              var projId = projList[0].projId
-              wx.request({
-                url: 'http://www.campus.com/api/venture/addMeetProject',
-                method: 'POST',
-                data: {
-                  userId: that.gdata.userId,
-                  meetId: meetId,
-                  projId: projId
-                },
-                success: function(res){
-                  if (res.statusCode !== 200 || res.data.errcode !== 0) {
-                    return that.showError(3)
-                  }
-                  wx.showToast({
-                    title: '成功加入加速营!',
-                    icon: 'success'
-                  })
-                  if (callback) {
-                    callback()
-                  }
-                },
-                fail: function(){
-                  wx.hideToast()
-                  return getApp().showError(2)
-                }
+                url: '/pages/project/projAdd?festId=' + festId
               })
             } else {
+              that.gdata.avlProjList = projList
               wx.navigateTo({
-                url: '/pages/projList/projChoose?meetId=' + meetId
+                url: '/pages/project/projChoose?festId=' + festId
               })
             }
           }
         })
       },
       fail: function(){
-        wx.hideToast()
         return getApp().showError(2)
       }
     })
   },
 
-  beMember: function(projId, isLoading, callback){
+  addMember: function(projId, isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -274,19 +239,18 @@ App({
     }
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/addProjMember',
+      url: 'http://www.campus.com/api/spark/addProjMember',
       method: 'POST',
       data: reqData,
       success: function(res){
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        //that.gdata.meetRole = 1
         if (callback) {
           callback()
         }
         wx.switchTab({
-          url: '/pages/projList/projList',
+          url: '/pages/project/project',
           success: function(){
             wx.showToast({
               title: '成功加入项目!',
@@ -299,6 +263,7 @@ App({
   },
 
   qrScan: function(callback){
+    console.log('qrScan')
     var that = this
     wx.scanCode({
       success: function(res){
@@ -307,8 +272,6 @@ App({
           icon: 'loading',
           duration: 10000
         })
-        console.log('res.path=>')
-        console.log(res.path)
         var data = that.queryString(res.path)
         console.log('qrScan=>')
         console.log(data)
@@ -341,9 +304,12 @@ App({
     avatarUrl: '',
     nickName: '',
     role: 0,
-    meetRole: 0,
-    curCampId: 0,
-    curProjId: 0
+    festRole: 0,
+    curFestId: 0,
+    curProjId: 0,
+    isMentor: 0,
+    avlProjList: []
   }
 })
+
 

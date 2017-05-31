@@ -1,50 +1,51 @@
 <view class="container">
-  <view class="" wx:if="{{campId}}">
-  <view class="page-title-area">
-    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
-    <view class="title-info-box">
-      <text class="info-name">{{name}}</text>
-      <text class="info-province">主办方：{{sponsor}}</text>
-      <!--<text class="info-tag">{{tag}}</text>-->
-    </view>
+  <view class="page-title">
+    {{name}}
   </view>
-    <!--<view class="sponsor-area">-->
-      <!--<view class="avatar-box" wx:for="{{logos}}"> -->
-        <!--<image class="logo" src="{{item}}" mode="aspectFit"></image>-->
-        <!--</view>-->
-      <!--</view>-->
-    <!--<view class="interval-title">-->
-      <!--简介-->
-      <!--</view>-->
-    <view class="para content-area">
-      {{intro}}
-    </view>
-    <view class="interval-title">
-      项目列表
-    </view>
-    <view class="noproj-text" wx:if="{{!projList[0]}}">
-      本次加速营还没有项目哦
-    </view>
-    <view class="proj-list content-area">
-      <navigator url="/pages/camp/projDetail?projId={{item.projId}}" wx:for="{{projList}}" hover-class="navigator-hover">
-        <view class="proj-info">
-          <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
-          <text class="nick-name">{{item.nickName}}</text>
-          <text class="proj-title">{{item.name}}</text>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+  </view>
+  <view class="interval-title">
+    活动简介
+  </view>
+  <view class="content-area">
+    <text class="para">{{intro}}</text>
+  </view>
+  <view class="interval-title">
+    项目列表
+  </view>
+  <view class="main-hint" wx:if="{{!projList[0]}}">
+    本次活动还没有项目
+  </view>
+  <view class="proj-list-box content-area" wx:else >
+    <navigator class="proj-list-item" url="/pages/camp/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&&hidden={{hidden}}" wx:for="{{projList}}" hover-class="navigator-hover">
+      <view class="info-main">
+        <view class="info-logo">
+        <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
         </view>
-      </navigator>
-    </view>
-  </view>
-  <view class="noproj-text" wx:else >
-    还没有创建加速营
+        <view class="info-text">
+          <text class="title">{{item.nickName}}</text>
+          <text class="content">{{item.name}}</text>
+        </view>
+        <view class="info-prog">
+          <!--<text class="title">进展分数</text>-->
+          <!--<text class="score">{{item.progScore}}分</text>-->
+        </view>
+      </view>
+      <view class="info-extra">
+        <view class="tag-box">
+          <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
+        </view>
+      </view>
+    </navigator>
   </view>
   <view class="btn-area">
     <navigator url="/pages/camp/campAdd" hover-class="navigator-hover">
-      <button type="primary" size="default" wx:if="{{true}}">创建加速营</button>
+      <button type="primary" size="default" wx:if="{{role||campRole}}">创建加速营</button>
     </navigator>
     <navigator url="/pages/camp/campDetail?campId={{campId}}" hover-class="navigator-hover">
-      <button type="default" size="default" wx:if="{{true}}">管理加速营</button>
+      <button type="{{role||campRole ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||campId===1}}">管理加速营</button>
     </navigator>
-    <picker class="btn-style" mode="selector" range="{{campList}}" range-key="name" bindchange="onCampChange">切换加速营</picker>
+    <picker class="btn-style {{role||campRole||orgerId===userId||campId===1 ? 'default' : 'primary'}}" mode="selector" range="{{campList}}" range-key="name" bindchange="onCampChange">切换加速营</picker>
   </view>
 </view>

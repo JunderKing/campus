@@ -1,9 +1,10 @@
 Page({
   data: {
-    logo: '/img/icon/add2.png'
+    logo: ''
   },
 
   formSubmit: function(e) {
+    console.log(e.detail.value)
     var userId = getApp().gdata.userId
     var formData = e.detail.value
     var isCorrect = this.checkForm(formData)
@@ -19,38 +20,37 @@ Page({
       filePath: this.data.logo,
       name: 'campLogo',
       formData: {
-        userId: userId,
+        userId: getApp().gdata.userId,
         name: formData.name,
-        intro: formData.intro,
-        sponsor: formData.sponsor
+        sponsor: formData.sponsor,
+        intro: formData.intro
       },
       success: function(res){
+        wx.hideToast()
         console.log('addCamp=>')
         console.log(res)
-        wx.hideToast()
         res.data = JSON.parse(res.data)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
-        }
-        getApp().gdata.curCampId = res.data.campId
-        wx.switchTab({
-          url: '/pages/camp/camp'
+        }        
+        wx.navigateBack();
+        wx.showToast({
+          title: '创建成功'
         })
       },
       fail: function(){
         wx.hideToast()
-        getApp().showError(2)
       }
     })
   },
-  
+
   checkForm: function(data){
     if (!data.name) {
-      wx.showToast({title: '请填写火种节标题!'})
-    } else if (!data.intro) {
-      wx.showToast({title: '请填写火种节简介!'})
+      wx.showToast({title: '请填写加速营标题!'})
     } else if (!data.sponsor) {
-      wx.showToast({title: '请输入主办方名称!'})
+      wx.showToast({title: '请填写加速营主办方!'})
+    } else if (!data.intro) {
+      wx.showToast({title: '请填写加速营简介!'})
     } else if (!this.data.logo) {
       wx.showToast({title: '请选择主办方logo!'})
     } else {
@@ -64,9 +64,10 @@ Page({
       count: 1,
       success: function(res){
         that.setData({
-          logo: res.tempFilePaths[0]
+          logo: res.tempFilePaths[0],
         })
       }
     })
   }
 })
+

@@ -4,6 +4,9 @@
   <view class="page-title">
       <text>{{name}}</text>
   </view>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+  </view>
   <view class="interval-title">
     项目简介
   </view>

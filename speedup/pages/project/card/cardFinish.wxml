@@ -1,10 +1,10 @@
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="area-title">
+    <view class="group-title">
       请填写实验结果
     </view>
-    <view class="form-area column">
-      <view class="form-item big border">
+    <view class="form-group">
+      <view class="form-item border">
         <view class="item-title">成功与否</view>
         <view class="item-content">
           <radio-group name="status" value="{{status}}">
@@ -13,9 +13,11 @@
           </radio-group>
         </view>
       </view>
-      <view class="form-item big">
+      <view class="form-item">
         <view class="item-title">实验结果</view>
-        <textarea class="item-content" name="result" placeholder="请输入实验结果" auto-height value="{{result}}"/>
+        <view class="item-content big">
+          <textarea class="item-content" name="result" placeholder="请输入实验结果" auto-height value="{{result}}"/>
+        </view>
       </view>
     </view>
     <view class="btn-area">

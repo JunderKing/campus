@@ -8,7 +8,8 @@ Page({
 
   onLoad: function(options){
     this.setData({
-      festId: options.festId
+      festId: options.festId,
+      role: getApp().gdata.role
     })
   },
 
@@ -108,8 +109,7 @@ Page({
         })
       },
       fail: function(){
-        wx.hideToast()
-        return getApp().showError(2)
+        getApp().showError(2)
       }
     })
   },
@@ -129,6 +129,11 @@ Page({
 
   delMentor: function(e){
     var userId = e.currentTarget.dataset.userid
+    wx.showToast({
+      title: '处理中...',
+      icon: 'loading',
+      duration: 10000
+    })
     var that = this
     wx.request({
       url: 'http://www.campus.com/api/spark/delFestMentor',
@@ -138,36 +143,99 @@ Page({
         festId: this.data.festId
       },
       success: function(res){
-        getApp().updateUserInfo()
+        console.log('delFestMentor=>')
+        console.log(res)
+        wx.hideToast()
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        wx.showToast({
+          title: '删除成功!'
+        })
         that.getFestInfo()
+      },
+      fail: function(){
+        getApp().showError(2)
       }
     })
   },
 
   delProject: function(e){
-    var cancel = false
     var that = this
     var projId = e.currentTarget.dataset.projid
-    var festId = getApp().gdata.curfestId
     wx.showModal({
-      title: '确定删除队长？',
-      content: '如果删除队长，则与队长相关的项目以及项目成员都将将同时删除，并且无法撤回',
+      title: '确定删除项目？',
+      content: '删除后无法恢复',
       success: function(res){
-        if (res.confirm) {
-          wx.request({
-            url: 'http://www.campus.com/api/spark/delFestProject',
-            method: 'POST',
-            data: {
-              projId: projId,
-              festId: that.data.festId
-            },
-            success: function(res){
-              console.log('delFestProject=>')
-              console.log(res)
-              that.getFestInfo()
-            }
-          })
+        if (!res.confirm) {
+          return
         }
+        wx.showToast({
+          title: '处理中...',
+          icon: 'loading',
+          duration: 10000
+        })
+        wx.request({
+          url: 'http://www.campus.com/api/spark/delFestProject',
+          method: 'POST',
+          data: {
+            projId: projId,
+            festId: that.data.festId
+          },
+          success: function(res){
+            console.log('delFestProject=>')
+            console.log(res)
+            if (res.statusCode !== 200 || res.data.errcode !== 0) {
+              return getApp().showError(3)
+            }
+            wx.showToast({
+              title: '删除成功!'
+            })
+            that.getFestInfo()
+          },
+          fail: function(){
+            getApp().showError(2)
+          }
+        })
+      }
+    })
+  },
+
+  delFestival: function(e){
+    var that = this
+    wx.showModal({
+      title: '确定删除火种节？',
+      content: '删除后相关数据将丢失!',
+      success: function(res){
+        if (!res.confirm) {
+          return
+        }
+        wx.showToast({
+          title: '处理中...',
+          icon: 'loading',
+          duration: 10000
+        })
+        wx.request({
+          url: 'http://www.campus.com/api/spark/delFestival',
+          method: 'POST',
+          data: {
+            festId: that.data.festId
+          },
+          success: function(res){
+            console.log('delFestProject=>')
+            console.log(res)
+            if (res.statusCode !== 200 || res.data.errcode !== 0) {
+              return getApp().showError(3)
+            }
+            wx.navigateBack()
+            wx.showToast({
+              title: '删除成功!'
+            })
+          },
+          fail: function(){
+            getApp().showError(2)
+          }
+        })
       }
     })
   }

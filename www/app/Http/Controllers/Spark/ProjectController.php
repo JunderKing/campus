@@ -56,7 +56,13 @@ class ProjectController extends Controller
     extract($params);
     $projId = Model\SfUser::where('user_id', $userId)->pluck('cur_proj_id');
     if ($projId[0] === 0) {
-      return $this->output(['projInfo' => ['proj_id' => 0]]);
+      $projId = Model\SfFestMember::where(['user_id', $userId])
+        ->orderBy('created_at', 'desc')
+        ->pluck('proj_id');
+      if (count($projId) === 0) {
+        return $this->output(['projInfo' => ['proj_id' => 0]]);
+      }
+      Model\SfUser::where('user_id', $userId)->update(['cur_proj_id' => $projId[0]]);
     }
     $projInfo = Model\Project::where('proj_id', $projId[0])
       ->select('proj_id', 'leader_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')
@@ -108,12 +114,17 @@ class ProjectController extends Controller
       return self::$ERROR1;
     }
     extract($params);
-    $result = Model\Project::where('proj_id', $projId)->delete();
+    Model\SfFestProject::where('proj_id', $projId)->delete();
     Model\SfProjMember::where('proj_id', $projId)->delete();
-    Model\ScProjMember::where('proj_id', $projId)->delete();
-    Model\VmProjMember::where('proj_id', $projId)->delete();
-    Model\ScProjGrid::where('proj_id', $projId)->delete();
-    return $this->output(['deleted' => $result]);
+    Model\SfProjProgress::where('proj_id', $projId)->delete();
+    Model\SfProjScore::where('proj_id', $projId)->delete();
+    Model\SfUser::where('cur_proj_id', $projId)->update(['cur_proj_id' => 0]);
+    $campMemberNum = Model\ScProjMember::where('proj_id', $projId)->count();
+    $meetMemberNum = Model\VmProjMember::where('proj_id', $projId)->count();
+    if ($campMemberNum === 0 && $meetMemberNum === 0) {
+      Model\Project::where('proj_id', $projId)->delete();
+    }
+    return $this->output(['deleted' => 'success']);
   }
 
   public function getUserProjList(Request $request)

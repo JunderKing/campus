@@ -1,14 +1,10 @@
 Page({
   data: {
-    meetId: 0,
-    addr: '',
-    logo: '/img/icon/add.png'
-  },
-
-  onLoad: function(options){
-    this.setData({
-      meetId: options.meetId
-    })
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
+    logo: ''
   },
 
   onPickerChange: function(e) {
@@ -20,68 +16,72 @@ Page({
   },
 
   formSubmit: function(e) {
+    console.log(e.detail.value)
+    var userId = getApp().gdata.userId
     var formData = e.detail.value
-    console.log(formData)
     var isCorrect = this.checkForm(formData)
-    if (!isCorrect) {
-      return
-    }
+    if (!isCorrect) { return }
+    var startTimeStr = this.data.startDate + ' ' + this.data.startTime
+    var startTime = Date.parse(new Date(startTimeStr))/1000
+    var endTimeStr = this.data.endDate + ' ' + this.data.endTime
+    var endTime = Date.parse(new Date(endTimeStr))/1000
     var that = this
     wx.showToast({
       title: '提交中……',
       icon: 'loading',
-      duration: 10000,
-      mask: true
+      duration: 10000
     })
     wx.uploadFile({
-      url: "http://www.campus.com/api/venture/addInvor",
+      url: "http://www.campus.com/api/spark/addFestival",
       filePath: this.data.logo,
-      name: 'meetLogo',
+      name: 'festLogo',
       formData: {
         userId: getApp().gdata.userId,
-        meetId: that.data.meetId,
         name: formData.name,
-        intro: formData.intro,
-        company: formData.company,
-        position: formData.position,
-        addr: formData.addr
+        sponsor: formData.sponsor,
+        startTime: startTime,
+        endTime: endTime,
+        addr: formData.addr,
+        intro: formData.intro
       },
       success: function(res){
         wx.hideToast()
-        console.log('addInvor=>')
+        console.log('addFestival=>')
         console.log(res)
         res.data = JSON.parse(res.data)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
-        }
+        }        
         wx.navigateBack();
+        wx.showToast({
+          title: '创建成功'
+        })
       },
       fail: function(){
         wx.hideToast()
-        return getApp().showError(2)
       }
     })
   },
 
   checkForm: function(data){
     if (!data.name) {
-      wx.showToast({title: '请填写创投会标题!'})
+      wx.showToast({title: '请填写火种节标题!'})
     } else if (!data.sponsor) {
-      wx.showToast({title: '请填写主办方名称!'})
-    } else if (!this.data.logo) {
-      wx.showToast({title: '请选择主办方logo!'})
-    } else if (data.startDate === '请选择日期') {
-      wx.showToast({title: '请选择创投会开始日期!'})
-    } else if (data.startTime === '请选择时间') {
-      wx.showToast({title: '请选择创投会开始时间!'})
-    } else if (data.endDate === '请选择日期') {
-      wx.showToast({title: '请选择创投会结束日期!'})
-    } else if (data.endTime === '请选择时间') {
-      wx.showToast({title: '请选择创投会结束时间!'})
-    } else if (!data.addr) {
-      wx.showToast({title: '请输入创投会地址!'})
+      wx.showToast({title: '请填写火种节主办方!'})
     } else if (!data.intro) {
-      wx.showToast({title: '请填写创投会简介!'})
+      wx.showToast({title: '请填写火种节简介!'})
+    } else if (!this.data.startDate) {
+      wx.showToast({title: '请选择火种节开始日期!'})
+    } else if (!this.data.startTime) {
+      wx.showToast({title: '请选择火种节开始时间!'})
+    } else if (!this.data.endDate) {
+      wx.showToast({title: '请选择火种节结束日期!'})
+    } else if (!this.data.endTime) {
+      wx.showToast({title: '请选择火种节结束时间!'})
+    } else if (!data.addr) {
+      wx.showToast({title: '请输入火种节地址!'})
+    }else if (!this.data.logo) {
+      wx.showToast({title: '请选择主办方logo!'})
     } else {
       return true
     }
@@ -92,7 +92,6 @@ Page({
     wx.chooseImage({
       count: 1,
       success: function(res){
-        console.log(res)
         that.setData({
           logo: res.tempFilePaths[0],
         })
@@ -106,3 +105,4 @@ Page({
     })
   }
 })
+

@@ -1,36 +1,29 @@
 <view class="container">
-  <view wx:if="{{!isUser}}">
-    <view class="page-title">{{title}}</view>
-    <view wx:if="{{assumption}}" class="content-area">
-      <text class="para">实验假设：{{assumption}}</text>
-    </view>
-    <view wx:if="{{result}}" class="content-area">
-      <text class="para">实验结果：{{result}}</text>
+  <view class="page-title">{{title}}</view>
+  <view class="interval-title">
+    实验假设
+  </view>
+  <view class="content-area">
+    <text class="para">{{assumption}}</text>
+  </view>
+  <view class="interval-title">
+    实验结果
+  </view>
+  <view wx:if="{{result}}" class="content-area">
+    <text class="para">{{result}}</text>
+  </view>
+  <view class="content-area" wx:else >
+    <view class="main-hint">
+      通过下方『填写实验结果』按钮来完成实验吧!
     </view>
   </view>
-  <view wx:else >
-    <view class="card-page-title">
-      <navigator class="card-title" url="">
-        <text>{{title}}</text>
-      </navigator>
-    </view>
-    <view wx:if="{{assumption}}" class="content-area">
-      <navigator class="card-assumption" url="">
-        <text class="para">实验假设：{{assumption}}</text>
-      </navigator> 
-    </view>
-    <view wx:if="{{result}}" class="content-area">
-      <navigator class="card-result" url="/pages/project/card/cardFinish?cardId={{cardId}}&result={{result}}&status={{status}}">
-        <text class="para">实验结果：{{result}}</text>
-      </navigator> 
-    </view>
-    <view wx:else class="content-area">
-      <navigator class="nav-btn" url="/pages/project/card/cardFinish?cardId={{cardId}}">
-        <text>点击填写实验结果</text>
-      </navigator>
-    </view>
-    <view class="btn-area">
-      <button type="warn" bindtap="delCard">删除</button>
-    </view>
+  <view class="btn-area" wx:if="{{isUser}}">
+    <navigator url="/pages/project/card/cardFinish?cardId={{cardId}}&result={{result}}&status={{status}}" hover-class="navigator-hover">
+      <button type="primary" size="default">填写实验结果</button>
+    </navigator>
+    <!--<navigator url="/pages/project/card/cardAdd?cardId={{cardId}}&result={{result}}&status={{status}}" hover-class="navigator-hover">-->
+      <!--<button type="default" size="default">编辑实验假设</button>-->
+    <!--</navigator>-->
+    <button type="warn" bindtap="delCard">删除实验</button>
   </view>
 </view>

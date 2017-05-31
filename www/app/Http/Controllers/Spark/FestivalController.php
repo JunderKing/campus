@@ -59,6 +59,7 @@ class FestivalController extends Controller
       return self::$ERROR2;
     }
     $festInfo = Model\SfFestival::select('fest_id', 'orger_id', 'name', 'intro', 'sponsor', 'start_time', 'end_time', 'addr', 'logo_url')->find($festId)->toArray();
+    $festInfo['isMentor'] = Model\SfFestMentor::where([['fest_id', $festId], ['user_id', $userId]])->count();
     $festList = Model\SfFestival::select('fest_id', 'name')->get()->toArray();
     $projIds = Model\SfFestProject::where('fest_id', $festId)->pluck('proj_id');
     $projList = Model\User::join('project', 'user.user_id', '=', 'project.leader_id')
@@ -77,8 +78,8 @@ class FestivalController extends Controller
       $bScore = Model\SfProjScore::where('proj_id', $projId)->avg('b_score');
       $cScore = Model\SfProjScore::where('proj_id', $projId)->avg('c_score');
       $value['projScore'] = round(($tScore + $aScore + $bScore + $cScore) / 4 * 100) / 100;
+      $value['isMember'] = Model\SfProjMember::where([['proj_id', $projId], ['user_id', $userId]])->count();
     }
-    $festInfo['projList'] = $projList;
     $festInfo['festList'] = $festList;
     $festInfo['projList'] = $projList;
     return $this->output(['festInfo' => $festInfo]);
@@ -105,12 +106,12 @@ class FestivalController extends Controller
       ->select('project.proj_id', 'project.name', 'project.logo_url', 'user.avatar_url', 'user.nick_name')
       ->get()->toArray();
     //foreach ($projList as &$value) {
-      //$projId = $value['proj_id'];
-      //$imageNum = Model\SfProjProgress::where([['proj_id', $projId], ['image_url', '<>', '']])->count();
-      //$contentNum = Model\SfProjProgress::where([['proj_id', $projId], ['content', '<>', '']])->count();
-      //$comntNum = Model\SfComnt::where(['proj_id', $projId])->count();
-      //$comntNum = $comntNum > 3 ? 3 : $comntNum;
-      //$value['progScore'] = ($imageNum + $contentNum) * 5 + $comntNum * 10;
+    //$projId = $value['proj_id'];
+    //$imageNum = Model\SfProjProgress::where([['proj_id', $projId], ['image_url', '<>', '']])->count();
+    //$contentNum = Model\SfProjProgress::where([['proj_id', $projId], ['content', '<>', '']])->count();
+    //$comntNum = Model\SfComnt::where(['proj_id', $projId])->count();
+    //$comntNum = $comntNum > 3 ? 3 : $comntNum;
+    //$value['progScore'] = ($imageNum + $contentNum) * 5 + $comntNum * 10;
     //}
     $festInfo['projList'] = $projList;
     return $this->output(['festInfo' => $festInfo]);
@@ -140,12 +141,11 @@ class FestivalController extends Controller
       return self::$ERROR1;
     }
     extract($params);
-    $result = DB::transaction(function(){
-      Model\SfFestival::where('fest_id', $festId)->delete();
-      Model\SfFestProject::where('fest_id', $festId)->delete();
-      Model\SfFestMentor::where('fest_id', $festId)->delete();
-    });
-    return $this->output(['deleted' => $result]);
+    Model\SfFestival::where('fest_id', $festId)->delete();
+    Model\SfFestProject::where('fest_id', $festId)->delete();
+    Model\SfFestMentor::where('fest_id', $festId)->delete();
+    Model\SfUser::where('cur_fest_id', $festId)->update(['cur_fest_id' => 0]);
+    return $this->output(['deleted' => 'success']);
   }
 
   public function addFestProject(Request $request)

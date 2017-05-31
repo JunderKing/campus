@@ -38,9 +38,7 @@
     </view>
     <view class="form-group">
       <view class="form-item">
-        <view class="item-content">
-          <input name="tag" type="text" placeholder="请输入2~6个项目关键词作为标签，以空格分隔"/>
-        </view>
+        <input name="tag" type="text" placeholder="请输入2~6个项目关键词作为标签，以空格分隔"/>
       </view>
     </view>
     <view class="group-title">

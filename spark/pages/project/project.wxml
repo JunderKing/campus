@@ -4,6 +4,9 @@
   <view class="page-title">
       <text>{{name}}</text>
   </view>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+  </view>
   <view class="interval-title">
     项目简介
   </view>
@@ -17,7 +20,7 @@
   <view class="avatar-area">
     <view class="avatar-box" wx:for="{{members}}"> 
       <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="del-icon" hidden="{{delHidden}}" data-userId="{{item.userId}}" catchtap="delMember" wx:if="{{item.userId !== leaderId}}">
+      <view class="del-icon" data-userid="{{item.userId}}" catchtap="delMember" wx:if="{{item.userId !== leaderId && !delHidden}}">
         <view class=""></view>
       </view>
       <text>{{item.nickName}}</text>
@@ -33,7 +36,7 @@
     <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
   </view>
 
-  <template is="comment" data="{{comments}}"/>
+  <template is="comment" data="{{comnts:comnts, scores: scores}}"/>
 
   <view class="btn-area">
     <navigator url="/pages/project/projProgress?projId={{projId}}" hover-class="navigator-hover">

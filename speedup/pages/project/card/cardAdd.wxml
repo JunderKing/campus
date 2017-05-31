@@ -1,19 +1,19 @@
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="area-title">
+    <view class="group-title">
       请填写实验信息
     </view>
-    <view class="form-area column">
-      <view class="form-item big border">
+    <view class="form-group">
+      <view class="form-item border">
         <view class="item-title">实验标题</view>
         <view class="item-content">
-          <input class="" name="title" placeholder="请输入实验标题"/>
+          <input name="title" placeholder="请输入实验标题"/>
         </view>
       </view>
       <view class="form-item big">
         <view class="item-title">实验假设</view>
-        <view class="item-content">
-          <textarea class="" name="assumption" placeholder="请输入实验假设" auto-height/>
+        <view class="item-content big">
+          <textarea name="assumption" placeholder="请输入实验假设" auto-height/>
         </view>
       </view>
     </view>

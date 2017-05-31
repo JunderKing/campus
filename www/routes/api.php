@@ -92,6 +92,7 @@ Route::group(['prefix' => 'speedup', 'namespace' => 'Speedup'], function(){
   Route::any('getProjInfo', 'ProjectController@getProjInfo');
   Route::any('getUserProjInfo', 'ProjectController@getUserProjInfo');
   Route::any('getUserProjList', 'ProjectController@getUserProjList');
+  Route::any('getAvlProjList', 'ProjectController@getAvlProjList');
   Route::any('getCampProjList', 'ProjectController@getCampProjList');
   Route::any('addProjMember', 'ProjectController@addProjMember');
   Route::any('delProjMember', 'ProjectController@delProjMember');
@@ -115,7 +116,7 @@ Route::group(['prefix' => 'speedup', 'namespace' => 'Speedup'], function(){
   //ComntController
   Route::any('addComnt', 'ComntController@addComnt');
   Route::any('delComnt', 'ComntController@delComnt');
-  Route::any('getComntInfo', 'ComntController@getComntInfo');
+  Route::any('getComnt', 'ComntController@getComnt');
   Route::any('addReply', 'ComntController@addReply');
 });
 
@@ -144,6 +145,7 @@ Route::group(['prefix' => 'venture', 'namespace' => 'Venture'], function(){
   Route::any('getProjInfo', 'ProjectController@getProjInfo');
   Route::any('getUserProjInfo', 'ProjectController@getUserProjInfo');
   Route::any('getMeetProjList', 'ProjectController@getMeetProjList');
+  Route::any('getAvlProjList', 'ProjectController@getAvlProjList');
   Route::any('addProjMember', 'ProjectController@addProjMember');
   Route::any('delProjMember', 'ProjectController@delProjMember');
   Route::any('getProgInfo', 'ProjectController@getProgInfo');
@@ -158,7 +160,7 @@ Route::group(['prefix' => 'venture', 'namespace' => 'Venture'], function(){
   //ComntController
   Route::any('addComnt', 'ComntController@addComnt');
   Route::any('delComnt', 'ComntController@delComnt');
-  Route::any('getComntInfo', 'ComntController@getComntInfo');
+  Route::any('getComnt', 'ComntController@getComnt');
   Route::any('addReply', 'ComntController@addReply');
   Route::any('addInvorScore', 'ComntController@addInvorScore');
   Route::any('updInvorScore', 'ComntController@updInvorScore');

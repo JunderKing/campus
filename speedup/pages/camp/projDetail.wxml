@@ -1,51 +1,54 @@
 <import src="../include/template.wxml" />
 
-<view class="container" wx:if="{{projId}}"> 
-  <view class="page-title-area">
-    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
-    <view class="title-info-box">
-      <text class="info-name">{{name}}</text>
-      <text class="info-province">{{province}}</text>
-      <text class="info-tag">{{tag}}</text>
-    </view>
+<view class="container"> 
+  <view class="page-title">
+      <text>{{name}}</text>
   </view>
-  <view class="para content-area">
-    <navigator hover-class="navigator-hover">{{intro}}</navigator>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
   </view>
+  <view class="interval-title">
+    项目简介
+  </view>
+  <view class="content-area">
+    <text class="para">{{intro}}</text>
+  </view>
+
   <view class="interval-title">
     项目成员
   </view>
   <view class="avatar-area">
     <view class="avatar-box" wx:for="{{members}}"> 
       <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="del-box">
-        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
-      </view>
-      <text class="avatar-nickName">{{item.nickName}}</text>
+      <text>{{item.nickName}}</text>
     </view>
+    <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
   </view>
   <view class="interval-title">
     项目菜单
   </view>
-  <view class="menu-box content-area">
-    <navigator class="menu-item" url="/pages/project/record/recList?projId={{projId}}&isUser=0" hover-class="navigator-hover">
+  <view class="menu-box content-area" wx:if="{{!hidden}}">
+    <navigator class="menu-item" url="/pages/project/record/recList?projId={{projId}}&isUser={{isUser}}" hover-class="navigator-hover">
       <view class="image-button report">
         <image mode="aspectToFill" src="/img/icon/report_white.png"></image>
       </view>
       <text>项目周报</text>
     </navigator>
-    <navigator class="menu-item" url="/pages/project/canvas/canvas?projId={{projId}}&isUser=0" hover-class="navigator-hover">
+    <navigator class="menu-item" url="/pages/project/canvas/canvas?projId={{projId}}&isUser={{isUser}}" hover-class="navigator-hover">
       <view class="image-button canvas">
         <image mode="aspectToFill" src="/img/icon/canvas_white.png"></image>
       </view>
       <text>项目画布</text>
     </navigator>
-    <navigator class="menu-item" url="/pages/project/card/cardList?projId={{projId}}&isUser=0" hover-class="navigator-hover">
+    <navigator class="menu-item" url="/pages/project/card/cardList?projId={{projId}}&isUser={{isUser}}" hover-class="navigator-hover">
       <view class="image-button card">
         <image mode="aspectToFill" src="/img/icon/plan_white.png"></image>
       </view>
       <text>项目实验</text>
     </navigator>
+  </view>  
+  <view class="main-hint" wx:else >
+    只有同一个加速营的成员之间才能查看项目详情
   </view>
   <!--<template is="comment" data="{{comments}}"/>-->
 </view>
