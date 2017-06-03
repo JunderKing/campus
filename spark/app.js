@@ -34,7 +34,7 @@ App({
     console.log('loginData')
     console.log(loginData)
     wx.request({
-      url: 'http://www.campus.com/api/spark/login',
+      url: 'https://www.kingco.tech/api/spark/login',
       method: 'POST',
       data: loginData,
       success: function (res) {
@@ -85,7 +85,7 @@ App({
   updateUserInfo: function(callback){
     var that = this;
     wx.request({
-      url: 'http://www.campus.com/api/spark/getUserInfo',
+      url: 'https://www.kingco.tech/api/spark/getUserInfo',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
@@ -126,7 +126,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addOrger',
+      url: 'https://www.kingco.tech/api/spark/addOrger',
       method: 'GET',
       data: {
         userId: this.gdata.userId
@@ -161,7 +161,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addFestMentor',
+      url: 'https://www.kingco.tech/api/spark/addFestMentor',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
@@ -192,7 +192,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getAvlProjList',
+      url: 'https://www.kingco.tech/api/spark/getAvlProjList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
@@ -239,7 +239,7 @@ App({
     }
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addProjMember',
+      url: 'https://www.kingco.tech/api/spark/addProjMember',
       method: 'POST',
       data: reqData,
       success: function(res){

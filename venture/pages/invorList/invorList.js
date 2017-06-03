@@ -6,7 +6,7 @@ Page({
   onShow: function(){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/venture/getMeetInvorList',
+      url: 'https://www.kingco.tech/api/venture/getMeetInvorList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId

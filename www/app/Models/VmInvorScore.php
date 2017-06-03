@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class VmInvorScore extends Model
 {
   protected $table = 'vm_invor_score';
-  //protected $primaryKey = '';
+  protected $primaryKey = 'score_id';
   //public $incrementing = false;
   public $timestamps = true;
   protected $guarded = [];

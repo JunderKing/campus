@@ -28,7 +28,7 @@ class CampController extends Controller
       'name' => $name,
       'intro' => $intro,
       'sponsor' => $sponsor,
-      'logo_url' => "http://www.campus.com/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $campId = $campObj->camp_id;
     Model\ScUser::where('user_id', $userId)->update(['cur_camp_id' => $campId]);
@@ -87,18 +87,11 @@ class CampController extends Controller
       ->select('user_id', 'avatar_url', 'nick_name')
       ->get()->toArray();
     $projIds = Model\ScCampProject::where('camp_id', $campId)->pluck('proj_id');
-    $leaderIds = Model\ScProjMember::whereIn('proj_id', $projIds)
-      ->where('is_leader', 1)
-      ->pluck('user_id');
-    $campInfo['leaders'] = Model\User::whereIn('user_id', $leaderIds)
-      ->select('user_id', 'avatar_url', 'nick_name')
+    $projList = Model\Project::join('user', 'project.leader_id', '=', 'user.user_id')
+      ->whereIn('project.proj_id', $projIds)
+      ->select('project.proj_id', 'project.name', 'project.logo_url', 'user.avatar_url', 'user.nick_name')
       ->get()->toArray();
-    $memberIds = Model\ScProjMember::whereIn('proj_id', $projIds)
-      ->where('is_leader', 0)
-      ->pluck('user_id');
-    $campInfo['members'] = Model\User::whereIn('user_id', $memberIds)
-      ->select('user_id', 'avatar_url', 'nick_name')
-      ->get()->toArray();
+    $campInfo['projList'] = $projList;
     return $this->output(['campInfo' => $campInfo]);
   }
 

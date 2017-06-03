@@ -15,7 +15,7 @@ Page({
     var that = this
     var projId = e.currentTarget.dataset.projid
     wx.request({
-      url: 'http://www.campus.com/api/speedup/addCampProject',
+      url: 'https://www.kingco.tech/api/speedup/addCampProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,

@@ -11,10 +11,10 @@ Page({
     var roleStr = '创业者'
     if (gdata.role === 1) {
       roleStr = '管理员'
-    } else if (gdata.festRole === 1){
+    } else if (gdata.meetRole === 1){
       roleStr = '组织者'
-    } else if (gdata.isMentor === 1) {
-      roleStr = '创业导师'
+    } else if (gdata.isInvor === 1) {
+      roleStr = '创业投资人'
     }
     this.setData({
       avatarUrl: gdata.avatarUrl,
@@ -26,8 +26,8 @@ Page({
 
   onShareAppMessage: function(){
     return {
-      title: '火种节小程序',
-      path: '/pages/project/project'
+      title: '创投会小程序',
+      path: '/pages/projList/projList'
     }
   },
 
@@ -39,11 +39,11 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/common/getQrcode',
+      url: 'https://www.kingco.tech/api/common/getQrcode',
       method: 'GET',
       data: {
-        type: 1,
-        name: 'spark_orger',
+        type: 3,
+        name: 'venture_orger',
         path: '/pages/include/start?role=4'
       },
       success: function(res){
@@ -53,7 +53,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://www.campus.com/static/qrcode/spark_orger.png'
+        var url = 'https://www.kingco.tech/static/qrcode/venture_orger.png'
         wx.previewImage({
           urls: [url]
         })
@@ -75,7 +75,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/common/getWxcode',
+      url: 'https://www.kingco.tech/api/common/getWxcode',
       method: 'GET',
       data: {
         type: type,
@@ -89,10 +89,10 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
+        var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
         var title = '小程序'
         if (type === 1) {
-          title = '火种节小程序'
+          title = '创投会小程序'
         } else if (type === 2) {
           title = '加速营小程序'
         } else {
@@ -116,4 +116,3 @@ Page({
     })
   }
 })
-

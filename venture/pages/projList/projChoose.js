@@ -1,25 +1,25 @@
 Page({
   data:{
-    festId: 0,
+    meetId: 0,
     projList: []
   },
 
   onLoad: function(options){
     this.setData({
-      festId: options.festId,
+      meetId: options.meetId,
       projList: getApp().gdata.avlProjList
     })
   },
 
-  addFestProject: function(e){
+  addMeetProject: function(e){
     var that = this
     var projId = e.currentTarget.dataset.projid
     wx.request({
-      url: 'http://www.campus.com/api/spark/addFestProject',
+      url: 'https://www.kingco.tech/api/venture/addMeetProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,
-        festId: this.data.festId,
+        meetId: this.data.meetId,
         projId: projId
       },
       success: function(res){
@@ -28,7 +28,7 @@ Page({
         }
         wx.navigateBack()
         wx.showToast({
-          title: '成功加入火种节!',
+          title: '成功加入创投会!',
           icon: 'success'
         })
       },
@@ -41,10 +41,10 @@ Page({
 
   toProjAdd: function(){
     wx.switchTab({
-      url: '/pages/project/project',
+      url: '/pages/projList/projList',
       success: function(){
         wx.navigateTo({
-          url: '/pages/project/projAdd?festId=' + this.data.festId
+          url: '/pages/projList/projAdd?meetId=' + this.data.meetId
         })
       }
     })

@@ -32,9 +32,9 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "http://www.campus.com/api/spark/addFestival",
+      url: "https://www.kingco.tech/api/venture/addMeeting",
       filePath: this.data.logo,
-      name: 'festLogo',
+      name: 'meetLogo',
       formData: {
         userId: getApp().gdata.userId,
         name: formData.name,
@@ -46,7 +46,7 @@ Page({
       },
       success: function(res){
         wx.hideToast()
-        console.log('addFestival=>')
+        console.log('addMeeting=>')
         console.log(res)
         res.data = JSON.parse(res.data)
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
@@ -65,21 +65,21 @@ Page({
 
   checkForm: function(data){
     if (!data.name) {
-      wx.showToast({title: '请填写火种节标题!'})
+      wx.showToast({title: '请填写创投会标题!'})
     } else if (!data.sponsor) {
-      wx.showToast({title: '请填写火种节主办方!'})
+      wx.showToast({title: '请填写创投会主办方!'})
     } else if (!data.intro) {
-      wx.showToast({title: '请填写火种节简介!'})
+      wx.showToast({title: '请填写创投会简介!'})
     } else if (!this.data.startDate) {
-      wx.showToast({title: '请选择火种节开始日期!'})
+      wx.showToast({title: '请选择创投会开始日期!'})
     } else if (!this.data.startTime) {
-      wx.showToast({title: '请选择火种节开始时间!'})
+      wx.showToast({title: '请选择创投会开始时间!'})
     } else if (!this.data.endDate) {
-      wx.showToast({title: '请选择火种节结束日期!'})
+      wx.showToast({title: '请选择创投会结束日期!'})
     } else if (!this.data.endTime) {
-      wx.showToast({title: '请选择火种节结束时间!'})
+      wx.showToast({title: '请选择创投会结束时间!'})
     } else if (!data.addr) {
-      wx.showToast({title: '请输入火种节地址!'})
+      wx.showToast({title: '请输入创投会地址!'})
     }else if (!this.data.logo) {
       wx.showToast({title: '请选择主办方logo!'})
     } else {

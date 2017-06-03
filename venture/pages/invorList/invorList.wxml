@@ -1,8 +1,11 @@
 <view class="container">
   <view class="page-title">
+    创投会投资人
+  </view>
+  <view class="interval-title">
     投资人列表
   </view>
-  <view class="noproj-text" wx:if="{{!invorList[0]}}">
+  <view class="main-hint" wx:if="{{!invorList[0]}}">
     暂无投资人
   </view>
   <view class="list-container">
@@ -13,7 +16,7 @@
       <view class="info-box">
         <text>{{item.realName}}|{{item.position}}</text>
         <text>{{item.company}}</text>
-        <text>stars</text>
+        <text>总评分：{{item.invorScore}}星</text>
       </view>
     </navigator>
   </view>

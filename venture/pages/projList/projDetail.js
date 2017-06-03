@@ -1,19 +1,9 @@
 Page({
   data:{
     projId: 0,
-    title: '项目标题',
-    intro: '项目简介',
-    isHidden: true,
-    comments: [{
-      avatar: '../../img/icon/spark_cur.png',
-      nickName: 'Jun.K',
-      content: '评论',
-      ctime: '20150606',
-      replies: [{
-        nickName: 'HelloWorld',
-        content: '回复'
-      }]
-    }],
+    title: '',
+    intro: '',
+    isHidden: true
   },
   onLoad: function(options){
     this.setData({
@@ -23,6 +13,7 @@ Page({
 
   onShow: function(options){
     this.updProjInfo()
+    this.getProjComnt()
   },
 
   updProjInfo: function(){
@@ -35,7 +26,7 @@ Page({
       })
     }
     wx.request({
-      url: 'http://www.campus.com/api/venture/getProjInfo',
+      url: 'https://www.kingco.tech/api/venture/getProjInfo',
       method: 'GET',
       data: {
         projId: this.data.projId
@@ -56,7 +47,67 @@ Page({
         return getApp().showError(2)
       }
     })
-  }
+  },
+  
+  getProjComnt: function(){
+    var that = this
+    wx.request({
+      url: 'https://www.kingco.tech/api/venture/getProjComnt',
+      method: 'POST',
+      data: {
+        projId: this.data.projId
+      },
+      success: function(res){
+        wx.hideToast()
+        console.log('getProjComnt=>')
+        console.log(res)
+        if (res.statusCode !== 200 || res.data.errcode !== 0) {
+          return getApp().showError(3)
+        }
+        that.setData({
+          comnts: res.data.comnts,
+          scores: res.data.scores
+        })
+      }
+    })
+  },
+
+  showComntMenu: function(e){
+    var comntId = e.currentTarget.dataset.comntid
+    var comntorId = e.currentTarget.dataset.comntorid
+    var userId = getApp().gdata.userId
+    var that = this
+    if (userId === comntorId) {
+      wx.showActionSheet({
+        itemList: ['删除该评论'],
+        success: function(res){
+          if (res.tapIndex === 0) {
+            that.delComnt(comntId)
+          }
+        }
+      })
+    }
+  },
+
+  delComnt: function(comntId) {
+    var that = this
+    wx.request({
+      url: 'https://www.kingco.tech/api/venture/delComnt',
+      method: 'POST',
+      data: {
+        comntId: comntId
+      },
+      success: function(res){
+        if (res.data) {
+          wx.showToast({
+            title: '评论已删除',
+            icon: 'success'
+          })
+          that.updProjInfo()
+        }
+      }
+    })
+  },
 })
 
 

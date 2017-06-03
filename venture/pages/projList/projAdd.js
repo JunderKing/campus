@@ -38,7 +38,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "http://www.campus.com/api/venture/addProject",
+      url: "https://www.kingco.tech/api/venture/addProject",
       filePath: this.data.logo,
       name: 'projLogo',
       formData: {

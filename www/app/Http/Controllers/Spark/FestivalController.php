@@ -34,7 +34,7 @@ class FestivalController extends Controller
       'start_time' => $startTime,
       'end_time' => $endTime,
       'addr' => $addr,
-      'logo_url' => "http://www.campus.com/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $festId = $festObj->fest_id;
     Model\SfUser::where('user_id', $userId)->update(['cur_fest_id' => $festId]);
@@ -105,14 +105,6 @@ class FestivalController extends Controller
       ->whereIn('project.proj_id', $projIds)
       ->select('project.proj_id', 'project.name', 'project.logo_url', 'user.avatar_url', 'user.nick_name')
       ->get()->toArray();
-    //foreach ($projList as &$value) {
-    //$projId = $value['proj_id'];
-    //$imageNum = Model\SfProjProgress::where([['proj_id', $projId], ['image_url', '<>', '']])->count();
-    //$contentNum = Model\SfProjProgress::where([['proj_id', $projId], ['content', '<>', '']])->count();
-    //$comntNum = Model\SfComnt::where(['proj_id', $projId])->count();
-    //$comntNum = $comntNum > 3 ? 3 : $comntNum;
-    //$value['progScore'] = ($imageNum + $contentNum) * 5 + $comntNum * 10;
-    //}
     $festInfo['projList'] = $projList;
     return $this->output(['festInfo' => $festInfo]);
   }

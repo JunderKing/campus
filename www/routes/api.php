@@ -160,12 +160,15 @@ Route::group(['prefix' => 'venture', 'namespace' => 'Venture'], function(){
   //ComntController
   Route::any('addComnt', 'ComntController@addComnt');
   Route::any('delComnt', 'ComntController@delComnt');
-  Route::any('getComnt', 'ComntController@getComnt');
+  Route::any('getProjComnt', 'ComntController@getProjComnt');
+  Route::any('getInvorComnt', 'ComntController@getInvorComnt');
   Route::any('addReply', 'ComntController@addReply');
   Route::any('addInvorScore', 'ComntController@addInvorScore');
   Route::any('updInvorScore', 'ComntController@updInvorScore');
   Route::any('delInvorScore', 'ComntController@delInvorScore');
+  Route::any('getInvorScore', 'ComntController@getInvorScore');
   Route::any('addProjScore', 'ComntController@addProjScore');
   Route::any('updProjScore', 'ComntController@updProjScore');
   Route::any('delProjScore', 'ComntController@delProjScore');
+  Route::any('getProjScore', 'ComntController@getProjScore');
 });

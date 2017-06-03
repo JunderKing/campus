@@ -1,10 +1,34 @@
+<import src="../include/template.wxml" />
+
 <view class="container">
   <view class="info-area">
     <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
-    <text class="info-name">{{realName}}</text>
-    <text class="info-tag">{{company}}|{{position}}</text>
+    <view class="info-text">
+      <text class="text-big">{{realName}}</text>
+      <text class="text-def">{{company}}|{{position}}</text>
+    </view>
+  </view>
+  <view class="interval-title">
+    投资人简介
   </view>
   <view class="content-area">
-    {{intro}}
+    <text class="para">{{intro}}</text>
+  </view>
+  <template is="comment" data="{{comnts: comnts, scores: scores}}"/>
+  <view class="bottom-anchor">
+    <view class="bottom-float">
+      <navigator class="icon-box" url="/pages/include/comnForm?type=addComnt&tarType=1&tarId={{invorId}}" hover-class="navigator-hover">
+        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projCmnt.png"></image>
+        <text>评论</text>
+      </navigator>
+      <navigator class="icon-box" url="/pages/invorList/invorScoreAdd?invorId={{invorId}}" hover-class="navigator-hover" wx:if="{{true || isInvor || role || festId === 1}}">
+        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projScore.png"></image>
+        <text>打分</text>
+      </navigator>
+      <!--<navigator class="icon-box float-btn" hover-class="navigator-hover" bindtap="toProgress">-->
+        <!--<text>查看项目进展</text>-->
+      <!--</navigator>-->
+    </view>
   </view>
 </view>
+

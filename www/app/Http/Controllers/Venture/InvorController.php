@@ -32,14 +32,14 @@ class InvorController extends Controller
 
   //public function delInvor (Request $request)
   //{
-    //$params = $this->validation($request, [
-      //'userId' => 'required|numeric'
-    //]);
-    //if ($params === false) {
-      //return self::$ERROR1;
-    //}
-    //extract($params);
-    //$result = Model\VmInvor::where('user_id', $userId)->delete();
+  //$params = $this->validation($request, [
+  //'userId' => 'required|numeric'
+  //]);
+  //if ($params === false) {
+  //return self::$ERROR1;
+  //}
+  //extract($params);
+  //$result = Model\VmInvor::where('user_id', $userId)->delete();
   //}
 
   public function updInvorInfo (Request $request)
@@ -95,6 +95,11 @@ class InvorController extends Controller
       ->whereIn('user.user_id', $invorIdArr)
       ->select('user.user_id', 'user.avatar_url', 'user.nick_name', 'vm_invor.real_name', 'vm_invor.company', 'vm_invor.position', 'vm_invor.intro')
       ->get()->toArray();
+    foreach ($invorList as &$value) {
+      $invorId = $value['user_id'];
+      $score = Model\VmInvorScore::where('invor_id', $invorId)->avg('score');
+      $value['invorScore'] = round($score * 100) / 100;
+    }
     return $this->output(['invorList' => $invorList]);
   }
 }

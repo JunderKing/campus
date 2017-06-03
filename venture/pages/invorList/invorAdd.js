@@ -7,7 +7,7 @@ Page({
     console.log('meeadd onload=>')
     console.log(options)
     this.setData({
-      meetId: options.meetId
+      meetId: parseInt(options.meetId)
     })
   },
 
@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: "http://www.campus.com/api/venture/addInvor",
+      url: "https://www.kingco.tech/api/venture/addInvor",
       method: 'POST',
       data: {
         userId: userId,
@@ -52,8 +52,6 @@ Page({
         })
       },
       fail: function(res){
-        console.log(res)
-        wx.hideToast()
         getApp().showError(2)
       }
     })
@@ -71,5 +69,5 @@ Page({
     } else {
       return true
     }
-  },
+  }
 })

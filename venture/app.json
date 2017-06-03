@@ -1,22 +1,23 @@
 {
   "pages": [
     "pages/include/start",
+    "pages/include/comnForm",
     "pages/projList/projList",
     "pages/invorList/invorList",
     "pages/invorList/invorAdd",
     "pages/invorList/invorDetail",
-    "pages/invorList/invorScore",
+    "pages/invorList/invorScoreAdd",
     "pages/projList/projDetail",
     "pages/projList/projAdd",
-    "pages/projList/projScore",
-    "pages/projList/projList",
+    "pages/projList/projScoreAdd",
+    "pages/projList/projChoose",
     "pages/meeting/meeting",
     "pages/meeting/meetAdd",
     "pages/meeting/meetDetail",
     "pages/info/info"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#79377C",
+    "navigationBarBackgroundColor": "#000",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "",
     "backgroundColor": "#ffffff",
@@ -25,7 +26,7 @@
   },
   "tabBar": {
     "color": "#000",
-    "selectedColor": "#920783",
+    "selectedColor": "#17A362",
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "list": [

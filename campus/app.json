@@ -1,37 +1,37 @@
 {
   "pages": [
-    "pages/project/project",
-    "pages/list/list",
-    "pages/list/projDetail",
-    "pages/speed/speed",
+    "pages/include/start",
+    "pages/include/comnForm",
+    "pages/projList/projList",
+    "pages/projList/projAdd",
+    "pages/postList/postList",
     "pages/info/info"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#00913A",
+    "navigationBarBackgroundColor": "#000",
     "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "加速营",
-    "backgroundColor": "#00913A",
+    "navigationBarTitleText": "校园VC",
+    "backgroundColor": "#99C72F",
     "backgroundTextStyle": "dark",
     "enablePullDownRefresh": "true"
   },
   "tabBar": {
     "color": "#888",
-    "selectedColor": "#00913A",
+    "selectedColor": "#99C72F",
     "backgroundColor": "#fff",
     "borderStyle": "black",
     "list": [
       {
-        "pagePath": "pages/project/project",
-        "text": "项目投递",
-        "iconPath": "img/icon/proj_def.png",
-        "selectedIconPath": "img/icon/proj_cur.png"
-      },
-      {
-        "pagePath": "pages/list/list",
-        "text": "项目列表",
+        "pagePath": "pages/projList/projList",
+        "text": "项目",
         "iconPath": "img/icon/list_def.png",
         "selectedIconPath": "img/icon/list_cur.png"
       },{
+        "pagePath": "pages/postList/postList",
+        "text": "发现",
+        "iconPath": "img/icon/proj_def.png",
+        "selectedIconPath": "img/icon/proj_cur.png"
+      },  {
         "pagePath": "pages/info/info",
         "text": "小程序",
         "iconPath": "img/icon/info_def.png",

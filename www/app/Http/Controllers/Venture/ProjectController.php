@@ -27,14 +27,17 @@ class ProjectController extends Controller
     $projObj = Model\Project::create([
       'leader_id' => $userId,
       'name' => $name,
-      'logo_url' => "http://www.campus.com/storage/logo/$fileName",
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName",
       'province' => 4,
       'tag' => $tag,
       'intro' => $intro,
       'origin' => 2
     ]);
     $projId = $projObj->proj_id;
+    Model\SfProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
+    Model\ScProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
     Model\VmProjMember::updateOrCreate(['proj_id' => $projId, 'user_id' => $userId], ['is_leader' => 1]);
+    //Model\VmUser::where('user_id', $userId)->update(['cur_proj_id' => $projId]);
     if ($meetId > 0) {
       Model\VmMeetProject::create(['meet_id' => $meetId, 'proj_id' => $projId]);
       Model\VmUser::where('user_id', $userId)->update(['cur_meet_id' => $meetId]);
@@ -104,6 +107,24 @@ class ProjectController extends Controller
     return $this->output(['projList' => $projList]);
   }
 
+  public function getAvlProjList(Request $request)
+  {
+    $params = $this->validation($request, [
+      'userId' => 'required|numeric',
+      'meetId' => 'required|numeric'
+    ]);
+    if ($params === false) {
+      return self::$ERROR1;
+    }
+    extract($params);
+    $meetProjIds = Model\VmMeetProject::where('meet_id', $meetId)->pluck('proj_id');
+    $projList = Model\Project::where('leader_id', $userId)
+      ->whereNotIn('proj_id', $meetProjIds)
+      ->select('proj_id', 'name')
+      ->get()->toArray();
+    return $this->output(['projList' => $projList]);
+  }
+
   public function getMeetProjList(Request $request)
   {
     $params = $this->validation($request, [
@@ -124,8 +145,17 @@ class ProjectController extends Controller
     }
     $projList = Model\User::join('project', 'user.user_id', '=', 'project.leader_id')
       ->whereIn('project.proj_id', $projIds)
-      ->select('user.avatar_url', 'user.nick_name', 'project.proj_id', 'project.name', 'project.logo_url')
+      ->select('user.avatar_url', 'user.nick_name', 'project.proj_id', 'project.name', 'project.tag', 'project.logo_url')
       ->get()->toArray();
+    foreach ($projList as &$value) {
+      $projId = $value['proj_id'];
+      $tScore = Model\VmProjScore::where('proj_id', $projId)->avg('t_score');
+      $aScore = Model\VmProjScore::where('proj_id', $projId)->avg('a_score');
+      $bScore = Model\VmProjScore::where('proj_id', $projId)->avg('b_score');
+      $cScore = Model\VmProjScore::where('proj_id', $projId)->avg('c_score');
+      $value['projScore'] = round(($tScore + $aScore + $bScore + $cScore) / 4 * 100) / 100;
+      $value['isMember'] = Model\VmProjMember::where([['proj_id', $projId], ['user_id', $userId]])->count();
+    }
     return $this->output(['projList' => $projList]);
   }
 

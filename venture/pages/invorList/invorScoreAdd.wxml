@@ -1,0 +1,33 @@
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="group-title">
+      请打分
+    </view>
+    <view class="form-group">
+      <view class="form-item border">
+        <view class="item-title">
+          总体评分
+        </view>
+        <view class="item-content">
+          <image class="score" mode="aspectFit" src="/img/star{{score>=1 ? 'red' : 'gray'}}.png" data-name="score" data-score="1" bindtap="setScore"></image>
+          <image class="score" mode="aspectFit" src="/img/star{{score>=2 ? 'red' : 'gray'}}.png" data-name="score" data-score="2" bindtap="setScore"></image>
+          <image class="score" mode="aspectFit" src="/img/star{{score>=3 ? 'red' : 'gray'}}.png" data-name="score" data-score="3" bindtap="setScore"></image>
+          <image class="score" mode="aspectFit" src="/img/star{{score>=4 ? 'red' : 'gray'}}.png" data-name="score" data-score="4" bindtap="setScore"></image>
+          <image class="score" mode="aspectFit" src="/img/star{{score==5 ? 'red' : 'gray'}}.png" data-name="score" data-score="5" bindtap="setScore"></image>
+        </view>
+      </view>
+    </view>
+    <view class="group-title">
+      请填写评语
+    </view>
+    <view class="form-group">
+      <view class="form-item">
+        <textarea class="" name="content" placeholder="评论一下吧……" value="{{content}}" auto-height />
+      </view>
+    </view>
+    <view class="btn-area">
+      <button formType="submit" type="primary" size="default">提交</button>
+    </view>
+  </form>
+</view>
+

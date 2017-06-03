@@ -11,7 +11,7 @@
   </view>
   <view class="growth-line">
     <view class="growth-cursor">
-      <image mode="widthFix" src="../../img/cursor.png"></image>
+      <image mode="widthFix" src="../../img/icon/running.png"></image>
     </view>
     <view class="line active"></view>
     <view class="dot active"></view>
@@ -34,17 +34,17 @@
   </view>
   <view class="app-list">
     <view class="app-box" data-type="1" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/spark2.png"></image>
+      <image mode="widthFix" src="../../img/icon/spark_cur.png"></image>
       <text class="app-status">进行中</text>
       玩-火种节
     </view>
     <view class="app-box" data-type="2" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/freeman.png"></image>
+      <image mode="widthFix" src="../../img/icon/speed_def.png"></image>
       <text class="app-status gray">未参与</text>
       创-加速营
     </view>
     <view class="app-box" data-type="3" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/venture.png"></image>
+      <image mode="widthFix" src="../../img/icon/venture_cur.png"></image>
       <text class="app-status gray">未参与</text>
       投-创投会
     </view>
@@ -53,7 +53,6 @@
     我的徽章
   </view>
   <view class="btn-area">
-    <button type="primary" bindtap="toOrgerAdd" wx:if="{{true || role}}">添加组织者</button>
+    <button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>
   </view>
 </view>
-

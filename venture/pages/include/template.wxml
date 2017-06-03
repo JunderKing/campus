@@ -9,7 +9,7 @@
       <view class="content-box">
         <text class="nick-name">{{item.nickName}}</text>
         <view class="score-bar">
-          <view class="score-red" style="width:{{(item.tScore + item.aScore + item.bScore + item.cScore) / 0.2}}%"></view>
+          <view class="score-red" style="width:{{item.score ? item.score * 20 : (item.tScore + item.aScore + item.bScore + item.cScore) * 5}}%"></view>
           <view class="score-star-box">
           <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
           <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>

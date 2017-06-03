@@ -1,27 +1,29 @@
 <view class="container-white">
   <view class="info-area">
-    <image class="avatar info" mode="scaleToFill" src="{{avatar}}"></image>
-    <text class="info-name">{{nickName}}</text>
-    <text class="info-tag">{{role}}</text>
+    <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
+    <view class="info-text">
+      <text class="text-big">{{nickName}}</text>
+      <text class="text-def">{{roleStr}}</text>
+    </view>
   </view>
   <view class="interval-title">
     我的成长
   </view>
   <view class="growth-line">
     <view class="growth-cursor">
-      <image mode="widthFix" src="../../img/icon/runing.png"></image>
+      <image mode="widthFix" src="../../img/cursor.png"></image>
     </view>
-    <view class="line green"></view>
-    <view class="dot green"></view>
-    <view class="line"></view>
-    <view class="dot"></view>
-    <view class="line"></view>
-    <view class="dot"></view>
-    <view class="line"></view>
-    <view class="dot"></view>
-    <view class="line"></view>
-    <view class="dot"></view>
-    <view class="line"></view>
+    <view class="line active"></view>
+    <view class="dot active"></view>
+    <view class="line {{stage > 1 ? active : ''}}"></view>
+    <view class="dot {{stage > 1 ? active : ''}}"></view>
+    <view class="line {{stage > 1 ? active : ''}}"></view>
+    <view class="dot {{stage > 1 ? active : ''}}"></view>
+    <view class="line {{stage > 1 ? active : ''}}"></view>
+    <view class="dot {{stage > 1 ? active : ''}}"></view>
+    <view class="line {{stage > 1 ? active : ''}}"></view>
+    <view class="dot {{stage > 1 ? active : ''}}"></view>
+    <view class="line {{stage > 1 ? active : ''}}"></view>
     <view class="growth-scale">
       <text class="scale">感兴趣</text>
       <text class="scale">开始创业</text>
@@ -31,23 +33,26 @@
     </view>
   </view>
   <view class="app-list">
-    <view class="app-box" bindtap="getWxcode">
-      <image mode="widthFix" src="../../img/icon/spark_cur.png"></image>
-      <text class="app-status">已完成</text>
+    <view class="app-box" data-type="1" bindtap="toWxcode">
+      <image mode="widthFix" src="../../img/spark2.png"></image>
+      <text class="app-status">进行中</text>
       玩-火种节
     </view>
-    <view class="app-box">
-      <image mode="widthFix" src="../../img/icon/speed_cur.png"></image>
-      <text class="app-status">进行中</text>
-      创-自由人
+    <view class="app-box" data-type="2" bindtap="toWxcode">
+      <image mode="widthFix" src="../../img/freeman.png"></image>
+      <text class="app-status gray">未参与</text>
+      创-加速营
     </view>
-    <view class="app-box">
-      <image mode="widthFix" src="../../img/icon/venture_cur.png"></image>
+    <view class="app-box" data-type="3" bindtap="toWxcode">
+      <image mode="widthFix" src="../../img/venture.png"></image>
       <text class="app-status gray">未参与</text>
       投-创投会
     </view>
   </view>
   <view class="interval-title">
     我的徽章
+  </view>
+  <view class="btn-area">
+    <button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>
   </view>
 </view>

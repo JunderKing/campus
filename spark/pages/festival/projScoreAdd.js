@@ -28,7 +28,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/spark/getProjScore',
+      url: 'https://www.kingco.tech/api/spark/getProjScore',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
@@ -67,7 +67,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: "http://www.campus.com/api/spark/updProjScore",
+      url: "https://www.kingco.tech/api/spark/updProjScore",
       method: 'POST',
       data: {
         projId: this.data.projId,

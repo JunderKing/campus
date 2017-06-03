@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="page-title">
+    创业项目
+  </view>
+  <view class="btn-area">
+    <navigator url="/pages/projList/projAdd" hover-class="navigator-hover">
+      <button type="primary" size="">投递项目</button>
+    </navigator>
+  </view>
+</view>

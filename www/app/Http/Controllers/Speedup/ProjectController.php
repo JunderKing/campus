@@ -27,7 +27,7 @@ class ProjectController extends Controller
     $projObj = Model\Project::create([
       'leader_id' => $userId,
       'name' => $name,
-      'logo_url' => "http://www.campus.com/storage/logo/$fileName",
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName",
       'province' => 4,
       'tag' => $tag,
       'intro' => $intro,
@@ -56,7 +56,13 @@ class ProjectController extends Controller
     extract($params);
     $projId = Model\ScUser::where('user_id', $userId)->pluck('cur_proj_id');
     if ($projId[0] === 0) {
-      return $this->output(['projInfo' => ['proj_id' => 0]]);
+      $projId = Model\ScProjMember::where('user_id', $userId)
+        ->orderBy('created_at', 'desc')
+        ->pluck('proj_id');
+      if (count($projId) === 0) {
+        return $this->output(['projInfo' => ['proj_id' => 0]]);
+      }
+      Model\ScUser::where('user_id', $userId)->update(['cur_proj_id' => $projId[0]]);
     }
     $projInfo = Model\Project::where('proj_id', $projId[0])
       ->select('proj_id', 'leader_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')

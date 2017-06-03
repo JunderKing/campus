@@ -18,7 +18,7 @@ App({
           success: function (res) {
             loginData.iv = res.iv
             loginData.rawData = res.encryptedData
-            loginData.type = 1
+            loginData.type = 3
             that.getUserInfo(loginData, options)
           }
         })
@@ -34,7 +34,7 @@ App({
     console.log('loginData')
     console.log(loginData)
     wx.request({
-      url: 'http://www.campus.com/api/spark/login',
+      url: 'https://www.kingco.tech/api/venture/login',
       method: 'POST',
       data: loginData,
       success: function (res) {
@@ -48,7 +48,7 @@ App({
           that.checkOption(options, true)
         } else {
           wx.switchTab({
-            url: '/pages/project/project'
+            url: '/pages/projList/projList'
           })
         }
       },
@@ -85,7 +85,7 @@ App({
   updateUserInfo: function(callback){
     var that = this;
     wx.request({
-      url: 'http://www.campus.com/api/spark/getUserInfo',
+      url: 'https://www.kingco.tech/api/venture/getUserInfo',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
@@ -101,19 +101,19 @@ App({
 
   checkOption: function(options, isLoading, callback){
     options.role = parseInt(options.role)
-    options.festId = parseInt(options.festId)
+    options.meetId = parseInt(options.meetId)
     options.projId = parseInt(options.projId)
     if (options.role === 4) {
       this.addOrger(isLoading, callback)
-    } else if (options.role === 3 && options.festId > 0) {
-      this.addMentor(options.festId, isLoading, callback)
-    } else if (options.role === 2 && options.festId > 0) {
-      this.addProject(options.festId, isLoading, callback)
+    } else if (options.role === 3 && options.meetId > 0) {
+      this.addInvor(options.meetId, isLoading, callback)
+    } else if (options.role === 2 && options.meetId > 0) {
+      this.addProject(options.meetId, isLoading, callback)
     } else if (options.role === 1 && options.projId > 0) {
       this.addMember(options.projId, isLoading, callback)
     } else {
       wx.switchTab({
-        url: '/pages/project/project'
+        url: '/pages/projList/projList'
       })
     }
   },
@@ -126,7 +126,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addOrger',
+      url: 'https://www.kingco.tech/api/venture/addOrger',
       method: 'GET',
       data: {
         userId: this.gdata.userId
@@ -135,12 +135,12 @@ App({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        that.gdata.festRole = 1
+        that.gdata.meetRole = 1
         if (callback) {
           callback()
         }
         wx.switchTab({
-          url: '/pages/project/project',
+          url: '/pages/projList/projList',
           success: function(){
             wx.showToast({
               title: '恭喜您成为组织者!',
@@ -152,8 +152,8 @@ App({
     })
   },
 
-  addMentor: function(festId, isLoading, callback){
-    console.log('addMentor')
+  addInvor: function(meetId, isLoading, callback){
+    console.log('addInvor')
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -161,30 +161,36 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addFestMentor',
+      url: 'https://www.kingco.tech/api/venture/addMeetInvor',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
-        festId: festId
+        meetId: meetId
       },
       success: function(res){
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return that.showError(3)
         }
-        that.gdata.isMentor = 1
+        that.gdata.isInvor = 1
         wx.switchTab({
-          url: '/pages/project/project',
+          url: '/pages/invorList/invorList',
           success: function(){
-            wx.showToast({
-              title: '恭喜您成为火种节导师!'
-            })
+            if (res.data.isInvor === 0) {
+              wx.navigateTo({
+                url: '/pages/invorList/invorAdd?meetId=' + meetId
+              })
+            } else {
+              wx.showToast({
+                title: '恭喜您成为创投会投资人!'
+              })
+            }
           }
         })
       }
     })
   },
 
-  addProject: function(festId, isLoading, callback){
+  addProject: function(meetId, isLoading, callback){
     wx.showToast({
       title: '数据处理中...',
       icon: 'loading',
@@ -192,11 +198,11 @@ App({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getAvlProjList',
+      url: 'https://www.kingco.tech/api/venture/getAvlProjList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
-        festId: festId
+        meetId: meetId
       },
       success: function(res){
         console.log('getUserProjList=>')
@@ -206,16 +212,16 @@ App({
         }
         var projList = res.data.projList
         wx.switchTab({
-          url: '/pages/project/project',
+          url: '/pages/projList/projList',
           success: function(){
             if (projList.length === 0) {
               wx.navigateTo({
-                url: '/pages/project/projAdd?festId=' + festId
+                url: '/pages/projList/projAdd?meetId=' + meetId
               })
             } else {
               that.gdata.avlProjList = projList
               wx.navigateTo({
-                url: '/pages/project/projChoose?festId=' + festId
+                url: '/pages/projList/projChoose?meetId=' + meetId
               })
             }
           }
@@ -239,7 +245,7 @@ App({
     }
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/addProjMember',
+      url: 'https://www.kingco.tech/api/venture/addProjMember',
       method: 'POST',
       data: reqData,
       success: function(res){
@@ -250,7 +256,7 @@ App({
           callback()
         }
         wx.switchTab({
-          url: '/pages/project/project',
+          url: '/pages/projList/projList',
           success: function(){
             wx.showToast({
               title: '成功加入项目!',
@@ -304,10 +310,10 @@ App({
     avatarUrl: '',
     nickName: '',
     role: 0,
-    festRole: 0,
-    curFestId: 0,
+    meetRole: 0,
+    curMeetId: 0,
     curProjId: 0,
-    isMentor: 0,
+    isInvor: 0,
     avlProjList: []
   }
 })

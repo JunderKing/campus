@@ -3,9 +3,6 @@ Page({
     projList: []
   },
 
-  onLoad: function(options){
-  },
-
   onShow: function(){
     var that = this
     wx.showToast({
@@ -14,7 +11,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/venture/getMeetProjList',
+      url: 'https://www.kingco.tech/api/venture/getMeetProjList',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId
@@ -26,6 +23,10 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
+        res.data.projList.map(function(item){
+          item.tag = item.tag.split(' ')
+          return item
+        })        
         that.setData({
           projList: res.data.projList
         })

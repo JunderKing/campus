@@ -1,16 +1,17 @@
 <import src="../include/template.wxml" />
 
-<view class="container" wx:if="{{projId}}"> 
-  <view class="page-title-area">
-    <image class="title-logo" mode="aspectFill" src="{{logoUrl}}"></image>
-    <view class="title-info-box">
-      <text class="info-name">{{name}}</text>
-      <text class="info-province">{{province}}</text>
-      <text class="info-tag">{{tag}}</text>
-    </view>
+<view class="container"> 
+  <view class="page-title">
+      <text>{{name}}</text>
   </view>
-  <view class="para content-area">
-    <navigator hover-class="navigator-hover">{{intro}}</navigator>
+  <view class="logo-area">
+    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+  </view>
+  <view class="interval-title">
+    项目简介
+  </view>
+  <view class="content-area">
+    <text class="para">{{intro}}</text>
   </view>
   <view class="interval-title">
     项目成员
@@ -18,25 +19,25 @@
   <view class="avatar-area">
     <view class="avatar-box" wx:for="{{members}}"> 
       <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="del-box">
-        <image class="tiny-del" hidden="{{isHidden}}" src="../../img/icon/del.png" data-uid="{{item.uid}}" bindtap="delMember" wx:if="{{index !== 0}}"></image>
-      </view>
-      <text class="avatar-nickName">{{item.nickName}}</text>
+      <text>{{item.nickName}}</text>
     </view>
+    <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
   </view>
-  <!--<template is="comment" data="{{comments}}"/>-->
-  <view class="footer-anchor">
-    <view class="page-footer">
-      <view class="footer-item">
-        <image mode="scaleToFill" src="/img/icon/spark_cur.png"></image>
+  <template is="comment" data="{{comnts: comnts, scores: scores}}"/>
+  <view class="bottom-anchor">
+    <view class="bottom-float">
+      <navigator class="icon-box" url="/pages/include/comnForm?type=addComnt&projId={{projId}}" hover-class="navigator-hover">
+        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projCmnt.png"></image>
         <text>评论</text>
-      </view>
-      <view class="footer-item">
-        <image mode="scaleToFill" src="/img/icon/spark_cur.png"></image>
+      </navigator>
+      <navigator class="icon-box" url="/pages/projList/projScoreAdd?projId={{projId}}" hover-class="navigator-hover" wx:if="{{true || isInvor || role || festId === 1}}">
+        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projScore.png"></image>
         <text>打分</text>
-      </view>
+      </navigator>
+      <!--<navigator class="icon-box float-btn" hover-class="navigator-hover" bindtap="toProgress">-->
+        <!--<text>查看项目进展</text>-->
+      <!--</navigator>-->
     </view>
   </view>
 </view>
-
 

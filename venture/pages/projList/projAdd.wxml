@@ -1,23 +1,14 @@
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="area-title">
-      项目基本信息(必填)
-    </view>
-    <view class="form-area">
-      <view class="form-item cube">
-        <view class="item-title-float">
-          项目Logo
-        </view>
-        <image class="logo" mode="aspectFit" src="{{logo}}" wx:if="{{logo}}" bindtap="chooseLogo"></image>
-        <image class="logo" mode="aspectFit" src="/img/icon/add2.png" wx:else bindtap="chooseLogo"></image>
-      </view>
-      <view class="form-item-box">
+    <view class="group-title">项目基本信息(必填)</view>
+    <view class="form-group">
+      <view class="form-group small">
         <view class="form-item border">
           <view class="item-title">
-            名称
+            标题
           </view>
           <view class="item-content">
-            <input type="text" name="name" placeholder="请输入项目名称"/>
+            <input name="name" type="text" placeholder="请输入项目名称"/>
           </view>
         </view>
         <view class="form-item">
@@ -25,31 +16,43 @@
             省份
           </view>
           <view class="item-content">
-            <picker mode="selector" range="{{provinceList}}" value="{{provinceId}}" bindchange="onPickerChange" wx:if="{{province}}">
+            <picker class="big" mode="selector" range="{{provinceList}}" bindchange="onPickerChange" wx:if="{{province}}">
               {{province}}
             </picker>
-            <picker mode="selector" range="{{provinceList}}" value="{{provinceId}}" class="picker-default" bindchange="onPickerChange" wx:else >
+            <picker class="big def" mode="selector" range="{{provinceList}}" bindchange="onPickerChange" wx:else >
               请选择项目省份
             </picker>
           </view>
         </view>
       </view>
+      <view class="form-item-logo">
+        <view class="item-title">
+          项目logo
+        </view>
+        <image class="logo-icon" mode="aspectFit" src="{{logo}}" bindtap="chooseLogo" wx:if="{{logo}}"></image>
+        <image class="logo-icon" mode="aspectFit" src="/img/iconadd.png" bindtap="chooseLogo" wx:else ></image>
+      </view>
     </view>
-    <view class="area-title">
-      项目标签(以空格分隔，必填)
+    <view class="group-title">
+      项目标签(必填)
     </view>
-    <view class="form-area">
-      <input type="text" name="tag" placeholder="请输入2~6个项目标签，以空格分隔" bindinput="oninput"/>
+    <view class="form-group">
+      <view class="form-item">
+        <input name="tag" type="text" placeholder="请输入2~6个项目关键词作为标签，以空格分隔"/>
+      </view>
     </view>
-    <view class="area-title">
+    <view class="group-title">
       项目简介(必填)
     </view>
-    <view class="form-area">
-      <textarea name="intro" auto-height placeholder="请填写不少于15字的项目简介" max-length="500"/>
+    <view class="form-group">
+      <view class="form-item">
+        <textarea name="intro" auto-height placeholder="请输入不少于15字的火种节简介" />
+      </view>
     </view>
     <view class="btn-area">
       <button formType="submit" type="primary">提交</button>
     </view>
   </form>
 </view>
+
 

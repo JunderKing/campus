@@ -1,19 +1,54 @@
 <view class="container">
   <view class="page-title">
+    创投会项目
+  </view>
+  <view class="interval-title">
     项目列表
   </view>
-  <view class="noproj-text" wx:if="{{!projList[0]}}">
-    本次活动还没有人创建项目哦
+  <view class="main-hint" wx:if="{{!projList[0]}}">
+    本次活动还没有项目
   </view>
-  <view class="proj-list content-area">
-    <navigator url="/pages/projList/projDetail?projId={{item.projId}}" wx:for="{{projList}}" hover-class="navigator-hover">
-      <view class="proj-info">
+  <view class="proj-list-box content-area" wx:else >
+    <navigator class="proj-list-item" url="/pages/projList/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&isInvor={{isInvor}}" wx:for="{{projList}}" hover-class="navigator-hover">
+      <view class="info-main">
+        <view class="info-logo">
         <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
-        <text class="nick-name">{{item.nickName}}</text>
-        <text class="proj-title">{{item.name}}</text>
+        </view>
+        <view class="info-text">
+          <text class="title">{{item.nickName}}</text>
+          <text class="content">{{item.name}}</text>
+        </view>
+        <view class="info-prog">
+          <!--<text class="title">进展分数</text>-->
+          <!--<text class="score">{{item.progScore}}分</text>-->
+        </view>
+      </view>
+      <view class="info-extra">
+        <view class="tag-box">
+          <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
+        </view>
+        <view class="score-bar project" wx:if="{{true}}">
+          <view class="score-red" style="width:{{item.projScore * 20}}%"></view>
+          <view class="score-star-box">
+          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
+          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
+          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
+          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
+          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
+          </view>
+        </view>
       </view>
     </navigator>
   </view>
+  <!--<view class="proj-list content-area">-->
+    <!--<navigator url="/pages/projList/projDetail?projId={{item.projId}}" wx:for="{{projList}}" hover-class="navigator-hover">-->
+      <!--<view class="proj-info">-->
+        <!--<image mode="scaleToFill" src="{{item.logoUrl}}"></image>-->
+        <!--<text class="nick-name">{{item.nickName}}</text>-->
+        <!--<text class="proj-title">{{item.name}}</text>-->
+      <!--</view>-->
+    <!--</navigator>-->
+  <!--</view>-->
   <view class="btn-area">
     <button type="primary" bindtap="scanCode">扫一扫</button>
   </view>

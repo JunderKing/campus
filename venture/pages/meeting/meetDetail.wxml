@@ -3,28 +3,28 @@
     {{name}}
   </view>
   <view class="interval-title">
-    火种节导师
+    创投会投资人
   </view>
   <view class="avatar-area">
-    <view class="avatar-box" wx:for="{{mentors}}"> 
+    <view class="avatar-box" wx:for="{{invors}}"> 
       <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delMentor">
+      <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delInvor">
         <view class=""></view>
       </view>
       <text>{{item.nickName}}</text>
     </view>
     <view class="avatar-box"> 
-      <image class="avatar cube" src="../../img/iconadd.png" bindtap="toMentorAdd"></image>
+      <image class="avatar cube" src="../../img/iconadd.png" bindtap="toInvorAdd"></image>
       <text>添加</text>
     </view>
     <view class="avatar-box"> 
-      <image class="avatar cube" src="../../img/icondel.png" data-key="mentor" bindtap="showDel"></image>
+      <image class="avatar cube" src="../../img/icondel.png" data-key="invor" bindtap="showDel"></image>
       <text>删除</text>
     </view>
     <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
   </view>
   <view class="interval-title">
-    火种节项目
+    创投会项目
   </view>
   <view class="proj-list content-area">
     <view class="proj-info" wx:for="{{projList}}">
@@ -38,8 +38,8 @@
   </view>
   <view class="btn-area">
     <button type="primary" bindtap="toProjAdd">添加项目</button>
-    <button type="default" bindtap="toMentorAdd">添加导师</button>
-    <button type="warn" bindtap="delFestival" wx:if="{{role}}">删除火种节</button>
+    <button type="default" bindtap="toInvorAdd">添加投资人</button>
+    <button type="warn" bindtap="delMeeting" wx:if="{{role}}">删除创投会</button>
   </view>
 </view>
 

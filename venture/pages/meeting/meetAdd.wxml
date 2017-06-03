@@ -1,6 +1,6 @@
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="group-title">火种节基本信息(必填)</view>
+    <view class="group-title">创投会基本信息(必填)</view>
     <view class="form-group">
       <view class="form-group small">
         <view class="form-item border">
@@ -8,7 +8,7 @@
             标题
           </view>
           <view class="item-content">
-            <input name="name" type="text" placeholder="请输入火种节标题"/>
+            <input name="name" type="text" placeholder="请输入创投会标题"/>
           </view>
         </view>
         <view class="form-item">
@@ -72,16 +72,16 @@
           地址
         </view>
         <view class="item-content">
-          <input name="addr" type="text" placeholder="请输入火种节地址"/>
+          <input name="addr" type="text" placeholder="请输入创投会地址"/>
         </view>
       </view>
     </view>
     <view class="group-title">
-      火种节简介(必填)
+      创投会简介(必填)
     </view>
     <view class="form-group">
       <view class="form-item">
-        <textarea name="intro" auto-height placeholder="请输入不少于15字的火种节简介" />
+        <textarea name="intro" auto-height placeholder="请输入不少于15字的创投会简介" />
       </view>
     </view>
     <view class="btn-area">

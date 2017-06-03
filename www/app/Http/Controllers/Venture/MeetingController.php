@@ -34,7 +34,7 @@ class MeetingController extends Controller
       'end_time' => $endTime,
       'addr' => $addr,
       'sponsor' => $sponsor,
-      'logo_url' => "http://www.campus.com/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $meetId = $meetObj->meet_id;
     Model\VmUser::where('user_id', $userId)->update(['cur_meet_id' => $meetId]);
@@ -80,18 +80,11 @@ class MeetingController extends Controller
       ->select('user_id', 'avatar_url', 'nick_name')
       ->get()->toArray();
     $projIds = Model\VmMeetProject::where('meet_id', $meetId)->pluck('proj_id');
-    $leaderIds = Model\VmProjMember::whereIn('proj_id', $projIds)
-      ->where('is_leader', 1)
-      ->pluck('user_id');
-    $meetInfo['leaders'] = Model\User::whereIn('user_id', $leaderIds)
-      ->select('user_id', 'avatar_url', 'nick_name')
+    $projList = Model\Project::join('user', 'project.leader_id', '=', 'user.user_id')
+      ->whereIn('project.proj_id', $projIds)
+      ->select('project.proj_id', 'project.name', 'project.logo_url', 'user.avatar_url', 'user.nick_name')
       ->get()->toArray();
-    $memberIds = Model\VmProjMember::whereIn('proj_id', $projIds)
-      ->where('is_leader', 0)
-      ->pluck('user_id');
-    $meetInfo['members'] = Model\User::whereIn('user_id', $memberIds)
-      ->select('user_id', 'avatar_url', 'nick_name')
-      ->get()->toArray();
+    $meetInfo['projList'] = $projList;
     return $this->output(['meetInfo' => $meetInfo]);
   }
 
@@ -119,12 +112,11 @@ class MeetingController extends Controller
       return self::$ERROR1;
     }
     extract($params);
-    $result = DB::transaction(function(){
-      Model\VmMeeting::where('meet_id', $meetId)->delete();
-      Model\VmMeetProject::where('meet_id', $meetId)->delete();
-      Model\VmMeetInvor::where('meet_id', $meetId)->delete();
-    });
-    return $this->output(['deleted' => $result]);
+    Model\VmMeeting::where('meet_id', $meetId)->delete();
+    Model\VmMeetProject::where('meet_id', $meetId)->delete();
+    Model\VmMeetInvor::where('meet_id', $meetId)->delete();
+    Model\VmUser::where('cur_meet_id', $meetId)->update(['cur_meet_id' => 0]);
+    return $this->output(['deleted' => 'success']);
   }
 
   public function addMeetProject(Request $request)
@@ -195,7 +187,7 @@ class MeetingController extends Controller
       ['user_id', '=', $userId],
       ['meet_id', '=', $meetId]
     ];
-    $result = Model\VmMeetMember::where($map)->delete();
+    $result = Model\VmMeetInvor::where($map)->delete();
     return $this->output(['deleted' => $result]);
   }
 }

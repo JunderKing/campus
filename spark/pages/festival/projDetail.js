@@ -28,7 +28,7 @@ Page({
   updateProjInfo: function(){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getProjInfo',
+      url: 'https://www.kingco.tech/api/spark/getProjInfo',
       method: 'POST',
       data: {
         projId: that.data.projId
@@ -52,7 +52,7 @@ Page({
   getComnt: function(){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getComnt',
+      url: 'https://www.kingco.tech/api/spark/getComnt',
       method: 'POST',
       data: {
         projId: this.data.projId
@@ -73,11 +73,11 @@ Page({
   },
 
   showComntMenu: function(e){
-    var comntId = e.currentTarget.dataset.comntId
-    var comntorId = e.currentTarget.dataset.comntorId
+    var comntId = e.currentTarget.dataset.comntid
+    var comntorId = e.currentTarget.dataset.comntorid
     var userId = getApp().gdata.userId
     var that = this
-    if (userId === cmntorid) {
+    if (userId === cmntorId) {
       wx.showActionSheet({
         itemList: ['删除该评论'],
         success: function(res){
@@ -92,7 +92,7 @@ Page({
   delComnt: function(comntId) {
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/delComnt',
+      url: 'https://www.kingco.tech/api/spark/delComnt',
       method: 'POST',
       data: {
         comntId: comntId
@@ -103,7 +103,7 @@ Page({
             title: '评论已删除',
             icon: 'success'
           })
-          that.updateProjInfo()
+          that.updProjInfo()
         }
       }
     })

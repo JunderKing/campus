@@ -4,19 +4,14 @@ Page({
     holder: '',
     content: ''
   },
+
   onLoad: function(options){
     this.setData(options)
     switch (options.type) {
-      case 'progress':
-        this.setData({
-          projId: parseInt(options.projId),
-          stepNum: parseInt(options.stepNum),
-          holder: '请填写图片描述'
-        })
-        break;
       case 'addComnt':
         this.setData({
-          projId: parseInt(options.projId),
+          tarType: parseInt(options.tarType),
+          tarId: parseInt(options.tarId),
           holder: '评论一下...'
         })
         break;
@@ -44,35 +39,19 @@ Page({
       duration: 10000
     })
     switch (this.data.type) {
-      case 'progress':
-        this.updProgContent(content)
-        break;
       case 'addComnt':
         this.addComnt(content)
         break;
       case 'addReply':
         this.addReply(content)
         break;
-      case 'canvas':
-        this.updateCanvas()
-        break;
-      case 'canvas':
-        this.updateCanvas()
-        break;
-      case 'canvas':
-        this.updateCanvas()
-        break;
-      case 'canvas':
-        this.updateCanvas()
-        break;
-      default:
     }
   },
 
   updProgContent: function(content){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/updProgContent',
+      url: 'https://www.kingco.tech/api/venture/updProgContent',
       method: 'POST',
       data: {
         projId: this.data.projId,
@@ -96,11 +75,12 @@ Page({
 
   addComnt: function(content){
     wx.request({
-      url: 'http://www.campus.com/api/spark/addComnt',
+      url: 'https://www.kingco.tech/api/venture/addComnt',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,
-        projId: this.data.projId,
+        tarType: this.data.tarType,
+        tarId: this.data.tarId,
         content: content
       },
       success: function(res){
@@ -123,7 +103,7 @@ Page({
 
   addReply: function(content){
     wx.request({
-      url: 'http://www.campus.com/api/spark/addReply',
+      url: 'https://www.kingco.tech/api/venture/addReply',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,

@@ -53,6 +53,6 @@
     我的徽章
   </view>
   <view class="btn-area">
-    <button type="primary" bindtap="toOrgerAdd" wx:if="{{true || role}}">添加组织者</button>
+    <button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>
   </view>
 </view>

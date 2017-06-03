@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class VmProjScore extends Model
 {
   protected $table = 'vm_proj_score';
-  //protected $primaryKey = '';
+  protected $primaryKey = 'score_id';
   //public $incrementing = true;
   public $timestamps = true;
   protected $guarded = [];

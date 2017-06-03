@@ -151,7 +151,8 @@ class ComntController extends Controller
     extract($params);
     $projScore = Model\SfProjScore::where([['proj_id', $projId], ['grader_id', $userId]])
       ->select('t_score', 'a_score', 'b_score', 'c_score', 'content')
-      ->first()->toArray();
+      ->first();
+    $projScore = is_null($projScore) ? [] : $projScore->toArray();
     return $this->output(['projScore' => $projScore]);
   }
 }

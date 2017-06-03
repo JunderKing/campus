@@ -30,7 +30,7 @@
         <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projCmnt.png"></image>
         <text>评论</text>
       </navigator>
-      <navigator class="icon-box" url="/pages/festival/projScoreAdd?projId={{projId}}" hover-class="navigator-hover" wx:if="{{true || isMentor || role || festId === 1}}">
+      <navigator class="icon-box" url="/pages/festival/projScoreAdd?projId={{projId}}" hover-class="navigator-hover" wx:if="{{isMentor || role || festId === 1}}">
         <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projScore.png"></image>
         <text>打分</text>
       </navigator>
