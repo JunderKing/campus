@@ -59,7 +59,7 @@ Page({
   updateGridInfo: function(content){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/updGridInfo',
+      url: 'http://localhost/campusvc/public/api/speedup/updGridInfo',
       method: 'POST',
       data: {
         gridId: this.data.gridId,
@@ -84,7 +84,7 @@ Page({
   addCmnt: function(formData){
     formData.projid = this.data.projid
     wx.request({
-      url: 'https://www.kingco.tech/speedup/comment/addCmnt',
+      url: 'http://localhost/campusvc/public/speedup/comment/addCmnt',
       method: 'POST',
       data: formData,
       success: function(res){
@@ -97,7 +97,7 @@ Page({
   addReply: function(formData){
     formData.cmntid = this.data.cmntid
     wx.request({
-      url: 'https://www.kingco.tech/speedup/comment/addReply',
+      url: 'http://localhost/campusvc/public/speedup/comment/addReply',
       method: 'POST',
       data: formData,
       success: function(res){

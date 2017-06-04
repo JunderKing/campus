@@ -15,7 +15,7 @@ Page({
     var that = this
     var projId = e.currentTarget.dataset.projid
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/addFestProject',
+      url: 'http://www.campus.com/api/spark/addFestProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,

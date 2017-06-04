@@ -50,7 +50,7 @@ Page({
     }
     var that = this
     wx.request({
-      url: "https://www.kingco.tech/api/spark/getUserFestInfo",
+      url: "http://www.campus.com/api/spark/getUserFestInfo",
       method: 'POST',
       data: {
         userId: getApp().gdata.userId
@@ -81,7 +81,7 @@ Page({
   getAllFestList: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getAllFestList',
+      url: 'http://www.campus.com/api/spark/getAllFestList',
       method: 'GET',
       success: function(res){
         console.log('getAllFestList=>')
@@ -109,7 +109,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/chgCurFestival',
+      url: 'http://www.campus.com/api/spark/chgCurFestival',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,

@@ -39,7 +39,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://www.campus.com/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 1,
@@ -53,7 +53,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/spark_orger.png'
+        var url = 'http://www.campus.com/static/qrcode/spark_orger.png'
         wx.previewImage({
           urls: [url]
         })
@@ -75,7 +75,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getWxcode',
+      url: 'http://www.campus.com/api/common/getWxcode',
       method: 'GET',
       data: {
         type: type,
@@ -89,7 +89,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
+        var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
         var title = '小程序'
         if (type === 1) {
           title = '火种节小程序'

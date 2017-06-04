@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: "https://www.kingco.tech/api/venture/addInvor",
+      url: "http://localhost/campusvc/public/api/venture/addInvor",
       method: 'POST',
       data: {
         userId: userId,

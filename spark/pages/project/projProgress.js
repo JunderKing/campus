@@ -38,7 +38,7 @@ Page({
     console.log('getProgInfo')
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getProgInfo',
+      url: 'http://www.campus.com/api/spark/getProgInfo',
       method: 'GET',
       data: {
         projId: this.data.projId
@@ -83,7 +83,7 @@ Page({
           icon: 'loading'
         })
         wx.uploadFile({
-          url: 'https://www.kingco.tech/api/spark/updProgImage',
+          url: 'http://www.campus.com/api/spark/updProgImage',
           filePath: url,
           name: 'progImage',
           formData: {

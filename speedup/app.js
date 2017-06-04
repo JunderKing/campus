@@ -34,7 +34,7 @@ App({
     console.log('loginData')
     console.log(loginData)
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/login',
+      url: 'http://www.campus.com/api/speedup/login',
       method: 'POST',
       data: loginData,
       success: function (res) {
@@ -85,7 +85,7 @@ App({
   updateUserInfo: function(callback){
     var that = this;
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getUserInfo',
+      url: 'http://www.campus.com/api/speedup/getUserInfo',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
@@ -126,7 +126,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/addOrger',
+      url: 'http://www.campus.com/api/speedup/addOrger',
       method: 'GET',
       data: {
         userId: this.gdata.userId
@@ -161,7 +161,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/addCampMentor',
+      url: 'http://www.campus.com/api/speedup/addCampMentor',
       method: 'POST',
       data: {
         userId: this.gdata.userId,
@@ -192,7 +192,7 @@ App({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getAvlProjList',
+      url: 'http://www.campus.com/api/speedup/getAvlProjList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
@@ -239,7 +239,7 @@ App({
     }
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/addProjMember',
+      url: 'http://www.campus.com/api/speedup/addProjMember',
       method: 'POST',
       data: reqData,
       success: function(res){

@@ -32,7 +32,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "https://www.kingco.tech/api/venture/addMeeting",
+      url: "http://localhost/campusvc/public/api/venture/addMeeting",
       filePath: this.data.logo,
       name: 'meetLogo',
       formData: {

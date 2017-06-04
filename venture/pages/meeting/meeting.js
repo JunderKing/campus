@@ -50,7 +50,7 @@ Page({
     }
     var that = this
     wx.request({
-      url: "https://www.kingco.tech/api/venture/getUserMeetInfo",
+      url: "http://localhost/campusvc/public/api/venture/getUserMeetInfo",
       method: 'POST',
       data: {
         userId: getApp().gdata.userId
@@ -81,7 +81,7 @@ Page({
   getAllMeetList: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/getAllMeetList',
+      url: 'http://localhost/campusvc/public/api/venture/getAllMeetList',
       method: 'GET',
       success: function(res){
         console.log('getAllMeetList=>')
@@ -109,7 +109,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/chgCurMeeting',
+      url: 'http://localhost/campusvc/public/api/venture/chgCurMeeting',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,

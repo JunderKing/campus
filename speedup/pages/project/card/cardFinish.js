@@ -22,7 +22,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/updCardInfo',
+      url: 'http://localhost/campusvc/public/api/speedup/updCardInfo',
       method: 'POST',
       data: {
         cardId: this.data.cardId,

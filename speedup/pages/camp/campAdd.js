@@ -16,7 +16,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "https://www.kingco.tech/api/speedup/addCamp",
+      url: "http://www.campus.com/api/speedup/addCamp",
       filePath: this.data.logo,
       name: 'campLogo',
       formData: {

@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getCampInfo',
+      url: 'http://www.campus.com/api/speedup/getCampInfo',
       method: 'POST',
       data: {
         campId: this.data.campId
@@ -54,7 +54,7 @@ Page({
     })
     var fileName = 'speedup_camp_mentor_' + this.data.campId
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://www.campus.com/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 2,
@@ -68,7 +68,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -89,7 +89,7 @@ Page({
     })
     var fileName = 'speedup_camp_proj_' + this.data.campId
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://www.campus.com/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 2,
@@ -103,7 +103,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -136,7 +136,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/delCampMentor',
+      url: 'http://www.campus.com/api/speedup/delCampMentor',
       method: 'POST',
       data: {
         userId: userId,
@@ -176,7 +176,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'https://www.kingco.tech/api/speedup/delCampProject',
+          url: 'http://www.campus.com/api/speedup/delCampProject',
           method: 'POST',
           data: {
             projId: projId,
@@ -216,7 +216,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'https://www.kingco.tech/api/speedup/delCamp',
+          url: 'http://www.campus.com/api/speedup/delCamp',
           method: 'POST',
           data: {
             campId: that.data.campId

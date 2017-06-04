@@ -27,7 +27,7 @@ class ProjectController extends Controller
     $projObj = Model\Project::create([
       'leader_id' => $userId,
       'name' => $name,
-      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName",
+      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName",
       'province' => 4,
       'tag' => $tag,
       'intro' => $intro,

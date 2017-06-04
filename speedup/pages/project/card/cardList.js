@@ -20,7 +20,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getProjCardList',
+      url: 'http://localhost/campusvc/public/api/speedup/getProjCardList',
       method: 'GET',
       data: {
         projId: this.data.projId

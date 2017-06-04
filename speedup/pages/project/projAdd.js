@@ -35,7 +35,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "https://www.kingco.tech/api/speedup/addProject",
+      url: "http://localhost/campusvc/public/api/speedup/addProject",
       filePath: this.data.logo,
       name: 'projLogo',
       formData: {

@@ -72,7 +72,7 @@ Page({
   updProgContent: function(content){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/updProgContent',
+      url: 'http://www.campus.com/api/spark/updProgContent',
       method: 'POST',
       data: {
         projId: this.data.projId,
@@ -96,7 +96,7 @@ Page({
 
   addComnt: function(content){
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/addComnt',
+      url: 'http://www.campus.com/api/spark/addComnt',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,
@@ -123,7 +123,7 @@ Page({
 
   addReply: function(content){
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/addReply',
+      url: 'http://www.campus.com/api/spark/addReply',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,

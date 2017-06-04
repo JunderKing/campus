@@ -35,7 +35,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "https://www.kingco.tech/api/spark/addProject",
+      url: "http://www.campus.com/api/spark/addProject",
       filePath: this.data.logo,
       name: 'projLogo',
       formData: {

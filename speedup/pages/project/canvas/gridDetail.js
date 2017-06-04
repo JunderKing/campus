@@ -64,7 +64,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getGridInfo',
+      url: 'http://localhost/campusvc/public/api/speedup/getGridInfo',
       method: 'GET',
       data: {
         projId: this.data.projId,
@@ -94,7 +94,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getGridCardList',
+      url: 'http://localhost/campusvc/public/api/speedup/getGridCardList',
       method: 'GET',
       data: {
         projId: this.data.projId,

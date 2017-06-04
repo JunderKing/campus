@@ -26,7 +26,7 @@ Page({
       })
     }
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/getProjInfo',
+      url: 'http://localhost/campusvc/public/api/venture/getProjInfo',
       method: 'GET',
       data: {
         projId: this.data.projId
@@ -52,7 +52,7 @@ Page({
   getProjComnt: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/getProjComnt',
+      url: 'http://localhost/campusvc/public/api/venture/getProjComnt',
       method: 'POST',
       data: {
         projId: this.data.projId
@@ -92,7 +92,7 @@ Page({
   delComnt: function(comntId) {
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/delComnt',
+      url: 'http://localhost/campusvc/public/api/venture/delComnt',
       method: 'POST',
       data: {
         comntId: comntId

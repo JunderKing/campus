@@ -38,7 +38,7 @@ Page({
     console.log('getProgInfo')
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getProgInfo',
+      url: 'http://www.campus.com/api/spark/getProgInfo',
       method: 'GET',
       data: {
         projId: this.data.projId

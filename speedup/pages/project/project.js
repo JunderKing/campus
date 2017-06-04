@@ -30,7 +30,7 @@ Page({
       })
     }
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getUserProjInfo',
+      url: 'http://localhost/campusvc/public/api/speedup/getUserProjInfo',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId
@@ -63,7 +63,7 @@ Page({
   getComnt: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getComnt',
+      url: 'http://localhost/campusvc/public/api/speedup/getComnt',
       method: 'POST',
       data: {
         tarType: 0,
@@ -86,7 +86,7 @@ Page({
   getProjList: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getUserProjList',
+      url: 'http://localhost/campusvc/public/api/speedup/getUserProjList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId
@@ -120,7 +120,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/chgCurProject',
+      url: 'http://localhost/campusvc/public/api/speedup/chgCurProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,
@@ -159,7 +159,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://localhost/campusvc/public/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 2,
@@ -173,7 +173,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://localhost/campusvc/public/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -205,7 +205,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/delProjMember',
+      url: 'http://localhost/campusvc/public/api/speedup/delProjMember',
       method: 'GET',
       data: {
         projId: projId,

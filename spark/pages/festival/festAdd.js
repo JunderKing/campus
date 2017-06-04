@@ -32,7 +32,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "https://www.kingco.tech/api/spark/addFestival",
+      url: "http://www.campus.com/api/spark/addFestival",
       filePath: this.data.logo,
       name: 'festLogo',
       formData: {

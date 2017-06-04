@@ -102,7 +102,7 @@ class ComntController extends Controller
       ->orderBy('vm_proj_score.created_at', 'desc')
       ->get()->toArray();
     $scoreIds = Model\VmProjScore::where('proj_id', $projId)->pluck('score_id');
-    $replies = Model\VmReply::where('tar_type', 1)
+    $replies = Model\VmReply::where('tar_type', 0)
       ->whereIn('tar_id', $scoreIds)
       ->join('user', 'vm_reply.replier_id', '=', 'user.user_id')
       ->select('user.nick_name', 'vm_reply.tar_id', 'vm_reply.content')

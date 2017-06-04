@@ -27,7 +27,7 @@ class ProjectController extends Controller
     $projObj = Model\Project::create([
       'leader_id' => $userId,
       'name' => $name,
-      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName",
+      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName",
       'province' => 4,
       'tag' => $tag,
       'intro' => $intro,
@@ -62,7 +62,7 @@ class ProjectController extends Controller
       if (count($projId) === 0) {
         return $this->output(['projInfo' => ['proj_id' => 0]]);
       }
-      Model\ScUser::where('user_id', $userId)->update(['cur_proj_id' => $projId[0]]);
+      Model\ScUser::where('user_id', $userId)->update(['cur_proj_id' => $projId[0]]);      
     }
     $projInfo = Model\Project::where('proj_id', $projId[0])
       ->select('proj_id', 'leader_id', 'name', 'intro', 'logo_url', 'province', 'tag', 'origin')

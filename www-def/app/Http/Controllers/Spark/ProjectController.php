@@ -27,7 +27,7 @@ class ProjectController extends Controller
     $projObj = Model\Project::create([
       'leader_id' => $userId,
       'name' => $name,
-      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName",
+      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName",
       'province' => 4,
       'tag' => $tag,
       'intro' => $intro,
@@ -230,7 +230,7 @@ class ProjectController extends Controller
     extract($params);
     $fileName = "spark_proj_step" . time() . ".png";
     $result = $request->file('progImage')->storeAs('progress', $fileName, 'public');
-    $imageUrl = "https://www.kingco.tech/storage/progress/$fileName";
+    $imageUrl = "http://localhost/campusvc/public/storage/progress/$fileName";
     $isExist = Model\SfProjProgress::where([['proj_id', $projId], ['step_num', $stepNum]])->count();
     if (!$isExist) {
       Model\SfProjProgress::create([

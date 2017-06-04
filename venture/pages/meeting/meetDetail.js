@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/getMeetInfo',
+      url: 'http://localhost/campusvc/public/api/venture/getMeetInfo',
       method: 'POST',
       data: {
         meetId: this.data.meetId
@@ -54,7 +54,7 @@ Page({
     })
     var fileName = 'venture_meet_invor_' + this.data.meetId
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://localhost/campusvc/public/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 3,
@@ -68,7 +68,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://localhost/campusvc/public/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -89,7 +89,7 @@ Page({
     })
     var fileName = 'venture_meet_proj_' + this.data.meetId
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://localhost/campusvc/public/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 3,
@@ -103,7 +103,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://localhost/campusvc/public/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -136,7 +136,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/venture/delMeetInvor',
+      url: 'http://localhost/campusvc/public/api/venture/delMeetInvor',
       method: 'POST',
       data: {
         userId: userId,
@@ -176,7 +176,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'https://www.kingco.tech/api/venture/delMeetProject',
+          url: 'http://localhost/campusvc/public/api/venture/delMeetProject',
           method: 'POST',
           data: {
             projId: projId,
@@ -216,7 +216,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'https://www.kingco.tech/api/venture/delMeeting',
+          url: 'http://localhost/campusvc/public/api/venture/delMeeting',
           method: 'POST',
           data: {
             meetId: that.data.meetId

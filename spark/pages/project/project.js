@@ -30,7 +30,7 @@ Page({
       })
     }
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getUserProjInfo',
+      url: 'http://www.campus.com/api/spark/getUserProjInfo',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId
@@ -58,7 +58,7 @@ Page({
   getComnt: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getComnt',
+      url: 'http://www.campus.com/api/spark/getComnt',
       method: 'POST',
       data: {
         projId: this.data.projId
@@ -81,7 +81,7 @@ Page({
   getProjList: function(){
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/getUserProjList',
+      url: 'http://www.campus.com/api/spark/getUserProjList',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId
@@ -115,7 +115,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/chgCurProject',
+      url: 'http://www.campus.com/api/spark/chgCurProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,
@@ -154,7 +154,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
+      url: 'http://www.campus.com/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 1,
@@ -168,7 +168,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -200,7 +200,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/spark/delProjMember',
+      url: 'http://www.campus.com/api/spark/delProjMember',
       method: 'GET',
       data: {
         projId: projId,
