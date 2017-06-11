@@ -1,434 +1,434 @@
 CampusVc({
-  'login': {},
-  'getQrcode': {}
+    'login': {},
+    'getQrcode': {}
 })
 SparkFestival({
-  'login': {
-    post: {
-      code: 'string',
-      rawData: 'string',
-      iv: 'string'
-      type: 'spark|speedup|venture|campus'
+    'login': {
+        post: {
+            code: 'string',
+            rawData: 'string',
+            iv: 'string'
+            type: 'spark|speedup|venture|campus'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            userInfo: {
+                uid: 'int',
+                avatar: 'string',
+                nickName: 'string',
+                cpRole: 'int',
+                sfRole: 'int',
+                curFestid: 'int',
+                isMentor: 'int',
+                isCaptain: 'int'
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      userInfo: {
-        uid: 'int',
-        avatar: 'string',
-        nickName: 'string',
-        cpRole: 'int',
-        sfRole: 'int',
-        curFestid: 'int',
-        isMentor: 'int',
-        isCaptain: 'int'
-      }
-    }
-  },
-  'getUserInfo': {
-    post: {
-      uid: 'int',
+    'getUserInfo': {
+        post: {
+            uid: 'int',
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            userInfo: {
+                uid: 'int',
+                avatar: 'string',
+                nickName: 'string',
+                cpRole: 'int',
+                sfRole: 'int',
+                curFestid: 'int',
+                isMentor: 'int',
+                isCaptain: 'int'
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      userInfo: {
-        uid: 'int',
-        avatar: 'string',
-        nickName: 'string',
-        cpRole: 'int',
-        sfRole: 'int',
-        curFestid: 'int',
-        isMentor: 'int',
-        isCaptain: 'int'
-      }
-    }
-  },
-  'getQrcode': {
-    post: {
-      path: 'string',
-      name: 'string'
+    'getQrcode': {
+        post: {
+            path: 'string',
+            name: 'string'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            name: 'string'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      name: 'string'
-    }
-  },
-  'changeCurFest' : {
-    post: {
-      uid: 'int',
-      festid: 'int'
+    'changeCurFest' : {
+        post: {
+            uid: 'int',
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+            curFestid: 'int'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-      curFestid: 'int'
-    }
-  },
-  'addSfOrger': {
-    post: {
-      uid: 'int'
+    'addSfOrger': {
+        post: {
+            uid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delSfOrger': {
-    post: {
-      uid: 'int'
+    'delSfOrger': {
+        post: {
+            uid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'addFestMentor': {
-    post: {
-      uid: 'int',
-      festid: 'int'
+    'addFestMentor': {
+        post: {
+            uid: 'int',
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delFestMentor': {
-    post: {
-      uid: 'int'
-      festid: 'int'
+    'delFestMentor': {
+        post: {
+            uid: 'int'
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'addFestCaptain': {
-    post: {
-      uid: 'int'
-      festid: 'int'
+    'addFestCaptain': {
+        post: {
+            uid: 'int'
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delFestCaptain': {
-    post: {
-      uid: 'int'
-      festid: 'int'
+    'delFestCaptain': {
+        post: {
+            uid: 'int'
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'addProjMember': {
-    post: {
-      uid: 'int'
-      projid: 'int'
+    'addProjMember': {
+        post: {
+            uid: 'int'
+            projid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delProjMember': {
-    post: {
-      uid: 'int'
-      projid: 'int'
+    'delProjMember': {
+        post: {
+            uid: 'int'
+            projid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delFestMember: {
-    post: {
-      uid: 'int'
-      festid: 'int'
+    'delFestMember': {
+        post: {
+            uid: 'int'
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'getFestUserInfo': {
-    post: {
-      festid: 'int'
+    'getFestUserInfo': {
+        post: {
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            festUserInfo: {
+                mentors: [{
+                    uid: 'int',
+                    avatar: 'url',
+                    nickName: 'string'
+                }],
+                captains: [{
+                    uid: 'int',
+                    avatar: 'url',
+                    ncikName: 'string'
+                }],
+                members: [{
+                    uid: 'uid',
+                    avatar: 'url',
+                    nickName: 'string'
+                }]
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      festUserInfo: {
-        mentors: [{
-          uid: 'int',
-          avatar: 'url',
-          nickName: 'string'
-        }],
-        captains: [{
-          uid: 'int',
-          avatar: 'url',
-          ncikName: 'string'
-        }],
-        members: [{
-          uid: 'uid',
-          avatar: 'url',
-          nickName: 'string'
-        }]
-      }
-    }
-  },
-  'addFest': {
-    post: {
-      uid: 'int',
-      title: 'string',
-      intro: 'string',
-      addr: 'string',
-      stime: 'int',
-      etime: 'int'
+    'addFest': {
+        post: {
+            uid: 'int',
+            title: 'string',
+            intro: 'string',
+            addr: 'string',
+            stime: 'int',
+            etime: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            festid: 'int'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      festid: 'int'
-    }
-  },
-  'getFestInfo': {
-    post: {
-      festid: 'int'
+    'getFestInfo': {
+        post: {
+            festid: 'int'
+        },
+        success: {
+            errcode: '0',
+            errmsg: 'success',
+            festInfo: {
+                title: 'string',
+                intro: 'string',
+                addr: 'string',
+                logos: [{
+                    logoid: 'int',
+                    url: 'string'
+                }],
+                stime: 'int',
+                etime: 'inte'
+            }
+        }
     },
-    success: {
-      errcode: '0',
-      errmsg: 'success',
-      festInfo: {
-        title: 'string',
-        intro: 'string',
-        addr: 'string',
-        logos: [{
-          logoid: 'int',
-          url: 'string'
-        }],
-        stime: 'int',
-        etime: 'inte'
-      }
-    }
-  },
-  'getAllFests': {
-    get: null,
-    success: {
-      errcode: '0',
-      errmsg: 'success',
-      allFests: [{
-        festid: 'int',
-        title: 'string'
-      }]
-    }
-  },
-  'updateFestInfo': {
-    post: {
-      festid: 'int',
-      festInfo: {
-        key: value
-      }
+    'getAllFests': {
+        get: null,
+        success: {
+            errcode: '0',
+            errmsg: 'success',
+            allFests: [{
+                festid: 'int',
+                title: 'string'
+            }]
+        }
     },
-    success: {
-      errcode: '0',
-      errmsg: 'success'
-    }
-  },
-  'getFestProjInfo': {
-    post: {
-      festid: 'int'
+    'updateFestInfo': {
+        post: {
+            festid: 'int',
+            festInfo: {
+                key: value
+            }
+        },
+        success: {
+            errcode: '0',
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 'int',
-      errmsg: 'success',
-      projInfo: {
-        projid: 'int',
-        title: 'string',
-        intro: 'string',
-        members: [{
-          avatar: 'url',
-          nickName: 'string'
-        }]
-      }
-    }
-  },
-  'addProj': {
-    post: {
-      uid: 'int',
-      festid: 'int',
-      title: 'string',
-      intro: 'string',
+    'getFestProjInfo': {
+        post: {
+            festid: 'int'
+        },
+        success: {
+            errcode: 'int',
+            errmsg: 'success',
+            projInfo: {
+                projid: 'int',
+                title: 'string',
+                intro: 'string',
+                members: [{
+                    avatar: 'url',
+                    nickName: 'string'
+                }]
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      projid: 'int'
-    }
-  },
-  'getUserProjInfo': {
-    post: {
-      uid: 'int',
-      festid: 'int'
+    'addProj': {
+        post: {
+            uid: 'int',
+            festid: 'int',
+            title: 'string',
+            intro: 'string',
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            projid: 'int'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      projInfo: {
-        captainid: 'int',
-        title: 'string',
-        intro: 'string',
-        members: [{
-          uid: 'int',
-          avatar: 'string',
-          nickName: 'string'
-        }]
-      }
-    }
-  },
-  'getProjInfo': {
-    post: {
-      projid: 'int'
+    'getUserProjInfo': {
+        post: {
+            uid: 'int',
+            festid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            projInfo: {
+                captainid: 'int',
+                title: 'string',
+                intro: 'string',
+                members: [{
+                    uid: 'int',
+                    avatar: 'string',
+                    nickName: 'string'
+                }]
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      projInfo: {
-        captainid: 'int',
-        title: 'string',
-        intro: 'string',
-        members: [{
-          uid: 'int',
-          avatar: 'string',
-          nickName: 'string'
-        }]
-      }
-    }
-  },
-  'updateProjInfo': {
-    post: {
-      projid: 'int',
-      projInfo: {
-        title: 'string',
-        intro: 'string'
-      }
+    'getProjInfo': {
+        post: {
+            projid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            projInfo: {
+                captainid: 'int',
+                title: 'string',
+                intro: 'string',
+                members: [{
+                    uid: 'int',
+                    avatar: 'string',
+                    nickName: 'string'
+                }]
+            }
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'getProjProgInfo': {
-    post: {
-      projid: 'int'
+    'updateProjInfo': {
+        post: {
+            projid: 'int',
+            projInfo: {
+                title: 'string',
+                intro: 'string'
+            }
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      progInfo: [{
-        stepid: 'int',
-        url: 'url',
-        desc: 'string'
-      }]
-    }
-  },
-  'updateProjProgImg': {
-    post: {
-      projid: 'int',
-      stepid: 'int',
-      file: 'file'
+    'getProjProgInfo': {
+        post: {
+            projid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            progInfo: [{
+                stepid: 'int',
+                url: 'url',
+                desc: 'string'
+            }]
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      name: 'string'
-    }
-  },
-  'updateProjProgDesc': {
-    post: {
-      projid: 'int',
-      stepid: 'int',
-      desc: 'string'
+    'updateProjProgImg': {
+        post: {
+            projid: 'int',
+            stepid: 'int',
+            file: 'file'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            name: 'string'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'addProjCmnt': {
-    post: {
-      projid: 'int',
-      content: 'string'
+    'updateProjProgDesc': {
+        post: {
+            projid: 'int',
+            stepid: 'int',
+            desc: 'string'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'delProjCmnt': {
-    post: {
-      uid: 'int',
-      cmntid: 'int'
+    'addProjCmnt': {
+        post: {
+            projid: 'int',
+            content: 'string'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'addProjScore': {
-    post: {
-      uid: 'int',
-      projid: 'int',
-      tscore: 'int',
-      ascore: 'int',
-      bscore: 'int',
-      cscore: 'int',
-      cmnt: 'string'
+    'delProjCmnt': {
+        post: {
+            uid: 'int',
+            cmntid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
-    }
-  },
-  'getProjCmnt': {
-    post: {
-      projid: 'int'
+    'addProjScore': {
+        post: {
+            uid: 'int',
+            projid: 'int',
+            tscore: 'int',
+            ascore: 'int',
+            bscore: 'int',
+            cscore: 'int',
+            cmnt: 'string'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success',
-      cmnts: [{
-        uid: 'int',
-        avatar: 'url',
-        nickName: 'string',
-        cmntid: 'int',
-        content: 'string',
-        replies: [{
-          uid: 'int',
-          nickName: 'string',
-          replyid: 'int',
-          targetReplyid: 'int',
-          targetNickName: 'string',
-          content: 'string'
-        }]
-      }]
-    }
-  },
-  'addCmntReply': {
-    post: {
-      uid: 'int',
-      cmntid: 'int',
-      targetid: 'int',
-      content: 'string'
+    'getProjCmnt': {
+        post: {
+            projid: 'int'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success',
+            cmnts: [{
+                uid: 'int',
+                avatar: 'url',
+                nickName: 'string',
+                cmntid: 'int',
+                content: 'string',
+                replies: [{
+                    uid: 'int',
+                    nickName: 'string',
+                    replyid: 'int',
+                    targetReplyid: 'int',
+                    targetNickName: 'string',
+                    content: 'string'
+                }]
+            }]
+        }
     },
-    success: {
-      errcode: 0,
-      errmsg: 'success'
+    'addCmntReply': {
+        post: {
+            uid: 'int',
+            cmntid: 'int',
+            targetid: 'int',
+            content: 'string'
+        },
+        success: {
+            errcode: 0,
+            errmsg: 'success'
+        }
     }
-  }
 })
 SpeedupCamp({})
 VentureMeeting({})

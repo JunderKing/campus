@@ -1,10 +1,50 @@
 <view class="container">
-  <view class="page-title">
-    创业项目
-  </view>
-  <view class="btn-area">
-    <navigator url="/pages/projList/projAdd" hover-class="navigator-hover">
-      <button type="primary" size="">投递项目</button>
-    </navigator>
-  </view>
+    <view class="page-title">
+        创业项目
+    </view>
+    <view class="header-nav">
+        <view class="nav-item {{type === 0 ? 'cur' : ''}}" data-type="0" bindtap="chgProjList">
+            所有项目
+        </view>
+        <view class="nav-item {{type === 1 ? 'cur' : ''}}" data-type="1" bindtap="chgProjList">
+            火种节
+        </view>
+        <view class="nav-item {{type === 2 ? 'cur' : ''}}" data-type="2" bindtap="chgProjList">
+            加速营
+        </view>
+        <view class="nav-item {{type === 3 ? 'cur' : ''}}" data-type="3" bindtap="chgProjList">
+            创投会
+        </view>
+        <view class="nav-item {{type === 4 ? 'cur' : ''}}" data-type="4" bindtap="chgProjList">
+            其它项目
+        </view>
+    </view>
+    <view class="main-hint" wx:if="{{!projList[0]}}">
+        暂无项目
+    </view>
+    <view class="proj-list-box content-area" wx:else >
+        <navigator class="proj-list-item" url="/pages/projList/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&isMentor={{isMentor}}" wx:for="{{projList}}" hover-class="navigator-hover">
+            <view class="info-main">
+                <view class="info-logo">
+                    <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
+                </view>
+                <view class="info-text">
+                    <text class="title">{{item.nickName}}</text>
+                    <text class="content">{{item.name}}</text>
+                </view>
+                <view class="info-prog">
+                </view>
+            </view>
+            <view class="info-extra">
+                <view class="tag-box">
+                    <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="btn-area">
+        <navigator url="/pages/projList/projAdd" hover-class="navigator-hover">
+            <button type="primary" size="">投递项目</button>
+        </navigator>
+    </view>
 </view>

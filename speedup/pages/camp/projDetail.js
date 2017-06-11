@@ -29,7 +29,7 @@ Page({
       })
     }
     wx.request({
-      url: 'http://www.campus.com/api/speedup/getProjInfo',
+      url: 'https://www.kingco.tech/api/speedup/getProjInfo',
       method: 'GET',
       data: {
         projId: this.data.projId

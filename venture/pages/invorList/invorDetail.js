@@ -16,7 +16,7 @@ Page({
   getInvorInfo: function(){
     var that = this
     wx.request({
-      url: 'http://localhost/campusvc/public/api/venture/getInvorInfo',
+      url: 'https://www.kingco.tech/api/venture/getInvorInfo',
       method: 'GET',
       data: {
         invorId: this.data.invorId
@@ -35,7 +35,7 @@ Page({
   getInvorComnt: function(){
     var that = this
     wx.request({
-      url: 'http://localhost/campusvc/public/api/venture/getInvorComnt',
+      url: 'https://www.kingco.tech/api/venture/getInvorComnt',
       method: 'POST',
       data: {
         invorId: this.data.invorId

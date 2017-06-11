@@ -20,7 +20,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/speedup/getCardInfo',
+      url: 'https://www.kingco.tech/api/speedup/getCardInfo',
       method: 'GET',
       data: {
         cardId: this.data.cardId
@@ -48,7 +48,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/speedup/delCard',
+      url: 'https://www.kingco.tech/api/speedup/delCard',
       method: 'GET',
       data: {
         cardId: this.data.cardId

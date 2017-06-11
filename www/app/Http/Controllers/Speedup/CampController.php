@@ -28,7 +28,7 @@ class CampController extends Controller
       'name' => $name,
       'intro' => $intro,
       'sponsor' => $sponsor,
-      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $campId = $campObj->camp_id;
     Model\ScUser::where('user_id', $userId)->update(['cur_camp_id' => $campId]);

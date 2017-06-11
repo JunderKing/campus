@@ -28,7 +28,7 @@ Page({
   updateProjInfo: function(){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getProjInfo',
+      url: 'https://www.kingco.tech/api/spark/getProjInfo',
       method: 'POST',
       data: {
         projId: that.data.projId
@@ -52,7 +52,7 @@ Page({
   getComnt: function(){
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/getComnt',
+      url: 'https://www.kingco.tech/api/spark/getComnt',
       method: 'POST',
       data: {
         projId: this.data.projId
@@ -92,7 +92,7 @@ Page({
   delComnt: function(comntId) {
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/delComnt',
+      url: 'https://www.kingco.tech/api/spark/delComnt',
       method: 'POST',
       data: {
         comntId: comntId

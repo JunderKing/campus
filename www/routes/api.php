@@ -23,6 +23,18 @@ Route::group(['prefix' => 'common', 'namespace' => 'Common'], function(){
   Route::any('getWxcode', 'UserController@getWxcode');
 });
 
+Route::group(['prefix' => 'campus', 'namespace' => 'Campus'], function(){
+  Route::any('getProjList', 'ProjectController@getProjList');
+  Route::any('addProject', 'ProjectController@addProject');
+  Route::any('getProjInfo', 'ProjectController@getProjInfo');
+  Route::any('delProject', 'ProjectController@delProject');
+  Route::any('addPost', 'PostController@addPost');
+  Route::any('delPost', 'PostController@delPost');
+  Route::any('getPostInfo', 'PostController@getPostInfo');
+  Route::any('getPostList', 'PostController@getPostList');
+});
+
+
 Route::group(['prefix' => 'spark', 'namespace' => 'Spark'], function(){
   //UserController
   Route::any('login', 'UserController@login');

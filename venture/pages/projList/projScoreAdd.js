@@ -28,7 +28,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/venture/getProjScore',
+      url: 'https://www.kingco.tech/api/venture/getProjScore',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
@@ -67,7 +67,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: "http://localhost/campusvc/public/api/venture/updProjScore",
+      url: "https://www.kingco.tech/api/venture/updProjScore",
       method: 'POST',
       data: {
         projId: this.data.projId,

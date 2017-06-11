@@ -1,0 +1,42 @@
+<view class="container">
+    <view class="page-title">
+        资源库
+    </view>
+    <view class="main-hint" wx:if="{{!postList[0]}}">
+        暂无资源
+    </view>
+    <view class="post-container" wx:else >
+        <view class="post-area" wx:for="{{postList}}" >
+            <navigator url="/pages/postList/postDetail?postId={{item.postId}}" hover-class="navigator-hover">
+                <view class="post-header">
+                    <view class="post-avatar-box">
+                        <image src="{{item.avatarUrl}}"></image>
+                    </view>
+                    <view class="info-box">
+                        <view>{{item.nickName}}</view>
+                        <view class="post-time">{{item.createdAt}}</view>
+                    </view>
+                    <view class="tail-box">
+
+                    </view>
+                </view>
+                <view class="post-content">
+                    {{item.content}}
+                </view>
+            </navigator>
+            <view class="post-image" wx:if="{{item.images[0]}}">
+                <image src="{{imageUrl}}" mode="aspectFill" wx:for="{{item.images}}" wx:for-item="imageUrl" data-cur="{{imageUrl}}" data-urls="{{item.images}}" bindtap="preview"></image>
+                <view class="item-anchor"> </view>
+                <view class="item-anchor"> </view>
+            </view>
+            <view class="post-footer">
+                <!--<image src="{{src}}"></image>-->
+            </view>
+        </view>
+    </view>
+    <view class="btn-area">
+        <navigator url="/pages/postList/postAdd" hover-class="navigator-hover">
+            <button type="primary">发布资源</button>
+        </navigator>
+    </view>
+</view>

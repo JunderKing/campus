@@ -15,7 +15,7 @@ Page({
     var that = this
     var projId = e.currentTarget.dataset.projid
     wx.request({
-      url: 'http://localhost/campusvc/public/api/venture/addMeetProject',
+      url: 'https://www.kingco.tech/api/venture/addMeetProject',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId,

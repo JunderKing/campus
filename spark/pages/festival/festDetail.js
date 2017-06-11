@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/spark/getFestInfo',
+      url: 'https://www.kingco.tech/api/spark/getFestInfo',
       method: 'POST',
       data: {
         festId: this.data.festId
@@ -54,7 +54,7 @@ Page({
     })
     var fileName = 'spark_fest_mentor_' + this.data.festId
     wx.request({
-      url: 'http://www.campus.com/api/common/getQrcode',
+      url: 'https://www.kingco.tech/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 1,
@@ -68,7 +68,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -89,7 +89,7 @@ Page({
     })
     var fileName = 'spark_fest_proj_' + this.data.festId
     wx.request({
-      url: 'http://www.campus.com/api/common/getQrcode',
+      url: 'https://www.kingco.tech/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 1,
@@ -103,7 +103,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+        var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
         wx.previewImage({
           urls: [url]
         })
@@ -136,7 +136,7 @@ Page({
     })
     var that = this
     wx.request({
-      url: 'http://www.campus.com/api/spark/delFestMentor',
+      url: 'https://www.kingco.tech/api/spark/delFestMentor',
       method: 'POST',
       data: {
         userId: userId,
@@ -176,7 +176,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'http://www.campus.com/api/spark/delFestProject',
+          url: 'https://www.kingco.tech/api/spark/delFestProject',
           method: 'POST',
           data: {
             projId: projId,
@@ -216,7 +216,7 @@ Page({
           duration: 10000
         })
         wx.request({
-          url: 'http://www.campus.com/api/spark/delFestival',
+          url: 'https://www.kingco.tech/api/spark/delFestival',
           method: 'POST',
           data: {
             festId: that.data.festId

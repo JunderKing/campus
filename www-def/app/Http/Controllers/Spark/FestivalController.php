@@ -34,7 +34,7 @@ class FestivalController extends Controller
       'start_time' => $startTime,
       'end_time' => $endTime,
       'addr' => $addr,
-      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $festId = $festObj->fest_id;
     Model\SfUser::where('user_id', $userId)->update(['cur_fest_id' => $festId]);

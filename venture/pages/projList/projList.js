@@ -11,7 +11,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/venture/getMeetProjList',
+      url: 'https://www.kingco.tech/api/venture/getMeetProjList',
       method: 'POST',
       data: {
         userId: getApp().gdata.userId

@@ -34,7 +34,7 @@ class MeetingController extends Controller
       'end_time' => $endTime,
       'addr' => $addr,
       'sponsor' => $sponsor,
-      'logo_url' => "http://localhost/campusvc/public/storage/logo/$fileName" 
+      'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
     ]);
     $meetId = $meetObj->meet_id;
     Model\VmUser::where('user_id', $userId)->update(['cur_meet_id' => $meetId]);

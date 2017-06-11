@@ -35,7 +35,7 @@ Page({
       duration: 10000
     })
     wx.uploadFile({
-      url: "http://www.campus.com/api/spark/addProject",
+      url: "https://www.kingco.tech/api/campus/addProject",
       filePath: this.data.logo,
       name: 'projLogo',
       formData: {
@@ -43,8 +43,7 @@ Page({
         name: formData.name,
         province: this.data.provinceId,
         tag: formData.tag,
-        intro: formData.intro,
-        festId: this.data.festId
+        intro: formData.intro
       },
       success: function(res){
         wx.hideToast()
@@ -55,7 +54,7 @@ Page({
           return getApp().showError(3)
         }
         wx.switchTab({
-          url: '/pages/project/project',
+          url: '/pages/projList/projList',
           success: function(){
             wx.showToast({
               title: '项目创建成功!'

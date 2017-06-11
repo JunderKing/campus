@@ -21,7 +21,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/speedup/getGridLog',
+      url: 'https://www.kingco.tech/api/speedup/getGridLog',
       method: 'GET',
       data: {
         gridId: this.data.gridId

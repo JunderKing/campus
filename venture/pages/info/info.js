@@ -39,7 +39,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/common/getQrcode',
+      url: 'https://www.kingco.tech/api/common/getQrcode',
       method: 'GET',
       data: {
         type: 3,
@@ -53,7 +53,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://localhost/campusvc/public/static/qrcode/venture_orger.png'
+        var url = 'https://www.kingco.tech/static/qrcode/venture_orger.png'
         wx.previewImage({
           urls: [url]
         })
@@ -75,7 +75,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://localhost/campusvc/public/api/common/getWxcode',
+      url: 'https://www.kingco.tech/api/common/getWxcode',
       method: 'GET',
       data: {
         type: type,
@@ -89,7 +89,7 @@ Page({
         if (res.statusCode !== 200 || res.data.errcode !== 0) {
           return getApp().showError(3)
         }
-        var url = 'http://localhost/campusvc/public/static/wxcode/' + fileName + '.png'
+        var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
         var title = '小程序'
         if (type === 1) {
           title = '创投会小程序'

@@ -1,44 +1,47 @@
 {
-  "pages": [
-    "pages/include/start",
-    "pages/include/comnForm",
-    "pages/projList/projList",
-    "pages/projList/projAdd",
-    "pages/postList/postList",
-    "pages/info/info"
-  ],
-  "window": {
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "校园VC",
-    "backgroundColor": "#99C72F",
-    "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": "true"
-  },
-  "tabBar": {
-    "color": "#888",
-    "selectedColor": "#99C72F",
-    "backgroundColor": "#fff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/projList/projList",
-        "text": "项目",
-        "iconPath": "img/icon/list_def.png",
-        "selectedIconPath": "img/icon/list_cur.png"
-      },{
-        "pagePath": "pages/postList/postList",
-        "text": "发现",
-        "iconPath": "img/icon/proj_def.png",
-        "selectedIconPath": "img/icon/proj_cur.png"
-      },  {
-        "pagePath": "pages/info/info",
-        "text": "小程序",
-        "iconPath": "img/icon/info_def.png",
-        "selectedIconPath": "img/icon/info_cur.png"
-      }
-
+    "pages": [
+        "pages/include/start",
+        "pages/include/comnForm",
+        "pages/projList/projList",
+        "pages/projList/projAdd",
+        "pages/projList/projDetail",
+        "pages/postList/postList",
+        "pages/postList/postAdd",
+        "pages/postList/postDetail",
+        "pages/info/info"
     ],
-    "position": "bottom"
-  }
+    "window": {
+        "navigationBarBackgroundColor": "#000",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "校园VC",
+        "backgroundColor": "#fff",
+        "backgroundTextStyle": "dark",
+        "enablePullDownRefresh": "false"
+    },
+    "tabBar": {
+        "color": "#888",
+        "selectedColor": "#0F913A",
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/projList/projList",
+                "text": "项目",
+                "iconPath": "img/icon/list_def.png",
+                "selectedIconPath": "img/icon/list_cur.png"
+            },{
+            "pagePath": "pages/postList/postList",
+            "text": "资源库",
+            "iconPath": "img/icon/proj_def.png",
+            "selectedIconPath": "img/icon/proj_cur.png"
+            },  {
+            "pagePath": "pages/info/info",
+            "text": "小程序",
+            "iconPath": "img/icon/info_def.png",
+            "selectedIconPath": "img/icon/info_cur.png"
+            }
+
+        ],
+        "position": "bottom"
+    }
 }
