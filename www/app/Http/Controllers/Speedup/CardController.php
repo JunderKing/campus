@@ -28,6 +28,19 @@ class CardController extends Controller
     return $this->output(['cardId'=>$cardId]);
   }
 
+  public function delCard(Request $request)
+  {
+    $params = $this->validation($request, [
+      'cardId' => 'required|numeric'
+    ]);
+    if ($params === false) {
+      return self::$ERROR1;
+    }
+    extract($params);
+    $result = Model\ScProjCard::find($cardId)->delete();
+    return $this->output(['deleted' => $result]);
+  }
+
   public function updCardInfo(Request $request)
   {
     $params = $this->validation($request, [
@@ -40,6 +53,20 @@ class CardController extends Controller
     extract($params);
     $result = Model\ScProjCard::where('card_id', $cardId)->update($cardInfo);
     return $this->output(['temp' => $result]);
+  }
+
+  public function getCardInfo(Request $request)
+  {
+    $params = $this->validation($request, [
+      'cardId' => 'required|numeric'
+    ]);
+    if ($params === false) {
+      return self::$ERROR1;
+    }
+    extract($params);
+    $cardInfo = Model\ScProjCard::select('card_id', 'title', 'assumption', 'result', 'status', 'created_at')
+      ->find($cardId)->toArray();
+    return $this->output(['cardInfo' => $cardInfo]);
   }
 
   public function getGridCardList(Request $request)
@@ -84,32 +111,5 @@ class CardController extends Controller
       ->orderBy('created_at', 'desc')
       ->get()->toArray();
     return $this->output(['cardList' => $cardList]);
-  }
-
-  public function getCardInfo(Request $request)
-  {
-    $params = $this->validation($request, [
-      'cardId' => 'required|numeric'
-    ]);
-    if ($params === false) {
-      return self::$ERROR1;
-    }
-    extract($params);
-    $cardInfo = Model\ScProjCard::select('card_id', 'title', 'assumption', 'result', 'status', 'created_at')
-      ->find($cardId)->toArray();
-    return $this->output(['cardInfo' => $cardInfo]);
-  }
-
-  public function delCard(Request $request)
-  {
-    $params = $this->validation($request, [
-      'cardId' => 'required|numeric'
-    ]);
-    if ($params === false) {
-      return self::$ERROR1;
-    }
-    extract($params);
-    $result = Model\ScProjCard::find($cardId)->delete();
-    return $this->output(['deleted' => $result]);
   }
 }

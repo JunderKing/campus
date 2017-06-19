@@ -32,7 +32,7 @@ Page({
     addPost: function(timeId, content){
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/campus/addPost',
+            url: 'http://www.campus.com/api/campus/addPost',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId,
@@ -62,7 +62,7 @@ Page({
     uploadFile: function(index, imageUrl, timeId, content){
         var that = this
         wx.uploadFile({
-            url: "https://www.kingco.tech/api/campus/addPost",
+            url: "http://www.campus.com/api/campus/addPost",
             filePath: imageUrl,
             name: 'postImage',
             formData: {

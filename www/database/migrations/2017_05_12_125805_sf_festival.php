@@ -16,6 +16,7 @@ class SfFestival extends Migration
         Schema::create('sf_festival', function (Blueprint $table) {
             $table->increments('fest_id');
             $table->unsignedInteger('orger_id')->default(0);
+            $table->unsignedInteger('school_id')->default(0);
             $table->string('name', 32)->default('');
             $table->string('intro', 500)->default('');
             $table->string('addr', 32)->default('');

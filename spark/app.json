@@ -1,52 +1,53 @@
 {
-  "pages": [
-    "pages/include/start",
-    "pages/project/project",
-    "pages/project/projChoose",
-    "pages/project/projAdd",
-    "pages/project/projProgress",
-    "pages/festival/projScoreAdd",
-    "pages/include/comnForm",
-    "pages/festival/festival",
-    "pages/info/info",
-    "pages/festival/festAdd",
-    "pages/festival/festDetail",
-    "pages/festival/projDetailProg",
-    "pages/festival/projDetail"
-  ],
-  "window": {
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "火种节",
-    "backgroundColor": "#ffffff",
-    "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": "true"
-  },
-  "tabBar": {
-    "color": "#000",
-    "selectedColor": "#d81e06",
-    "backgroundColor": "#fff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/project/project",
-        "text": "我的项目",
-        "iconPath": "img/project.png",
-        "selectedIconPath": "img/project2.png"
-      },
-      {
-        "pagePath": "pages/festival/festival",
-        "text": "火种节",
-        "iconPath": "img/festival.png",
-        "selectedIconPath": "img/festival2.png"
-      },
-      {
-        "pagePath": "pages/info/info",
-        "text": "我的信息",
-        "iconPath": "img/info.png",
-        "selectedIconPath": "img/info2.png"
-      }
+    "pages": [
+        "pages/include/start",
+        "pages/include/qrpage",
+        "pages/project/project",
+        "pages/project/projChoose",
+        "pages/project/projAdd",
+        "pages/project/projProgress",
+        "pages/festival/projScoreAdd",
+        "pages/include/comnForm",
+        "pages/festival/festival",
+        "pages/info/info",
+        "pages/festival/festAdd",
+        "pages/festival/festDetail",
+        "pages/festival/projDetailProg",
+        "pages/festival/projDetail"
     ],
-    "position": "bottom"
-  }
+    "window": {
+        "navigationBarBackgroundColor": "#000",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "火种节",
+        "backgroundColor": "#ffffff",
+        "backgroundTextStyle": "dark",
+        "enablePullDownRefresh": "true"
+    },
+    "tabBar": {
+        "color": "#000",
+        "selectedColor": "#d12c1a",
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/project/project",
+                "text": "我的项目",
+                "iconPath": "img/icon/project_def.png",
+                "selectedIconPath": "img/icon/project_cur.png"
+            },
+            {
+                "pagePath": "pages/festival/festival",
+                "text": "火种节",
+                "iconPath": "img/icon/spark_def.png",
+                "selectedIconPath": "img/icon/spark_cur.png"
+            },
+            {
+                "pagePath": "pages/info/info",
+                "text": "我的信息",
+                "iconPath": "img/icon/info_def.png",
+                "selectedIconPath": "img/icon/info_cur.png"
+            }
+        ],
+        "position": "bottom"
+    }
 }

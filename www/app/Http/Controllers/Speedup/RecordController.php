@@ -49,6 +49,13 @@ class RecordController extends Controller
     }
     extract($params);
     $result = Model\ScProjRecord::create(['proj_id' => $projId, 'date' => $date, 'content' => $content]);
+        $isCampProject = Model\ScCampProject::where('proj_id', $projId)->count();
+        $recordNum = Model\ScProjRecord::where('proj_id', $projId)->count();
+        if ($isCampProject && $recordNum >= 12) {
+            $memberIds = Model\ProjMember::where('proj_id', $projId)->pluck('user_id');
+            Model\User::whereIn('user_id', $memberIds)->where('stage', '<', 3)->update(['stage' => 3]);
+            Model\User::whereIn('user_id', $memberIds)->where('campStage', '<', 3)->update(['campStage' => 3]);
+        }
     return $this->output(['temp' => $result]);
   }
 

@@ -1,118 +1,121 @@
 Page({
-  data: {
-    avatarUrl: '',
-    nickName: '',
-    roleStr: '',
-    role: 0
-  },
+    data: {
+        avatarUrl: '',
+        nickName: '',
+        roleStr: '',
+        role: 0
+    },
 
-  onShow: function(){
-    var gdata = getApp().gdata
-    var roleStr = '创业者'
-    if (gdata.role === 1) {
-      roleStr = '管理员'
-    } else if (gdata.meetRole === 1){
-      roleStr = '组织者'
-    } else if (gdata.isInvor === 1) {
-      roleStr = '创业投资人'
-    }
-    this.setData({
-      avatarUrl: gdata.avatarUrl,
-      nickName: gdata.nickName,
-      roleStr: roleStr,
-      role: gdata.role
-    })
-  },
-
-  onShareAppMessage: function(){
-    return {
-      title: '创投会小程序',
-      path: '/pages/projList/projList'
-    }
-  },
-
-  toOrgerAdd: function(){
-    var that = this
-    wx.showToast({
-      title: '数据加载中...',
-      icon: 'loading',
-      duration: 10000
-    })
-    wx.request({
-      url: 'https://www.kingco.tech/api/common/getQrcode',
-      method: 'GET',
-      data: {
-        type: 3,
-        name: 'venture_orger',
-        path: '/pages/include/start?role=4'
-      },
-      success: function(res){
-        console.log('getQrcode=>')
-        console.log(res)
-        wx.hideToast()
-        if (res.statusCode !== 200 || res.data.errcode !== 0) {
-          return getApp().showError(3)
+    onShow: function(){
+        getApp().updateUserInfo()
+        var gdata = getApp().gdata
+        var roleStr = '创业者'
+        if (gdata.role === 1) {
+            roleStr = '管理员'
+        } else if (gdata.schoolId === 1){
+            roleStr = '组织者'
+        } else if (gdata.isInvor === 1) {
+            roleStr = '创业导师'
         }
-        var url = 'https://www.kingco.tech/static/qrcode/venture_orger.png'
-        wx.previewImage({
-          urls: [url]
+        this.setData({
+            avatarUrl: gdata.avatarUrl,
+            nickName: gdata.nickName,
+            stage: gdata.stage,
+            meetStage: gdata.meetStage,
+            campStage: gdata.campStage,
+            meetStage: gdata.meetStage,
+            roleStr: roleStr,
+            role: gdata.role
         })
-      },
-      fail: function(){
-        wx.hideToast()
-        return getApp().showError(2)
-      }
-    })
-  },
+    },
 
-  toWxcode: function(e){
-    var type = parseInt(e.currentTarget.dataset.type)
-    var fileName = 'wxcode' + type
-    var that = this
-    wx.showToast({
-      title: '数据加载中',
-      icon: 'loading',
-      duration: 10000
-    })
-    wx.request({
-      url: 'https://www.kingco.tech/api/common/getWxcode',
-      method: 'GET',
-      data: {
-        type: type,
-        name: fileName,
-        path: '/pages/include/start'
-      },
-      success: function(res){
-        console.log('getWxcode=>')
-        console.log(res)
-        wx.hideToast()
-        if (res.statusCode !== 200 || res.data.errcode !== 0) {
-          return getApp().showError(3)
+    onShareAppMessage: function(){
+        return {
+            title: '创投会小程序',
+            path: '/pages/include/start'
         }
-        var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
-        var title = '小程序'
-        if (type === 1) {
-          title = '创投会小程序'
-        } else if (type === 2) {
-          title = '加速营小程序'
-        } else {
-          title = '创投会小程序'
-        }
-        wx.showModal({
-          title: title,
-          content: '页面跳转后，点击右上角菜单，选择『识别图中二维码』即可打开小程序',
-          showCancel: false,
-          success: function(){
-            wx.previewImage({
-              urls: [url]
-            })
-          }
+    },
+
+    toOrgerAdd: function(){
+        var that = this
+        wx.showToast({
+            title: '数据加载中...',
+            icon: 'loading',
+            duration: 10000
         })
-      },
-      fail: function(){
-        wx.hideToast()
-        return getApp().showError(2)
-      }
-    })
-  }
+        wx.request({
+            url: 'http://www.campus.com/api/campus/getQrcode',
+            method: 'GET',
+            data: {
+                appType: 3,
+                name: 'venture_orger',
+                path: '/pages/include/start?role=4'
+            },
+            success: function(res){
+                console.log('getQrcode=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return getApp().showError(3)
+                }
+                wx.hideToast()
+                var url = 'http://www.campus.com/static/qrcode/venture_orger.png'
+                wx.previewImage({
+                    urls: [url]
+                })
+            },
+            fail: function(){
+                return getApp().showError(2)
+            }
+        })
+    },
+
+    toWxcode: function(e){
+        var appType = parseInt(e.currentTarget.dataset.type)
+        var fileName = 'wxcode' + appType
+        var that = this
+        wx.showToast({
+            title: '数据加载中',
+            icon: 'loading',
+            duration: 10000
+        })
+        wx.request({
+            url: 'http://www.campus.com/api/campus/getWxcode',
+            method: 'GET',
+            data: {
+                appType: appType,
+                name: fileName,
+                path: '/pages/include/start'
+            },
+            success: function(res){
+                console.log('getWxcode=>')
+                console.log(res)
+                wx.hideToast()
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return getApp().showError(3)
+                }
+                var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
+                var title = '小程序'
+                if (appType === 1) {
+                    title = '火种节小程序'
+                } else if (appType === 2) {
+                    title = '加速营小程序'
+                } else {
+                    title = '创投会小程序'
+                }
+                wx.showModal({
+                    title: title,
+                    content: '页面跳转后，长按或点击右上角菜单，选择『识别图中小程序码』即可打开小程序',
+                    showCancel: false,
+                    success: function(){
+                        wx.previewImage({
+                            urls: [url]
+                        })
+                    }
+                })
+            },
+            fail: function(){
+                return getApp().showError(2)
+            }
+        })
+    }
 })

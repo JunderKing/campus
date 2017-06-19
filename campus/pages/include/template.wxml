@@ -1,53 +1,24 @@
 <template name="comment">
-  <view class="comment-area" wx:if="{{comnts[0]||scores[0]}}">
-    <view class="comment-title">
-      <text>所有评论：</text>
+    <view class="comment-area" wx:if="{{comnts[0]||scores[0]}}">
+        <view class="comment-title">
+            <text>所有评论：</text>
+        </view>
+        <view class="comment-box" wx:for="{{comnts}}" wx:key="cmntid" data-comntorid="{{item.comntorId}}" data-comntid="{{item.comntId}}" bindlongtap="showComntMenu">
+            <image class="avatar" src="{{item.avatarUrl}}"></image>
+            <view class="content-box">
+                <text class="nick-name">{{item.nickName}}</text>
+                <text class="content">{{item.content}}</text>
+                <view class="comment-btn-box">
+                    <text class="comment-time">{{item.updatedAt}}</text>
+                    <navigator class="reply-btn" data-id="{{item.comntId}}" url="/pages/include/comnForm?type=addReply&comntId={{item.comntId}}">回复</navigator>
+                </view>
+                <view class="reply-area">
+                    <view class="reply-box" wx:for="{{item.replies}}" wx:key="replierid">
+                        <text class="nick-name">{{item.nickName}}：</text>
+                        <text class="content"  data-id="{{item.cmntid}}">{{item.content}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
-
-    <view class="comment-box" wx:for="{{scores}}" wx:key="cmntid" data-comntorid="{{item.comntorId}}" data-comntid="{{item.comntId}}" bindlongtap="showComntMenu">
-      <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="content-box">
-        <text class="nick-name">{{item.nickName}}</text>
-        <view class="score-bar">
-          <view class="score-red" style="width:{{(item.tScore + item.aScore + item.bScore + item.cScore) / 0.2}}%"></view>
-          <view class="score-star-box">
-          <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:18px;height:20px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          </view>
-        </view>        
-        <text class="content">{{item.content}}</text>
-        <view class="comment-btn-box">
-          <text class="comment-time">{{item.createdAt}}</text>
-          <navigator class="reply-btn" data-id="{{item.comntId}}" url="/pages/include/comnForm?type=addReply&tarType=1&tarId={{item.scoreId}}">回复</navigator>
-        </view>
-        <view class="reply-area">
-          <view class="reply-box" wx:for="{{item.replies}}" wx:key="replierid">
-            <text class="nick-name">{{item.nickName}}：</text>
-            <text class="content"  data-id="{{item.cmntid}}">{{item.content}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="comment-box" wx:for="{{comnts}}" wx:key="cmntid" data-comntorid="{{item.comntorId}}" data-comntid="{{item.comntId}}" bindlongtap="showComntMenu">
-      <image class="avatar" src="{{item.avatarUrl}}"></image>
-      <view class="content-box">
-        <text class="nick-name">{{item.nickName}}</text>
-        <text class="content">{{item.content}}</text>
-        <view class="comment-btn-box">
-          <text class="comment-time">{{item.createdAt}}</text>
-          <navigator class="reply-btn" data-id="{{item.comntId}}" url="/pages/include/comnForm?type=addReply&tarType=0&tarId={{item.comntId}}">回复</navigator>
-        </view>
-        <view class="reply-area">
-          <view class="reply-box" wx:for="{{item.replies}}" wx:key="replierid">
-            <text class="nick-name">{{item.nickName}}：</text>
-            <text class="content"  data-id="{{item.cmntid}}">{{item.content}}</text>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
 </template>

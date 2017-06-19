@@ -1,51 +1,51 @@
 <view class="container">
-  <view class="page-title">
-    {{name}}
-  </view>
-  <view class="logo-area">
-    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
-  </view>
-  <view class="interval-title">
-    活动简介
-  </view>
-  <view class="content-area">
-    <text class="para">{{intro}}</text>
-  </view>
-  <view class="interval-title">
-    项目列表
-  </view>
-  <view class="main-hint" wx:if="{{!projList[0]}}">
-    本次活动还没有项目
-  </view>
-  <view class="proj-list-box content-area" wx:else >
-    <navigator class="proj-list-item" url="/pages/camp/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&&hidden={{hidden}}" wx:for="{{projList}}" hover-class="navigator-hover">
-      <view class="info-main">
-        <view class="info-logo">
-        <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
-        </view>
-        <view class="info-text">
-          <text class="title">{{item.nickName}}</text>
-          <text class="content">{{item.name}}</text>
-        </view>
-        <view class="info-prog">
-          <!--<text class="title">进展分数</text>-->
-          <!--<text class="score">{{item.progScore}}分</text>-->
-        </view>
-      </view>
-      <view class="info-extra">
-        <view class="tag-box">
-          <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
-        </view>
-      </view>
-    </navigator>
-  </view>
-  <view class="btn-area">
-    <navigator url="/pages/camp/campAdd" hover-class="navigator-hover">
-      <button type="primary" size="default" wx:if="{{role||campRole}}">创建加速营</button>
-    </navigator>
-    <navigator url="/pages/camp/campDetail?campId={{campId}}" hover-class="navigator-hover">
-      <button type="{{role||campRole ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||campId===1}}">管理加速营</button>
-    </navigator>
-    <picker class="btn-style {{role||campRole||orgerId===userId||campId===1 ? 'default' : 'primary'}}" mode="selector" range="{{campList}}" range-key="name" bindchange="onCampChange">切换加速营</picker>
-  </view>
+    <view class="page-title">
+        {{name}}
+    </view>
+    <view class="logo-area">
+        <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+    </view>
+    <view class="interval-title">
+        活动简介
+    </view>
+    <view class="content-area">
+        <text class="para">{{intro}}</text>
+    </view>
+    <view class="interval-title">
+        项目列表
+    </view>
+    <view class="main-hint" wx:if="{{!projList[0]}}">
+        本次活动还没有项目
+    </view>
+    <view class="proj-list-box content-area" wx:else >
+        <navigator class="proj-list-item" url="/pages/camp/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&&hidden={{hidden}}" wx:for="{{projList}}" hover-class="navigator-hover">
+            <view class="info-main">
+                <view class="info-logo">
+                    <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
+                </view>
+                <view class="info-text">
+                    <text class="title">{{item.nickName}}</text>
+                    <text class="content">{{item.name}}</text>
+                </view>
+                <view class="info-prog">
+                    <text class="title">进展分数</text>
+                    <text class="score">{{item.projScore}}分</text>
+                </view>
+            </view>
+            <view class="info-extra">
+                <view class="tag-box">
+                    <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="btn-area">
+        <navigator url="/pages/camp/campAdd" hover-class="navigator-hover">
+            <button type="primary" size="default" wx:if="{{role||campId}}">创建加速营</button>
+        </navigator>
+        <navigator url="/pages/camp/campDetail?campId={{campId}}" hover-class="navigator-hover">
+            <button type="{{role||campId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||campId===1}}">管理加速营</button>
+        </navigator>
+        <picker class="btn-style {{role||campId||orgerId===userId||campId===1 ? 'default' : 'primary'}}" mode="selector" range="{{campList}}" range-key="name" bindchange="onCampChange">切换加速营</picker>
+    </view>
 </view>

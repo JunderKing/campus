@@ -1,70 +1,70 @@
 <view class="container">
-  <form bindsubmit="formSubmit" bindreset="formReset">
-    <view class="group-title">
-      请打分
-    </view>
-    <view class="form-group">
-      <view class="form-item border">
-        <view class="item-title">
-          总体分数
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class="group-title">
+            请打分
         </view>
-        <view class="item-content">
-          <image class="score" mode="aspectFit" src="/img/star{{tScore>=1 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="1" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{tScore>=2 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="2" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{tScore>=3 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="3" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{tScore>=4 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="4" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{tScore==5 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="5" bindtap="setScore"></image>
+        <view class="form-group">
+            <view class="form-item border">
+                <view class="item-title">
+                    总体分数
+                </view>
+                <view class="item-content">
+                    <image class="score" mode="aspectFit" src="/img/star{{tScore>=1 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="1" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{tScore>=2 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="2" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{tScore>=3 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="3" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{tScore>=4 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="4" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{tScore==5 ? 'red' : 'gray'}}.png" data-name="tScore" data-score="5" bindtap="setScore"></image>
+                </view>
+            </view>
         </view>
-      </view>
-    </view>
-    <view class="form-group" wx:if="{{tScore}}">
-      <view class="form-item">
-        <view class="item-title">
-          创始团队
+        <view class="form-group" wx:if="{{tScore}}">
+            <view class="form-item">
+                <view class="item-title">
+                    创始团队
+                </view>
+                <view class="item-content">
+                    <image class="score" mode="aspectFit" src="/img/star{{aScore>=1 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="1" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{aScore>=2 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="2" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{aScore>=3 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="3" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{aScore>=4 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="4" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{aScore==5 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="5" bindtap="setScore"></image>
+                </view>
+            </view>
+            <view class="form-item">
+                <view class="item-title">
+                    项目方向
+                </view>
+                <view class="item-content">
+                    <image class="score" mode="aspectFit" src="/img/star{{bScore>=1 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="1" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{bScore>=2 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="2" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{bScore>=3 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="3" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{bScore>=4 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="4" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{bScore==5 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="5" bindtap="setScore"></image>
+                </view>
+            </view>
+            <view class="form-item">
+                <view class="item-title">
+                    跟进意向
+                </view>
+                <view class="item-content">
+                    <image class="score" mode="aspectFit" src="/img/star{{cScore>=1 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="1" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{cScore>=2 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="2" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{cScore>=3 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="3" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{cScore>=4 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="4" bindtap="setScore"></image>
+                    <image class="score" mode="aspectFit" src="/img/star{{cScore==5 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="5" bindtap="setScore"></image>
+                </view>
+            </view>
         </view>
-        <view class="item-content">
-          <image class="score" mode="aspectFit" src="/img/star{{aScore>=1 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="1" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{aScore>=2 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="2" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{aScore>=3 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="3" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{aScore>=4 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="4" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{aScore==5 ? 'red' : 'gray'}}.png" data-name="aScore" data-score="5" bindtap="setScore"></image>
+        <view class="group-title">
+            请填写评语
         </view>
-      </view>
-      <view class="form-item">
-        <view class="item-title">
-          项目方向
+        <view class="form-group">
+            <view class="form-item">
+                <textarea class="" name="content" placeholder="评论一下吧……" value="{{content}}" auto-height />
+            </view>
         </view>
-        <view class="item-content">
-          <image class="score" mode="aspectFit" src="/img/star{{bScore>=1 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="1" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{bScore>=2 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="2" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{bScore>=3 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="3" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{bScore>=4 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="4" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{bScore==5 ? 'red' : 'gray'}}.png" data-name="bScore" data-score="5" bindtap="setScore"></image>
+        <view class="btn-area">
+            <button formType="submit" type="primary" size="default">提交</button>
         </view>
-      </view>
-      <view class="form-item">
-        <view class="item-title">
-          跟进意向
-        </view>
-        <view class="item-content">
-          <image class="score" mode="aspectFit" src="/img/star{{cScore>=1 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="1" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{cScore>=2 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="2" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{cScore>=3 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="3" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{cScore>=4 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="4" bindtap="setScore"></image>
-          <image class="score" mode="aspectFit" src="/img/star{{cScore==5 ? 'red' : 'gray'}}.png" data-name="cScore" data-score="5" bindtap="setScore"></image>
-        </view>
-      </view>
-    </view>
-    <view class="group-title">
-      请填写评语
-    </view>
-    <view class="form-group">
-      <view class="form-item">
-        <textarea class="" name="content" placeholder="评论一下吧……" value="{{content}}" auto-height />
-      </view>
-    </view>
-    <view class="btn-area">
-      <button formType="submit" type="primary" size="default">提交</button>
-    </view>
-  </form>
+    </form>
 </view>

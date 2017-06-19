@@ -14,15 +14,13 @@ class SfProjScore extends Migration
     public function up()
     {
         Schema::create('sf_proj_score', function (Blueprint $table) {
-          $table->increments('score_id');
-          $table->unsignedInteger('proj_id')->default(0);
+          $table->unsignedInteger('comnt_id')->default(0);
           $table->unsignedInteger('grader_id')->default(0);
           $table->unsignedTinyInteger('t_score')->default(0);
           $table->unsignedTinyInteger('a_score')->default(0);
           $table->unsignedTinyInteger('b_score')->default(0);
           $table->unsignedTinyInteger('c_score')->default(0);
-          $table->string('content', 500)->default('');
-          $table->unique(['grader_id', 'proj_id']);
+          $table->primary(['grader_id', 'comnt_id']);
           $table->timestamps();
         });
     }

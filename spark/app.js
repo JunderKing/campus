@@ -1,24 +1,31 @@
 App({
     onLaunch: function (options) {
         console.log('AppOnLaunch')
-        console.log(options)
     },
 
     login: function (options) {
+        console.log('loginOptions=>')
+        console.log(options)
+        wx.showToast({
+            title: '数据处理中...',
+            icon: 'loading',
+            duration: 10000
+        })
         var that = this
         wx.login({
             success: function (res) {
                 if (!res.code) {
                     return that.showError(1)
                 }
-                var loginData = {}
-                loginData.code = res.code
+                var loginData = {
+                    code: res.code
+                }
                 wx.getUserInfo({
                     withCredentials: true,
                     success: function (res) {
                         loginData.iv = res.iv
                         loginData.rawData = res.encryptedData
-                        loginData.type = 1
+                        loginData.appType = 1
                         that.getUserInfo(loginData, options)
                     }
                 })
@@ -30,15 +37,15 @@ App({
     },
 
     getUserInfo: function (loginData, options) {
-        var that = this;
-        console.log('loginData')
+        var that = this
+        console.log('loginData=>')
         console.log(loginData)
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/login',
+            url: 'http://www.campus.com/api/campus/login',
             method: 'POST',
             data: loginData,
             success: function (res) {
-                console.log('UserInfo=>')
+                console.log('login=>')
                 console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return that.showError(3)
@@ -58,53 +65,36 @@ App({
         })
     },
 
-    showError: function(errcode){
-        var errmsg = ''
-        switch (errcode) {
-            case 1:
-                errmsg = '获取授权失败，请重试'
-                break;
-            case 2:
-                errmsg = '接口调用失败，请重试'
-                break;
-            case 3:
-                errmsg = '网络错误，请重试'
-                break;
-            case 4:
-                errmsg = '数据错误，请重试'
-                break;
-            default:
-                errmsg = '未知错误'
-        }
-        wx.showToast({
-            title: errmsg,
-            icon: 'loading'
-        })
-    },
-
     updateUserInfo: function(callback){
         var that = this;
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/getUserInfo',
+            url: 'http://www.campus.com/api/campus/getUserInfo',
             method: 'POST',
             data: {
-                userId: this.gdata.userId,
+                appType: 1,
+                userId: this.gdata.userId
             },
             success: function(res){
                 console.log('getUserInfo=>')
-                console.log(res.data)
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return that.showError(3)
+                }
                 that.gdata = res.data.userInfo;
-                if (callback) { callback() }
+                if (callback) {
+                    callback()
+                }
             }
         })
     },
 
     checkOption: function(options, isLoading, callback){
         options.role = parseInt(options.role)
+        options.schoolId = parseInt(options.schoolId)
         options.festId = parseInt(options.festId)
         options.projId = parseInt(options.projId)
         if (options.role === 4) {
-            this.addOrger(isLoading, callback)
+            this.addOrger(options.schoolId, isLoading, callback)
         } else if (options.role === 3 && options.festId > 0) {
             this.addMentor(options.festId, isLoading, callback)
         } else if (options.role === 2 && options.festId > 0) {
@@ -118,88 +108,94 @@ App({
         }
     },
 
-    addOrger: function(isLoading, callback){
-        wx.showToast({
-            title: '数据处理中...',
-            icon: 'loading',
-            duration: 10000
-        })
+    addOrger: function(schoolId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/addOrger',
+            url: 'http://www.campus.com/api/campus/addOrger',
             method: 'GET',
             data: {
+                appType: 1,
+                schoolId: schoolId,
                 userId: this.gdata.userId
             },
             success: function(res){
+                console.log('addOrger=>')
+                console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return that.showError(3)
                 }
-                that.gdata.festRole = 1
+                that.gdata.schoolId = 1
                 if (callback) {
                     callback()
                 }
-                wx.switchTab({
-                    url: '/pages/project/project',
-                    success: function(){
-                        wx.showToast({
-                            title: '恭喜您成为组织者!',
-                            icon: 'success'
-                        })
-                    }
-                })
+                if (isLoading) {
+                    wx.switchTab({
+                        url: '/pages/project/project',
+                        success: function(){
+                            wx.showToast({
+                                title: '恭喜您成为组织者!',
+                                icon: 'success'
+                            })
+                        }
+                    })
+                } else {
+                    wx.showToast({
+                        title: '恭喜您成为组织者!',
+                        icon: 'success'
+                    })
+                }
             }
         })
     },
 
     addMentor: function(festId, isLoading, callback){
-        console.log('addMentor')
-        wx.showToast({
-            title: '数据处理中...',
-            icon: 'loading',
-            duration: 10000
-        })
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/addFestMentor',
+            url: 'http://www.campus.com/api/spark/addFestMentor',
             method: 'POST',
             data: {
                 userId: this.gdata.userId,
                 festId: festId
             },
             success: function(res){
+                console.log('addMentorSuccess=>')
+                console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return that.showError(3)
                 }
                 that.gdata.isMentor = 1
-                wx.switchTab({
-                    url: '/pages/project/project',
-                    success: function(){
-                        wx.showToast({
-                            title: '恭喜您成为火种节导师!'
-                        })
-                    }
-                })
+                if (isLoading) {
+                    wx.switchTab({
+                        url: '/pages/project/project',
+                        success: function(){
+                            wx.showToast({
+                                title: '恭喜您成为火种节导师!',
+                                icon: 'success'
+                            })
+                        }
+                    })
+                } else {
+                    wx.showToast({
+                        title: '恭喜您成为火种节导师!',
+                        icon: 'success'
+                    })
+                }
             }
         })
     },
 
     addProject: function(festId, isLoading, callback){
-        wx.showToast({
-            title: '数据处理中...',
-            icon: 'loading',
-            duration: 10000
-        })
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/getAvlProjList',
+            url: 'http://www.campus.com/api/campus/getAvlProjList',
             method: 'GET',
             data: {
-                userId: getApp().gdata.userId,
-                festId: festId
+                appType: 1,
+                actId: festId,
+                userId: getApp().gdata.userId
             },
             success: function(res){
-                console.log('getUserProjList=>')
+                console.log('getAvlProjList=>')
                 console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
@@ -208,6 +204,10 @@ App({
                 wx.switchTab({
                     url: '/pages/project/project',
                     success: function(){
+                        wx.showToast({
+                            title: '数据加载中...',
+                            icon: 'loading'
+                        })
                         if (projList.length === 0) {
                             wx.navigateTo({
                                 url: '/pages/project/projAdd?festId=' + festId
@@ -228,21 +228,18 @@ App({
     },
 
     addMember: function(projId, isLoading, callback){
-        wx.showToast({
-            title: '数据处理中...',
-            icon: 'loading',
-            duration: 10000
-        })
-        var reqData = {
-            userId: this.gdata.userId,
-            projId: projId
-        }
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/spark/addProjMember',
+            url: 'http://www.campus.com/api/campus/addProjMember',
             method: 'POST',
-            data: reqData,
+            data: {
+                appType: 1,
+                userId: this.gdata.userId,
+                projId: projId
+            },
             success: function(res){
+                console.log('addProjMember Success=>')
+                console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return that.showError(3)
                 }
@@ -263,7 +260,6 @@ App({
     },
 
     qrScan: function(callback){
-        console.log('qrScan')
         var that = this
         wx.scanCode({
             success: function(res){
@@ -299,16 +295,39 @@ App({
         return provinceList[index]
     },
 
+    showError: function(errcode){
+        var errmsg = ''
+        switch (errcode) {
+            case 1:
+                errmsg = '获取授权失败，请重试'
+                break;
+            case 2:
+                errmsg = '接口调用失败，请重试'
+                break;
+            case 3:
+                errmsg = '网络错误，请重试'
+                break;
+            case 4:
+                errmsg = '数据错误，请重试'
+                break;
+            default:
+                errmsg = '未知错误'
+        }
+        wx.showToast({
+            title: errmsg,
+            icon: 'loading'
+        })
+    },
+
     gdata: {
-        userId: 1,
+        userId: 0,
         avatarUrl: '',
         nickName: '',
         role: 0,
-        festRole: 0,
+        schoolId: 0,
         curFestId: 0,
         curProjId: 0,
         isMentor: 0,
         avlProjList: []
     }
 })
-

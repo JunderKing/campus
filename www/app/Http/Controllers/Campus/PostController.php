@@ -30,7 +30,6 @@ class PostController extends Controller
         }
         $fileName = "campus_post_$imageNum" . '_' . time() . ".png";
         $result = $request->file('postImage')->storeAs('postImage', $fileName, 'public');
-        //echo $result;
         $postObj = Model\Post::updateOrCreate(
             ['user_id' => $userId, 'time_id' => $timeId],
             ['content' => $content]
@@ -38,23 +37,9 @@ class PostController extends Controller
         $postIdArr = Model\Post::where([['user_id', $userId], ['time_id', $timeId]])
             ->pluck('post_id')->toArray();
         $postId = $postIdArr[0];
-        //echo $imageNum;
-        //$isExist = Model\PostImage::where([['post_id', $postId], ['image_num', $imageNum]])
-            //->count();
-        //echo $isExist;
-        //if ($isExist > 0) {
-            //Model\PostImage::where([['post_id', $postId], ['image_num', $imageNum]])
-                //->update(['image_url' => "https://www.kingco.tech/storage/postImage/$fileName"]);
-        //} else {
-            //Model\PostImage::create([
-                //'post_id' => $postId,
-                //'image_num' => $imageNum,
-                //'image_url' => "https://www.kingco.tech/storage/postImage/$fileName"
-            //]);
-        //}
         $result = Model\PostImage::updateOrCreate(
             ['post_id' => $postId, 'image_num' => $imageNum],
-            ['image_url' => "https://www.kingco.tech/storage/postImage/$fileName"]
+            ['image_url' => "http://www.campus.com/storage/postImage/$fileName"]
         );
         return $this->output(['postId' => $postId]);
     }

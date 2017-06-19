@@ -1,3 +1,5 @@
+<import src="../include/template.wxml" />
+
 <view class="container">
     <view class="page-title">
       资源细节
@@ -27,7 +29,16 @@
             <!--<image src="{{src}}"></image>-->
         </view>
     </view>
+    <template is="comment" data="{{comnts: comnts}}"/>
     <view class="btn-area">
         <button type="warn" bindtap="delPost">删除资源</button>
+    </view>
+    <view class="bottom-anchor">
+        <view class="bottom-float">
+            <navigator class="icon-box" url="/pages/include/comnForm?type=addComnt&tarType=42&tarId={{postId}}" hover-class="navigator-hover">
+                <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/icon/comnt.png"></image>
+                <text>评论</text>
+            </navigator>
+        </view>
     </view>
 </view>

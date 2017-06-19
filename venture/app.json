@@ -1,60 +1,61 @@
 {
-  "pages": [
-    "pages/include/start",
-    "pages/include/comnForm",
-    "pages/projList/projList",
-    "pages/invorList/invorList",
-    "pages/invorList/invorAdd",
-    "pages/invorList/invorDetail",
-    "pages/invorList/invorScoreAdd",
-    "pages/projList/projDetail",
-    "pages/projList/projAdd",
-    "pages/projList/projScoreAdd",
-    "pages/projList/projChoose",
-    "pages/meeting/meeting",
-    "pages/meeting/meetAdd",
-    "pages/meeting/meetDetail",
-    "pages/info/info"
-  ],
-  "window": {
-    "navigationBarBackgroundColor": "#000",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "",
-    "backgroundColor": "#ffffff",
-    "backgroundTextStyle": "dark",
-    "enablePullDownRefresh": "true"
-  },
-  "tabBar": {
-    "color": "#000",
-    "selectedColor": "#17A362",
-    "backgroundColor": "#fff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/projList/projList",
-        "text": "创业项目",
-        "iconPath": "img/icon/proj_def.png",
-        "selectedIconPath": "img/icon/proj_cur.png"
-      },
-      {
-        "pagePath": "pages/invorList/invorList",
-        "text": "投资人",
-        "iconPath": "img/icon/invest_def.png",
-        "selectedIconPath": "img/icon/invest_cur.png"
-      },
-      {
-        "pagePath": "pages/meeting/meeting",
-        "text": "创投会",
-        "iconPath": "img/icon/venture_def.png",
-        "selectedIconPath": "img/icon/venture_cur.png"
-      },
-      {
-        "pagePath": "pages/info/info",
-        "text": "我的信息",
-        "iconPath": "img/icon/info_def.png",
-        "selectedIconPath": "img/icon/info_cur.png"
-      }
+    "pages": [
+        "pages/include/start",
+        "pages/include/qrpage",
+        "pages/include/comnForm",
+        "pages/projList/projList",
+        "pages/invorList/invorList",
+        "pages/invorList/invorAdd",
+        "pages/invorList/invorDetail",
+        "pages/invorList/invorScoreAdd",
+        "pages/projList/projDetail",
+        "pages/projList/projAdd",
+        "pages/projList/projScoreAdd",
+        "pages/projList/projChoose",
+        "pages/meeting/meeting",
+        "pages/meeting/meetAdd",
+        "pages/meeting/meetDetail",
+        "pages/info/info"
     ],
-    "position": "bottom"
-  }
+    "window": {
+        "navigationBarBackgroundColor": "#000",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "",
+        "backgroundColor": "#ffffff",
+        "backgroundTextStyle": "dark",
+        "enablePullDownRefresh": "true"
+    },
+    "tabBar": {
+        "color": "#000",
+        "selectedColor": "#18a362",
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
+        "list": [
+            {
+                "pagePath": "pages/projList/projList",
+                "text": "创业项目",
+                "iconPath": "img/icon/proj_def.png",
+                "selectedIconPath": "img/icon/proj_cur.png"
+            },
+            {
+                "pagePath": "pages/invorList/invorList",
+                "text": "投资人",
+                "iconPath": "img/icon/invest_def.png",
+                "selectedIconPath": "img/icon/invest_cur.png"
+            },
+            {
+                "pagePath": "pages/meeting/meeting",
+                "text": "创投会",
+                "iconPath": "img/icon/venture_def.png",
+                "selectedIconPath": "img/icon/venture_cur.png"
+            },
+            {
+                "pagePath": "pages/info/info",
+                "text": "我的信息",
+                "iconPath": "img/icon/info_def.png",
+                "selectedIconPath": "img/icon/info_cur.png"
+            }
+        ],
+        "position": "bottom"
+    }
 }

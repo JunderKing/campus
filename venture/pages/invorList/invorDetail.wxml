@@ -18,10 +18,10 @@
   <view class="bottom-anchor">
     <view class="bottom-float">
       <navigator class="icon-box" url="/pages/include/comnForm?type=addComnt&tarType=1&tarId={{invorId}}" hover-class="navigator-hover">
-        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projCmnt.png"></image>
+        <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/icon/comnt.png"></image>
         <text>评论</text>
       </navigator>
-      <navigator class="icon-box" url="/pages/invorList/invorScoreAdd?invorId={{invorId}}" hover-class="navigator-hover" wx:if="{{true || isInvor || role || festId === 1}}">
+      <navigator class="icon-box" url="/pages/invorList/invorScoreAdd?invorId={{invorId}}" hover-class="navigator-hover" wx:if="{{true || isInvor || role || meetId === 1}}">
         <image style="width: 3.5vh; height: 3.5vh;" mode="aspectFit" src="/img/projScore.png"></image>
         <text>打分</text>
       </navigator>

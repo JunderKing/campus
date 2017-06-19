@@ -1,5 +1,5 @@
 view.canvas-area{
-  height: calc(100vh - 50px);
+  height: calc(100vh - 61px);
   display: inline-flex;
   width: 100%;
   flex-flow: column nowrap;
@@ -21,6 +21,21 @@ view.canvas-row{
   justify-content: center;
   align-items: center;
   border: 1px solid #f0f0f0;
+  position: relative;
+}
+.canvas-item>text.card-num {
+    position: absolute;
+    display: inline-block;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    line-height: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 8px;
+    background-color: red;
+    text-align: center;
+    color: #fff;
 }
 navigator.canvas-item{
   width: 50%;
@@ -39,5 +54,6 @@ navigator.canvas-item{
   word-wrap: break-word;
   color: #888;
   position: absolute;
+  z-index: 2;
   background-color: #fff;
 }

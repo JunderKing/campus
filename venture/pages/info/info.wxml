@@ -1,58 +1,58 @@
 <view class="container-white">
-  <view class="info-area">
-    <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
-    <view class="info-text">
-      <text class="text-big">{{nickName}}</text>
-      <text class="text-def">{{roleStr}}</text>
+    <view class="info-area">
+        <image class="avatar info" mode="scaleToFill" src="{{avatarUrl}}"></image>
+        <view class="info-text">
+            <text class="text-big">{{nickName}}</text>
+            <text class="text-def">{{roleStr}}</text>
+        </view>
     </view>
-  </view>
-  <view class="interval-title">
-    我的成长
-  </view>
-  <view class="growth-line">
-    <view class="growth-cursor">
-      <image mode="widthFix" src="../../img/icon/running.png"></image>
+    <view class="interval-title">
+        我的成长
     </view>
-    <view class="line active"></view>
-    <view class="dot active"></view>
-    <view class="line {{stage > 1 ? active : ''}}"></view>
-    <view class="dot {{stage > 1 ? active : ''}}"></view>
-    <view class="line {{stage > 1 ? active : ''}}"></view>
-    <view class="dot {{stage > 1 ? active : ''}}"></view>
-    <view class="line {{stage > 1 ? active : ''}}"></view>
-    <view class="dot {{stage > 1 ? active : ''}}"></view>
-    <view class="line {{stage > 1 ? active : ''}}"></view>
-    <view class="dot {{stage > 1 ? active : ''}}"></view>
-    <view class="line {{stage > 1 ? active : ''}}"></view>
-    <view class="growth-scale">
-      <text class="scale">感兴趣</text>
-      <text class="scale">开始创业</text>
-      <text class="scale">创业中</text>
-      <text class="scale">种子轮</text>
-      <text class="scale">天使轮</text>
+    <view class="growth-line">
+        <view class="growth-cursor">
+            <image mode="widthFix" src="../../img/icon/running.png" style="transform:translate({{((stage + 1) * 100) / 6}}vw)"></image>
+        </view>
+        <view class="line active"></view>
+        <view class="dot active"></view>
+        <view class="line {{stage >= 1 ? 'active' : ''}}"></view>
+        <view class="dot {{stage >= 1 ? 'active' : ''}}"></view>
+        <view class="line {{stage >= 2 ? 'active' : ''}}"></view>
+        <view class="dot {{stage >= 2 ? 'active' : ''}}"></view>
+        <view class="line {{stage >= 3 ? 'active' : ''}}"></view>
+        <view class="dot {{stage >= 3 ? 'active' : ''}}"></view>
+        <view class="line {{stage >= 4 ? 'active' : ''}}"></view>
+        <view class="dot {{stage >= 4 ? 'active' : ''}}"></view>
+        <view class="line"></view>
+        <view class="growth-scale">
+            <text class="scale">感兴趣</text>
+            <text class="scale">开始创业</text>
+            <text class="scale">创业中</text>
+            <text class="scale">种子轮</text>
+            <text class="scale">天使轮</text>
+        </view>
     </view>
-  </view>
-  <view class="app-list">
-    <view class="app-box" data-type="1" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/icon/spark_cur.png"></image>
-      <text class="app-status">进行中</text>
-      玩-火种节
+    <view class="app-list">
+        <view class="app-box" data-type="1" bindtap="toWxcode">
+            <image mode="widthFix" src="../../img/icon/spark_{{meetStage===0 ? 'def' : 'cur'}}.png"></image>
+            <text class="app-status {{meetStage===3 ? 'green' : (meetStage===2 ? 'red' : 'gray')}}">{{meetStage===3 ? '已完成' : (meetStage===2 ? '进行中' : '未参与')}}</text>
+            玩-火种节
+        </view>
+        <view class="app-box" data-type="2" bindtap="toWxcode">
+            <image mode="widthFix" src="../../img/icon/speedup_{{campStage===0 ? 'def' : 'cur'}}.png"></image>
+            <text class="app-status {{campStage===3 ? 'green' : (campStage===2 ? 'red' : 'gray')}}">{{campStage===3 ? '已完成' : (campStage===2 ? '进行中' : '未参与')}}</text>
+            创-加速营
+        </view>
+        <view class="app-box" data-type="3" bindtap="toWxcode">
+            <image mode="widthFix" src="../../img/icon/venture_{{meetStage===0 ? 'def' : 'cur'}}.png"></image>
+            <text class="app-status {{meetStage===3 ? 'green' : (meetStage===2 ? 'red' : 'gray')}}">{{meetStage===3 ? '已完成' : (meetStage===2 ? '进行中' : '未参与')}}</text>
+            投-创投会
+        </view>
     </view>
-    <view class="app-box" data-type="2" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/icon/speed_def.png"></image>
-      <text class="app-status gray">未参与</text>
-      创-加速营
+    <view class="interval-title">
+        我的徽章
     </view>
-    <view class="app-box" data-type="3" bindtap="toWxcode">
-      <image mode="widthFix" src="../../img/icon/venture_cur.png"></image>
-      <text class="app-status gray">未参与</text>
-      投-创投会
-    </view>
-  </view>
-  <view class="interval-title">
-    我的徽章
-  </view>
-  <view class="btn-area">
-    <button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>
-  </view>
+    <!--<view class="btn-area" wx:if="{{role}}">-->
+        <!--<button type="primary" bindtap="toOrgerAdd" wx:if="{{role}}">添加组织者</button>-->
+    <!--</view>-->
 </view>

@@ -1,0 +1,3 @@
+<view class="container-white qrcode">
+  <image mode="scaleToFill" src="{{url}}"></image>
+</view>

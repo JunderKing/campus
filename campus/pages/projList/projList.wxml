@@ -3,19 +3,19 @@
         创业项目
     </view>
     <view class="header-nav">
-        <view class="nav-item {{type === 0 ? 'cur' : ''}}" data-type="0" bindtap="chgProjList">
+        <view class="nav-item {{appType === 0 ? 'cur' : ''}}" data-type="0" bindtap="chgProjList">
             所有项目
         </view>
-        <view class="nav-item {{type === 1 ? 'cur' : ''}}" data-type="1" bindtap="chgProjList">
+        <view class="nav-item {{appType === 1 ? 'cur' : ''}}" data-type="1" bindtap="chgProjList">
             火种节
         </view>
-        <view class="nav-item {{type === 2 ? 'cur' : ''}}" data-type="2" bindtap="chgProjList">
+        <view class="nav-item {{appType === 2 ? 'cur' : ''}}" data-type="2" bindtap="chgProjList">
             加速营
         </view>
-        <view class="nav-item {{type === 3 ? 'cur' : ''}}" data-type="3" bindtap="chgProjList">
+        <view class="nav-item {{appType === 3 ? 'cur' : ''}}" data-type="3" bindtap="chgProjList">
             创投会
         </view>
-        <view class="nav-item {{type === 4 ? 'cur' : ''}}" data-type="4" bindtap="chgProjList">
+        <view class="nav-item {{appType === 4 ? 'cur' : ''}}" data-type="4" bindtap="chgProjList">
             其它项目
         </view>
     </view>

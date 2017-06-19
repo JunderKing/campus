@@ -25,7 +25,7 @@
           主办方logo
         </view>
         <image class="logo-icon" mode="aspectFit" src="{{logo}}" bindtap="chooseLogo" wx:if="{{logo}}"></image>
-        <image class="logo-icon" mode="aspectFit" src="/img/iconadd.png" bindtap="chooseLogo" wx:else ></image>
+        <image class="logo-icon" mode="aspectFit" src="/img/icon/iconadd.png" bindtap="chooseLogo" wx:else ></image>
       </view>
     </view>
     <view class="form-group">

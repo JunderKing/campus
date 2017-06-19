@@ -11,12 +11,13 @@ Page({
 
     onShow: function(){
         this.getPostInfo()
+        this.getComnt()
     },
 
     getPostInfo: function(){
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/campus/getPostInfo',
+            url: 'http://www.campus.com/api/campus/getPostInfo',
             method: 'POST',
             data: {
                 postId: this.data.postId
@@ -36,7 +37,7 @@ Page({
     delPost: function(){
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/campus/delPost',
+            url: 'http://www.campus.com/api/campus/delPost',
             method: 'POST',
             data: {
                 postId: this.data.postId
@@ -64,6 +65,67 @@ Page({
             urls: urls,
             success: function(res){
                 console.log("success")
+            }
+        })
+    },
+
+    getComnt: function(){
+        var that = this
+        wx.request({
+            url: 'http://www.campus.com/api/campus/getComnt',
+            method: 'POST',
+            data: {
+                tarType: 42,
+                tarId: this.data.postId
+            },
+            success: function(res){
+                wx.hideToast()
+                console.log('getComnt=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return getApp().showError(3)
+                }
+                that.setData({comnts: res.data.comnts})
+            }
+        })
+    },
+
+    showComntMenu: function(e){
+        var comntId = e.currentTarget.dataset.comntid
+        var comntorId = e.currentTarget.dataset.comntorid
+        var userId = getApp().gdata.userId
+        var that = this
+        if (userId === comntorId) {
+            wx.showActionSheet({
+                itemList: ['删除该评论'],
+                success: function(res){
+                    if (res.tapIndex === 0) {
+                        that.delComnt(comntId)
+                    }
+                }
+            })
+        }
+    },
+
+    delComnt: function(comntId) {
+        var that = this
+        wx.request({
+            url: 'http://www.campus.com/api/campus/delComnt',
+            method: 'GET',
+            data: {
+                comntId: comntId
+            },
+            success: function(res){
+                console.log('delComnt=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return getApp().showError(3)
+                }
+                wx.showToast({
+                    title: '评论已删除',
+                    icon: 'success'
+                })
+                that.getComnt()
             }
         })
     }

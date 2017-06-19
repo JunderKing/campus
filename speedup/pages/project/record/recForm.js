@@ -64,7 +64,7 @@ Page({
     var timestamp = Date.parse(new Date(this.data.date))
     var date = timestamp / 1000
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/addRecord',
+      url: 'http://www.campus.com/api/speedup/addRecord',
       method: 'POST',
       data: {
         projId: this.data.projId,
@@ -94,7 +94,7 @@ Page({
     console.log('Date')
     console.log(date)
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/updRecInfo',
+      url: 'http://www.campus.com/api/speedup/updRecInfo',
       method: 'POST',
       data: {
         recId: this.data.recId,

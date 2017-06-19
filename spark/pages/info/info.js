@@ -7,11 +7,12 @@ Page({
     },
 
     onShow: function(){
+        getApp().updateUserInfo()
         var gdata = getApp().gdata
         var roleStr = '创业者'
         if (gdata.role === 1) {
             roleStr = '管理员'
-        } else if (gdata.festRole === 1){
+        } else if (gdata.schoolId === 1){
             roleStr = '组织者'
         } else if (gdata.isMentor === 1) {
             roleStr = '创业导师'
@@ -19,6 +20,10 @@ Page({
         this.setData({
             avatarUrl: gdata.avatarUrl,
             nickName: gdata.nickName,
+            stage: gdata.stage,
+            festStage: gdata.festStage,
+            campStage: gdata.campStage,
+            meetStage: gdata.meetStage,
             roleStr: roleStr,
             role: gdata.role
         })
@@ -27,7 +32,7 @@ Page({
     onShareAppMessage: function(){
         return {
             title: '火种节小程序',
-            path: '/pages/project/project'
+            path: '/pages/include/start'
         }
     },
 
@@ -39,35 +44,34 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'https://www.kingco.tech/api/common/getQrcode',
+            url: 'http://www.campus.com/api/campus/getQrcode',
             method: 'GET',
             data: {
-                type: 1,
+                appType: 1,
                 name: 'spark_orger',
                 path: '/pages/include/start?role=4'
             },
             success: function(res){
                 console.log('getQrcode=>')
                 console.log(res)
-                wx.hideToast()
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'https://www.kingco.tech/static/qrcode/spark_orger.png'
+                wx.hideToast()
+                var url = 'http://www.campus.com/static/qrcode/spark_orger.png'
                 wx.previewImage({
                     urls: [url]
                 })
             },
             fail: function(){
-                wx.hideToast()
                 return getApp().showError(2)
             }
         })
     },
 
     toWxcode: function(e){
-        var type = parseInt(e.currentTarget.dataset.type)
-        var fileName = 'wxcode' + type
+        var appType = parseInt(e.currentTarget.dataset.type)
+        var fileName = 'wxcode' + appType
         var that = this
         wx.showToast({
             title: '数据加载中',
@@ -75,10 +79,10 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'https://www.kingco.tech/api/common/getWxcode',
+            url: 'http://www.campus.com/api/campus/getWxcode',
             method: 'GET',
             data: {
-                type: type,
+                appType: appType,
                 name: fileName,
                 path: '/pages/include/start'
             },
@@ -89,18 +93,18 @@ Page({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
+                var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
                 var title = '小程序'
-                if (type === 1) {
+                if (appType === 1) {
                     title = '火种节小程序'
-                } else if (type === 2) {
+                } else if (appType === 2) {
                     title = '加速营小程序'
                 } else {
                     title = '创投会小程序'
                 }
                 wx.showModal({
                     title: title,
-                    content: '页面跳转后，点击右上角菜单，选择『识别图中二维码』即可打开小程序',
+                    content: '页面跳转后，长按或点击右上角菜单，选择『识别图中小程序码』即可打开小程序',
                     showCancel: false,
                     success: function(){
                         wx.previewImage({
@@ -110,7 +114,6 @@ Page({
                 })
             },
             fail: function(){
-                wx.hideToast()
                 return getApp().showError(2)
             }
         })

@@ -15,9 +15,9 @@ class VmUser extends Migration
     {
         Schema::create('vm_user', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->default(0);
-            $table->unsignedTinyInteger('meet_role')->default(0);
+            $table->unsignedTinyInteger('school_id')->default(0);
             $table->unsignedInteger('cur_meet_id')->default(0);
-            //$table->unsignedInteger('cur_proj_id')->default(0);
+            $table->unsignedTinyInteger('cur_proj_id')->default(0);
             $table->primary('user_id');
             $table->timestamps();
         });

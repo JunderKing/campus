@@ -12,8 +12,8 @@
     <view class="form-group">
       <view class="form-item image">
         <image src="{{item}}" wx:for="{{imageUrls}}"></image>
-        <image src="/img/iconadd.png" bindtap="chooseImage"></image>
-        <image src="/img/icondel.png"></image>
+        <image src="/img/icon/iconadd.png" bindtap="chooseImage"></image>
+        <image src="/img/icon/icondel.png"></image>
       </view>
     </view>
     <view class="btn-area">

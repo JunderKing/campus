@@ -24,7 +24,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'https://www.kingco.tech/api/speedup/getRecList',
+      url: 'http://www.campus.com/api/speedup/getRecList',
       method: 'GET',
       data: {
         projId: this.data.projId

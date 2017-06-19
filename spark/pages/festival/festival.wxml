@@ -1,74 +1,77 @@
 <view class="container">
-  <view class="page-title">
-    {{name}}
-  </view>
-  <view class="logo-area">
-    <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
-  </view>
-  <view class="interval-title">
-    活动简介
-  </view>
-  <view class="content-area">
-    <text class="para">{{intro}}</text>
-  </view>
-  <view class="interval-title">
-    时间安排
-  </view>
-  <view class="content-area time-box">
-    <text class="para">开始时间：{{startTime}}</text>
-    <text class="para">结束时间：{{endTime}}</text>
-  </view>
-  <view class="interval-title" >
-    活动地址
-  </view>
-  <view class="content-area">
-    <text class="para">{{addr}}</text>
-  </view>
-  <view class="interval-title">
-    项目列表
-  </view>
-  <view class="main-hint" wx:if="{{!projList[0]}}">
-    本次活动还没有项目
-  </view>
-  <view class="proj-list-box content-area" wx:else >
-    <navigator class="proj-list-item" url="/pages/festival/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&isMentor={{isMentor}}" wx:for="{{projList}}" hover-class="navigator-hover">
-      <view class="info-main">
-        <view class="info-logo">
-        <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
+    <view class="page-title">
+        {{name}}
+    </view>
+    <view class="logo-area">
+        <image class="logo" src="{{logoUrl}}" mode="aspectFit"></image>
+    </view>
+    <view class="interval-title">
+        活动简介
+    </view>
+    <view class="content-area">
+        <text class="para">{{intro}}</text>
+    </view>
+    <view class="interval-title">
+        时间安排
+    </view>
+    <view class="content-area time-box">
+        <text class="para">开始时间：{{startTime}}</text>
+        <text class="para">结束时间：{{endTime}}</text>
+    </view>
+    <view class="interval-title" >
+        活动地址
+    </view>
+    <view class="content-area">
+        <text class="para">{{addr}}</text>
+    </view>
+    <view class="interval-title">
+        项目列表
+    </view>
+    <view class="main-hint" wx:if="{{!projList[0]}}">
+        本次活动还没有项目
+    </view>
+    <view class="proj-list-box content-area" wx:else >
+        <view class="main-hint">
+            进展分数达到100分，需填满7个环节和至少三条评论
         </view>
-        <view class="info-text">
-          <text class="title">{{item.nickName}}</text>
-          <text class="content">{{item.name}}</text>
-        </view>
-        <view class="info-prog">
-          <text class="title">进展分数</text>
-          <text class="score">{{item.progScore}}分</text>
-        </view>
-      </view>
-      <view class="info-extra">
-        <view class="tag-box">
-          <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
-        </view>
-        <view class="score-bar project" wx:if="{{true}}">
-          <view class="score-red" style="width:{{item.projScore * 20}}%"></view>
-          <view class="score-star-box">
-          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          <image style="width:14px;height:16px;" mode="aspectFill" src="/img/hollowstar.png"></image>
-          </view>
-        </view>
-      </view>
-    </navigator>
-  </view>
-  <view class="btn-area">
-    <navigator url="/pages/festival/festAdd" hover-class="navigator-hover">
-      <button type="primary" size="default" wx:if="{{role||festRole}}">创建火种节</button>
-    </navigator>
-    <navigator url="/pages/festival/festDetail?festId={{festId}}" hover-class="navigator-hover">
-      <button type="{{role||festRole ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||festId===1}}">管理火种节</button>
-    </navigator>
-    <picker class="btn-style {{role||festRole||orgerId===userId||festId===1 ? 'default' : 'primary'}}" mode="selector" range="{{festList}}" range-key="name" bindchange="onFestChange">切换火种节</picker>
-  </view>
+        <navigator class="proj-list-item" url="/pages/festival/projDetail?projId={{item.projId}}&isMember={{item.isMember}}&isMentor={{isMentor}}" wx:for="{{projList}}" hover-class="navigator-hover">
+            <view class="info-main">
+                <view class="info-logo">
+                    <image mode="scaleToFill" src="{{item.logoUrl}}"></image>
+                </view>
+                <view class="info-text">
+                    <text class="title">{{item.nickName}}</text>
+                    <text class="content">{{item.name}}</text>
+                </view>
+                <view class="info-prog">
+                    <text class="title">进展分数</text>
+                    <text class="score">{{item.progScore}}分</text>
+                </view>
+            </view>
+            <view class="info-extra">
+                <view class="tag-box">
+                    <text wx:for="{{item.tag}}" wx:for-item="tag">{{tag}}</text>
+                </view>
+                <view class="score-bar project" wx:if="{{true}}">
+                    <view class="score-red" style="width:{{item.projScore * 20}}%"></view>
+                    <view class="score-star-box">
+                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                    </view>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="btn-area">
+        <navigator url="/pages/festival/festAdd" hover-class="navigator-hover">
+            <button type="primary" size="default" wx:if="{{role||schoolId}}">创建火种节</button>
+        </navigator>
+        <navigator url="/pages/festival/festDetail?festId={{festId}}" hover-class="navigator-hover">
+            <button type="{{role||schoolId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||festId===1}}">管理火种节</button>
+        </navigator>
+        <picker class="btn-style {{role||schoolId||orgerId===userId||festId===1 ? 'default' : 'primary'}}" mode="selector" range="{{festList}}" range-key="name" bindchange="onFestChange">切换火种节</picker>
+    </view>
 </view>
