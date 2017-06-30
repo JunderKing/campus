@@ -41,7 +41,7 @@ App({
         console.log('loginData=>')
         console.log(loginData)
         wx.request({
-            url: 'http://www.campus.com/api/campus/login',
+            url: 'https://www.kingco.tech/api/campus/login',
             method: 'POST',
             data: loginData,
             success: function (res) {
@@ -68,7 +68,7 @@ App({
     updateUserInfo: function(callback){
         var that = this;
         wx.request({
-            url: 'http://www.campus.com/api/campus/getUserInfo',
+            url: 'https://www.kingco.tech/api/campus/getUserInfo',
             method: 'POST',
             data: {
                 appType: 1,
@@ -90,11 +90,11 @@ App({
 
     checkOption: function(options, isLoading, callback){
         options.role = parseInt(options.role)
-        options.schoolId = parseInt(options.schoolId)
+        options.schlId = parseInt(options.schlId)
         options.festId = parseInt(options.festId)
         options.projId = parseInt(options.projId)
         if (options.role === 4) {
-            this.addOrger(options.schoolId, isLoading, callback)
+            this.addOrger(options.schlId, isLoading, callback)
         } else if (options.role === 3 && options.festId > 0) {
             this.addMentor(options.festId, isLoading, callback)
         } else if (options.role === 2 && options.festId > 0) {
@@ -108,14 +108,14 @@ App({
         }
     },
 
-    addOrger: function(schoolId, isLoading, callback){
+    addOrger: function(schlId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/addOrger',
+            url: 'https://www.kingco.tech/api/campus/addOrger',
             method: 'GET',
             data: {
                 appType: 1,
-                schoolId: schoolId,
+                schlId: schlId,
                 userId: this.gdata.userId
             },
             success: function(res){
@@ -124,7 +124,7 @@ App({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return that.showError(3)
                 }
-                that.gdata.schoolId = 1
+                that.gdata.schlId = 1
                 if (callback) {
                     callback()
                 }
@@ -151,7 +151,7 @@ App({
     addMentor: function(festId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/spark/addFestMentor',
+            url: 'https://www.kingco.tech/api/spark/addFestMentor',
             method: 'POST',
             data: {
                 userId: this.gdata.userId,
@@ -187,7 +187,7 @@ App({
     addProject: function(festId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getAvlProjList',
+            url: 'https://www.kingco.tech/api/campus/getAvlProjList',
             method: 'GET',
             data: {
                 appType: 1,
@@ -230,7 +230,7 @@ App({
     addMember: function(projId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/addProjMember',
+            url: 'https://www.kingco.tech/api/campus/addProjMember',
             method: 'POST',
             data: {
                 appType: 1,
@@ -324,7 +324,7 @@ App({
         avatarUrl: '',
         nickName: '',
         role: 0,
-        schoolId: 0,
+        schlId: 0,
         curFestId: 0,
         curProjId: 0,
         isMentor: 0,

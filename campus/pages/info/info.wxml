@@ -52,9 +52,14 @@
     <view class="interval-title">
         我的徽章
     </view>
-    <view class="btn-area" wx:if="{{role}}">
-        <navigator url="/pages/info/campusAdmin" hover-class="navigator-hover">
+    <view class="btn-area" wx:if="{{role===0 && schlId}}">
+        <navigator url="/pages/info/orgerAdmin?schlId={{schlId}}" hover-class="navigator-hover">
             <button type="primary">管理组织者</button>
+        </navigator>
+    </view>
+    <view class="btn-area" wx:if="{{role}}">
+        <navigator url="/pages/info/schlAdmin" hover-class="navigator-hover">
+            <button type="primary">管理学校</button>
         </navigator>
     </view>
 </view>

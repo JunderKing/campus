@@ -24,19 +24,19 @@ class FestivalController extends Controller
             return self::$ERROR1;
         }
         extract($params);
-        $fileName = "spark_fest_" . time() . ".png";
+        $schlId = Model\SfUser::where('user_id', $userId)->first()->schl_id;
+        $fileName = "spark-fest-$schlId-" . time() . ".png";
         $result = $request->file('festLogo')->storeAs('logo', $fileName, 'public');
-        $schoolId = Model\SfUser::where('user_id', $userId)->first()->school_id;
         $festObj = Model\SfFestival::create([
             'orger_id' => $userId,
-            'school_id' => $schoolId,
+            'schl_id' => $schlId,
             'name' => $name,
             'intro' => $intro,
             'sponsor' => $sponsor,
             'start_time' => $startTime,
             'end_time' => $endTime,
             'addr' => $addr,
-            'logo_url' => "http://www.campus.com/storage/logo/$fileName" 
+            'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
         ]);
         $festId = $festObj->fest_id;
         Model\SfUser::where('user_id', $userId)->update(['cur_fest_id' => $festId]);

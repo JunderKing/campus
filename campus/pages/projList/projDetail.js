@@ -27,7 +27,7 @@ Page({
     updateProjInfo: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getProjInfo',
+            url: 'https://www.kingco.tech/api/campus/getProjInfo',
             method: 'POST',
             data: {
                 appType: 1,
@@ -52,7 +52,7 @@ Page({
     delProject: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delProject',
+            url: 'https://www.kingco.tech/api/campus/delProject',
             method: 'GET',
             data: {
                 projId: this.data.projId
@@ -74,7 +74,7 @@ Page({
     getComnt: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getComnt',
+            url: 'https://www.kingco.tech/api/campus/getComnt',
             method: 'POST',
             data: {
                 tarType: 41,
@@ -112,7 +112,7 @@ Page({
     delComnt: function(comntId) {
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delComnt',
+            url: 'https://www.kingco.tech/api/campus/delComnt',
             method: 'GET',
             data: {
                 comntId: comntId

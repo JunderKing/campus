@@ -17,7 +17,7 @@ Page({
     getPostInfo: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getPostInfo',
+            url: 'https://www.kingco.tech/api/campus/getPostInfo',
             method: 'POST',
             data: {
                 postId: this.data.postId
@@ -37,7 +37,7 @@ Page({
     delPost: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delPost',
+            url: 'https://www.kingco.tech/api/campus/delPost',
             method: 'POST',
             data: {
                 postId: this.data.postId
@@ -72,7 +72,7 @@ Page({
     getComnt: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getComnt',
+            url: 'https://www.kingco.tech/api/campus/getComnt',
             method: 'POST',
             data: {
                 tarType: 42,
@@ -110,7 +110,7 @@ Page({
     delComnt: function(comntId) {
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delComnt',
+            url: 'https://www.kingco.tech/api/campus/delComnt',
             method: 'GET',
             data: {
                 comntId: comntId

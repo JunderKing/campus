@@ -28,7 +28,7 @@ class PostController extends Controller
             ]);
             return $this->output(['postId' => $postObj->post_id]);
         }
-        $fileName = "campus_post_$imageNum" . '_' . time() . ".png";
+        $fileName = "post-$imageNum-" . time() . ".png";
         $result = $request->file('postImage')->storeAs('postImage', $fileName, 'public');
         $postObj = Model\Post::updateOrCreate(
             ['user_id' => $userId, 'time_id' => $timeId],
@@ -39,7 +39,7 @@ class PostController extends Controller
         $postId = $postIdArr[0];
         $result = Model\PostImage::updateOrCreate(
             ['post_id' => $postId, 'image_num' => $imageNum],
-            ['image_url' => "http://www.campus.com/storage/postImage/$fileName"]
+            ['image_url' => "https://www.kingco.tech/storage/postImage/$fileName"]
         );
         return $this->output(['postId' => $postId]);
     }

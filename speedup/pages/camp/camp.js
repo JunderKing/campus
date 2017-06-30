@@ -43,7 +43,7 @@ Page({
         }
         var that = this
         wx.request({
-            url: "http://www.campus.com/api/speedup/getUserCampInfo",
+            url: "https://www.kingco.tech/api/speedup/getUserCampInfo",
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId
@@ -79,7 +79,7 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/speedup/chgCurCamp',
+            url: 'https://www.kingco.tech/api/speedup/chgCurCamp',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId,

@@ -9,7 +9,9 @@
         "pages/postList/postList",
         "pages/postList/postAdd",
         "pages/postList/postDetail",
-        "pages/info/campusAdmin",
+        "pages/info/orgerAdmin",
+        "pages/info/schlAdmin",
+        "pages/info/schlAdd",
         "pages/info/info"
     ],
     "window": {

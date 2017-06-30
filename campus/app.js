@@ -1,7 +1,6 @@
 App({
     onLaunch: function (options) {
         console.log('AppOnLaunch')
-        console.log(options)
     },
 
     login: function (options) {
@@ -25,17 +24,17 @@ App({
                 })
             },
             fail: function(res){
-                return that.showError(2)
+                that.showError(2)
             }
         })
     },
 
     getUserInfo: function (loginData, options) {
         var that = this;
-        console.log('loginData')
+        console.log('loginData=>')
         console.log(loginData)
         wx.request({
-            url: 'http://www.campus.com/api/campus/login',
+            url: 'https://www.kingco.tech/api/campus/login',
             method: 'POST',
             data: loginData,
             success: function (res) {
@@ -45,9 +44,13 @@ App({
                     return that.showError(3)
                 }
                 that.gdata = res.data.userInfo
-                wx.switchTab({
-                    url: '/pages/projList/projList'
-                })
+                if (options.role) {
+                    that.checkOption(options, true)
+                } else {
+                    wx.switchTab({
+                        url: '/pages/projList/projList'
+                    })
+                }
             },
             fail: function(){
                 that.showError(2)
@@ -58,8 +61,8 @@ App({
     updateUserInfo: function(callback){
         var that = this;
         wx.request({
-            url: 'http://www.campus.com/api/campus/getUserInfo',
-            method: 'POST',
+            url: 'https://www.kingco.tech/api/campus/getUserInfo',
+            method: 'GET',
             data: {
                 appType: 4,
                 userId: this.gdata.userId
@@ -74,6 +77,129 @@ App({
                 if (callback) {
                     callback()
                 }
+            }
+        })
+    },
+
+    checkOption: function(options, isLoading, callback){
+        options.role = parseInt(options.role)
+        options.schlId = parseInt(options.schlId)
+        options.adminId = parseInt(options.adminId)
+        if (options.role === 7 && options.adminId > 0) {
+            this.addAdmin(options.adminId, isLoading, callback)
+        } else if (options.role === 6 && options.adminId > 0) {
+            this.addSchool(options.adminId, isLoading, callback)
+        } else if (options.role === 5 && options.schlId > 0) {
+            this.addSchlAdmin(options.schlId, isLoading, callback)
+        } else {
+            wx.switchTab({
+                url: '/pages/projList/projList'
+            })
+        }
+    },
+
+    addAdmin: function(adminId, isLoading, callback){
+        var that = this
+        wx.request({
+            url: 'https://www.kingco.tech/api/campus/addAdmin',
+            method: 'GET',
+            data: {
+                adminId: adminId,
+                userId: this.gdata.userId
+            },
+            success: function(res){
+                console.log('addAdmin=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return that.showError(3)
+                }
+                that.gdata.role = 1
+                if (callback) {
+                    callback()
+                }
+                if (isLoading) {
+                    wx.switchTab({
+                        url: '/pages/projList/projList',
+                        success: function(){
+                            wx.showToast({
+                                title: '恭喜您成为管理员!'
+                            })
+                        }
+                    })
+                } else {
+                    wx.showToast({
+                        title: '恭喜您成为管理员!'
+                    })
+                }
+            }
+        })
+    },
+
+    addSchool: function(adminId, isLoading, callback){
+        wx.switchTab({
+            url: '/pages/info/info',
+            success: function(){
+                wx.showToast({
+                    title: '数据加载中...',
+                    icon: 'loading'
+                })
+                wx.navigateTo({
+                    url: '/pages/info/schlAdd?adminId=' + adminId
+                })
+            }
+        })
+    },
+
+    addSchlAdmin: function(schlId, isLoading, callback){
+        var that = this
+        wx.request({
+            url: 'https://www.kingco.tech/api/campus/addSchlAdmin',
+            method: 'GET',
+            data: {
+                schlId: schlId,
+                userId: this.gdata.userId
+            },
+            success: function(res){
+                console.log('addSchlAdmin=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return that.showError(3)
+                }
+                that.gdata.schlRole = 1
+                if (callback) {
+                    callback()
+                }
+                if (isLoading) {
+                    wx.switchTab({
+                        url: '/pages/projList/projList',
+                        success: function(){
+                            wx.showToast({
+                                title: '恭喜您成为学校管理员!'
+                            })
+                        }
+                    })
+                } else {
+                    wx.showToast({
+                        title: '恭喜您成为学校管理员!'
+                    })
+                }
+            }
+        })
+    },
+
+    qrScan: function(callback){
+        var that = this
+        wx.scanCode({
+            success: function(res){
+                wx.showToast({
+                    title: '数据处理中...',
+                    icon: 'loading',
+                    duration: 10000
+                })
+                var data = that.queryString(res.path)
+                console.log('qrScan=>')
+                console.log(data)
+                that.checkOption(data, false, callback)
             }
         })
     },
@@ -126,7 +252,7 @@ App({
         avatarUrl: '',
         nickName: '',
         role: 0,
-        schoolId: 0,
+        schlId: 0,
         isMentor: 0,
         avlProjList: []
     }

@@ -32,7 +32,7 @@ Page({
             duration: 10000
         })
         wx.uploadFile({
-            url: "http://www.campus.com/api/spark/addFestival",
+            url: "https://www.kingco.tech/api/spark/addFestival",
             filePath: this.data.logo,
             name: 'festLogo',
             formData: {
@@ -45,13 +45,12 @@ Page({
                 intro: formData.intro
             },
             success: function(res){
-                wx.hideToast()
                 console.log('addFestival=>')
                 console.log(res)
                 res.data = JSON.parse(res.data)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
-                }        
+                }
                 wx.navigateBack();
                 wx.showToast({
                     title: '创建成功'

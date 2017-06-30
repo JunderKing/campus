@@ -3,12 +3,33 @@
         管理组织者
     </view>
     <view class="interval-title">
+        学校管理员
+    </view>
+    <view class="avatar-area">
+        <view class="avatar-box" wx:for="{{schlAdmins}}"> 
+            <image class="avatar" src="{{item.avatarUrl}}"></image>
+            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delSchlAdmin">
+                <view class=""></view>
+            </view>
+            <text>{{item.nickName}}</text>
+        </view>
+        <view class="avatar-box"> 
+            <image class="avatar cube" src="../../img/icon/iconadd.png"  data-type="3" bindtap="toSchlAdminAdd"></image>
+            <text>添加</text>
+        </view>
+        <view class="avatar-box"> 
+            <image class="avatar cube" src="../../img/icon/icondel.png" data-key="mentor" bindtap="showDel"></image>
+            <text>删除</text>
+        </view>
+        <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
+    </view>
+    <view class="interval-title">
         火种节组织者
     </view>
     <view class="avatar-area">
         <view class="avatar-box" wx:for="{{festOrgers}}"> 
             <image class="avatar" src="{{item.avatarUrl}}"></image>
-            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delMentor">
+            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" data-type="1" catchtap="delOrger">
                 <view class=""></view>
             </view>
             <text>{{item.nickName}}</text>
@@ -29,7 +50,7 @@
     <view class="avatar-area">
         <view class="avatar-box" wx:for="{{campOrgers}}"> 
             <image class="avatar" src="{{item.avatarUrl}}"></image>
-            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delMentor">
+            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" data-type="2" catchtap="delOrger">
                 <view class=""></view>
             </view>
             <text>{{item.nickName}}</text>
@@ -39,7 +60,7 @@
             <text>添加</text>
         </view>
         <view class="avatar-box"> 
-            <image class="avatar cube" src="../../img/icon/icondel.png" data-key="mentor" bindtap="showDel"></image>
+            <image class="avatar cube" src="../../img/icon/icondel.png" data-key="mentor" data-type="3" bindtap="showDel"></image>
             <text>删除</text>
         </view>
         <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
@@ -50,7 +71,7 @@
     <view class="avatar-area">
         <view class="avatar-box" wx:for="{{meetOrgers}}"> 
             <image class="avatar" src="{{item.avatarUrl}}"></image>
-            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" catchtap="delMentor">
+            <view class="del-icon" wx:if="{{delHidden}}" data-userid="{{item.userId}}" data-type="3" catchtap="delOrger">
                 <view class=""></view>
             </view>
             <text>{{item.nickName}}</text>
@@ -66,8 +87,6 @@
         <view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>
     </view>
     <view class="btn-area">
-        <button type="primary" bindtap="toOrgerAdd" data-type="1">添加火种节组织者</button>
-        <button type="default" bindtap="toOrgerAdd" data-type="2">添加加速营组织者</button>
-        <button type="default" bindtap="toOrgerAdd" data-type="3">添加创投会组织者</button>
+        <button type="warn" bindtap="delSchool" data-type="1">删除学校</button>
     </view>
 </view>

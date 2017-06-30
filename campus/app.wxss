@@ -587,24 +587,24 @@ view.proj-list.content-area{
     padding-bottom: 0;
     padding-top: 0;
 }
-view.proj-info{
+navigator.proj-info{
     padding: 10px 0;
     border-top: 1px solid #dcdcdc;
     position: relative;
 }
-view.proj-info>image{
+navigator.proj-info>image{
     width: 45px;
     height: 45px;
     border-radius: 5px;
 }
-view.proj-info>text.nick-name{
+navigator.proj-info>text.nick-name{
     position: absolute;
     left: 55px;
     top: 14px;
     font-size: 16px;
     color: #888;
 }
-view.proj-info>text.proj-title{
+navigator.proj-info>text.proj-title{
     position: absolute;
     left: 55px;
     top: 34px;
@@ -615,7 +615,7 @@ view.proj-info>text.proj-title{
     white-space: nowrap;
     overflow: hidden;
 }
-view.proj-info>view.del-btn {
+navigator.proj-info>view.del-btn {
     position: absolute;
     right: 5px;
     top: 15px;

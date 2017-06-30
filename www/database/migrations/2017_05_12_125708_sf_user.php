@@ -15,7 +15,7 @@ class SfUser extends Migration
     {
         Schema::create('sf_user', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->default(0);
-            $table->unsignedTinyInteger('school_id')->default(0);
+            $table->unsignedTinyInteger('schl_id')->default(0);
             $table->unsignedInteger('cur_fest_id')->default(0);
             $table->unsignedTinyInteger('cur_proj_id')->default(0);
             $table->timestamps();

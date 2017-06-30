@@ -25,7 +25,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/speedup/getCampInfo',
+            url: 'https://www.kingco.tech/api/speedup/getCampInfo',
             method: 'GET',
             data: {
                 campId: this.data.campId
@@ -52,9 +52,9 @@ Page({
             icon: 'loading',
             duration: 10000
         })
-        var fileName = 'speedup_camp_mentor_' + this.data.campId
+        var fileName = 'speedup-camp-mentor-' + this.data.campId
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 2,
@@ -68,7 +68,7 @@ Page({
                     return getApp().showError(3)
                 }
                 wx.hideToast()
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -86,9 +86,9 @@ Page({
             icon: 'loading',
             duration: 10000
         })
-        var fileName = 'speedup_camp_proj_' + this.data.campId
+        var fileName = 'speedup-camp-proj-' + this.data.campId
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 2,
@@ -102,7 +102,7 @@ Page({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -135,7 +135,7 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/speedup/delCampMentor',
+            url: 'https://www.kingco.tech/api/speedup/delCampMentor',
             method: 'POST',
             data: {
                 userId: userId,
@@ -175,7 +175,7 @@ Page({
                     duration: 10000
                 })
                 wx.request({
-                    url: 'http://www.campus.com/api/speedup/delCampProject',
+                    url: 'https://www.kingco.tech/api/speedup/delCampProject',
                     method: 'POST',
                     data: {
                         projId: projId,
@@ -215,7 +215,7 @@ Page({
                     duration: 10000
                 })
                 wx.request({
-                    url: 'http://www.campus.com/api/speedup/delCamp',
+                    url: 'https://www.kingco.tech/api/speedup/delCamp',
                     method: 'POST',
                     data: {
                         campId: that.data.campId

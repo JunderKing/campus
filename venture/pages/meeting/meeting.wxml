@@ -26,12 +26,12 @@
   </view>
   <view class="btn-area">
     <navigator url="/pages/meeting/meetAdd" hover-class="navigator-hover">
-      <button type="primary" size="default" wx:if="{{role||schoolId}}">创建创投会</button>
+      <button type="primary" size="default" wx:if="{{role||schlId}}">创建创投会</button>
     </navigator>
     <navigator url="/pages/meeting/meetDetail?meetId={{meetId}}" hover-class="navigator-hover">
-      <button type="{{role||schoolId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||meetId===1}}">管理创投会</button>
+      <button type="{{role||schlId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||meetId===1}}">管理创投会</button>
     </navigator>
-    <picker class="btn-style {{role||schoolId||orgerId===userId||meetId===1 ? 'default' : 'primary'}}" mode="selector" range="{{meetList}}" range-key="name" bindchange="onMeetChange">切换创投会</picker>
+    <picker class="btn-style {{role||schlId||orgerId===userId||meetId===1 ? 'default' : 'primary'}}" mode="selector" range="{{meetList}}" range-key="name" bindchange="onMeetChange">切换创投会</picker>
   </view>
 </view>
 

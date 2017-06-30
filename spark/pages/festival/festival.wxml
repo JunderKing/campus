@@ -67,11 +67,11 @@
     </view>
     <view class="btn-area">
         <navigator url="/pages/festival/festAdd" hover-class="navigator-hover">
-            <button type="primary" size="default" wx:if="{{role||schoolId}}">创建火种节</button>
+            <button type="primary" size="default" wx:if="{{role||schlId}}">创建火种节</button>
         </navigator>
         <navigator url="/pages/festival/festDetail?festId={{festId}}" hover-class="navigator-hover">
-            <button type="{{role||schoolId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||festId===1}}">管理火种节</button>
+            <button type="{{role||schlId ? 'default' : 'primary'}}" size="default" wx:if="{{role||orgerId===userId||festId===1}}">管理火种节</button>
         </navigator>
-        <picker class="btn-style {{role||schoolId||orgerId===userId||festId===1 ? 'default' : 'primary'}}" mode="selector" range="{{festList}}" range-key="name" bindchange="onFestChange">切换火种节</picker>
+        <picker class="btn-style {{role||schlId||orgerId===userId||festId===1 ? 'default' : 'primary'}}" mode="selector" range="{{festList}}" range-key="name" bindchange="onFestChange">切换火种节</picker>
     </view>
 </view>

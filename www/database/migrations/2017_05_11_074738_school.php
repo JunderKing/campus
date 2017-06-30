@@ -14,11 +14,12 @@ class School extends Migration
     public function up()
     {
         Schema::create('school', function (Blueprint $table) {
-            $table->increments('school_id');
+            $table->increments('schl_id');
             $table->string('name', 32)->default('');
             $table->string('intro', 512)->default('');
             $table->string('logo_url', 128)->default('');
             $table->unsignedTinyInteger('province')->default(0);
+            $table->unsignedInteger('admin_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
             //$table->dateTime('created_at');

@@ -16,7 +16,7 @@ Page({
             duration: 10000
         })
         wx.uploadFile({
-            url: "http://www.campus.com/api/speedup/addCamp",
+            url: "https://www.kingco.tech/api/speedup/addCamp",
             filePath: this.data.logo,
             name: 'campLogo',
             formData: {
@@ -32,7 +32,7 @@ Page({
                 res.data = JSON.parse(res.data)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
-                }        
+                }
                 wx.navigateBack();
                 wx.showToast({
                     title: '创建成功'
@@ -70,4 +70,3 @@ Page({
         })
     }
 })
-

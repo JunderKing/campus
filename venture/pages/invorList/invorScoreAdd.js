@@ -25,7 +25,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/venture/getInvorScore',
+      url: 'https://www.kingco.tech/api/venture/getInvorScore',
       method: 'GET',
       data: {
         userId: getApp().gdata.userId,
@@ -65,7 +65,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: "http://www.campus.com/api/venture/updInvorScore",
+      url: "https://www.kingco.tech/api/venture/updInvorScore",
       method: 'POST',
       data: {
         invorId: this.data.invorId,

@@ -21,7 +21,7 @@ Page({
     getProjList: function() {
         var that = this
         wx.request({
-            url: "http://www.campus.com/api/campus/getAppProjList",
+            url: "https://www.kingco.tech/api/campus/getAppProjList",
             method: 'POST',
             data: {
                 appType: this.data.appType
@@ -45,6 +45,11 @@ Page({
                 wx.hideToast()
             }
         })
-    }
+    },
+
+    scanCode: function(){
+        var projPointer = this
+        getApp().qrScan()
+    },
 })
 

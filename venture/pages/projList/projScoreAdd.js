@@ -28,7 +28,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getComntScore',
+            url: 'https://www.kingco.tech/api/campus/getComntScore',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId,
@@ -68,7 +68,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: "http://www.campus.com/api/campus/upsComntScore",
+            url: "https://www.kingco.tech/api/campus/upsComntScore",
             method: 'POST',
             data: {
                 tarType: 31,

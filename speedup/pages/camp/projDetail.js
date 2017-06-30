@@ -29,7 +29,7 @@ Page({
             })
         }
         wx.request({
-            url: 'http://www.campus.com/api/campus/getProjInfo',
+            url: 'https://www.kingco.tech/api/campus/getProjInfo',
             method: 'GET',
             data: {
                 appType: 2,

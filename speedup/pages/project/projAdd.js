@@ -36,7 +36,7 @@ Page({
         })
         if (isCorrect === 1) {
             wx.request({
-                url: 'http://www.campus.com/api/campus/addProject',
+                url: 'https://www.kingco.tech/api/campus/addProject',
                 method: 'POST',
                 data: {
                     appType: 2,
@@ -70,7 +70,7 @@ Page({
             })
         } else if (isCorrect === 2){
             wx.uploadFile({
-                url: "http://www.campus.com/api/campus/addProject",
+                url: "https://www.kingco.tech/api/campus/addProject",
                 filePath: this.data.logo,
                 name: 'projLogo',
                 formData: {

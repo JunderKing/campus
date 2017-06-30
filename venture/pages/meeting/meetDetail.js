@@ -25,7 +25,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/venture/getMeetInfo',
+            url: 'https://www.kingco.tech/api/venture/getMeetInfo',
             method: 'POST',
             data: {
                 meetId: this.data.meetId
@@ -52,9 +52,9 @@ Page({
             icon: 'loading',
             duration: 10000
         })
-        var fileName = 'venture_meet_invor_' + this.data.meetId
+        var fileName = 'venture-meet-invor-' + this.data.meetId
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 3,
@@ -68,7 +68,7 @@ Page({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -86,9 +86,9 @@ Page({
             icon: 'loading',
             duration: 10000
         })
-        var fileName = 'venture_meet_proj_' + this.data.meetId
+        var fileName = 'venture-meet-proj-' + this.data.meetId
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 3,
@@ -102,7 +102,7 @@ Page({
                     return getApp().showError(3)
                 }
                 wx.hideToast()
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -135,7 +135,7 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/venture/delMeetInvor',
+            url: 'https://www.kingco.tech/api/venture/delMeetInvor',
             method: 'POST',
             data: {
                 userId: userId,
@@ -175,7 +175,7 @@ Page({
                     duration: 10000
                 })
                 wx.request({
-                    url: 'http://www.campus.com/api/venture/delMeetProject',
+                    url: 'https://www.kingco.tech/api/venture/delMeetProject',
                     method: 'POST',
                     data: {
                         projId: projId,
@@ -215,7 +215,7 @@ Page({
                     duration: 10000
                 })
                 wx.request({
-                    url: 'http://www.campus.com/api/venture/delMeetival',
+                    url: 'https://www.kingco.tech/api/venture/delMeetival',
                     method: 'POST',
                     data: {
                         meetId: that.data.meetId

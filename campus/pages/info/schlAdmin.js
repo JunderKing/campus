@@ -1,22 +1,22 @@
 Page({
     data: {
-        role: 0,
-        delHidden: false,
-        delHidden: false,
+        mentors: [],
+        projList: [],
         delHidden: false,
     },
 
     onLoad: function(options){
         this.setData({
+            festId: options.festId,
             role: getApp().gdata.role
         })
     },
 
     onShow: function(){
-        this.getOrgerInfo()
+        this.getSchlInfo()
     },
 
-    getOrgerInfo: function(){
+    getSchlInfo: function(){
         var that = this
         wx.showToast({
             title: '数据加载中……',
@@ -24,19 +24,19 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getOrgerInfo',
+            url: 'https://www.kingco.tech/api/campus/getSchlList',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId
             },
             success: function(res){
-                console.log('getFestInfo=>')
+                console.log('getSchlList=>')
                 console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }        
                 wx.hideToast()
-                that.setData(res.data.orgerInfo)
+                that.setData(res.data.adminInfo)
             },
             fail: function(){
                 getApp().showError(2)
@@ -44,24 +44,21 @@ Page({
         })
     },
 
-    toOrgerAdd: function(e){
-        console.log('toOrgerAdd')
-        console.log(e)
-        var appType = parseInt(e.currentTarget.dataset.type)
+    toAdminAdd: function(){
         var that = this
-        var name = 'orger' + appType
         wx.showToast({
-            title: '数据加载中...',
+            title: '数据加载中',
             icon: 'loading',
             duration: 10000
         })
+        var fileName = 'campusvc-admin-' + getApp().gdata.userId
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
-                appType: appType,
-                name: name,
-                path: '/pages/include/start?role=4&schoolId=' + getApp().gdata.userId
+                appType: 4,
+                name: fileName,
+                path: '/pages/include/start?role=7&adminId=' + getApp().gdata.userId
             },
             success: function(res){
                 console.log('getQrcode=>')
@@ -70,7 +67,42 @@ Page({
                     return getApp().showError(3)
                 }
                 wx.hideToast()
-                var url = 'http://www.campus.com/static/qrcode/' + name + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+                wx.navigateTo({
+                    url: '/pages/include/qrpage?url=' + url
+                })
+            },
+            fail: function(){
+                getApp().showError(2)
+            }
+        })
+    },
+
+    toSchlAdd: function(){
+        var that = this
+        wx.showToast({
+            title: '数据加载中',
+            icon: 'loading',
+            duration: 10000
+        })
+        var fileName = 'school_add-' + getApp().gdata.userId
+        wx.request({
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
+            method: 'GET',
+            data: {
+                appType: 4,
+                name: fileName,
+                path: '/pages/include/start?role=6&adminId=' + getApp().gdata.userId
+            },
+            success: function(res){
+                console.log('getQrcode=>')
+                console.log(res)
+                if (res.statusCode !== 200 || res.data.errcode !== 0) {
+                    return getApp().showError(3)
+                }
+                wx.hideToast()
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
+                console.log(url)
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -94,9 +126,8 @@ Page({
         }
     },
 
-    delOrger: function(e){
+    delAdmin: function(e){
         var userId = e.currentTarget.dataset.userid
-        return console.log(e)
         wx.showToast({
             title: '处理中...',
             icon: 'loading',
@@ -104,23 +135,23 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delOrger',
+            url: 'https://www.kingco.tech/api/campus/delAdmin',
             method: 'POST',
             data: {
-                appType: appType,
+                adminId: getApp().gdata.userId,
                 userId: userId
             },
             success: function(res){
-                console.log('delFestMentor=>')
+                console.log('delAdmin=>')
                 console.log(res)
-                wx.hideToast()
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
+                wx.hideToast()
                 wx.showToast({
-                    title: '组织者已删除!'
+                    title: '管理员已删除!'
                 })
-                that.getFestInfo()
+                that.getSchlInfo()
             },
             fail: function(){
                 getApp().showError(2)

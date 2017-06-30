@@ -10,7 +10,7 @@ Page({
     getPostList: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getPostList',
+            url: 'https://www.kingco.tech/api/campus/getPostList',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId

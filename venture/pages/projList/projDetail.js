@@ -28,7 +28,7 @@ Page({
     updateProjInfo: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getProjInfo',
+            url: 'https://www.kingco.tech/api/campus/getProjInfo',
             method: 'POST',
             data: {
                 appType: 3,
@@ -53,7 +53,7 @@ Page({
     getComnt: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getComnt',
+            url: 'https://www.kingco.tech/api/campus/getComnt',
             method: 'POST',
             data: {
                 tarType: 31,
@@ -91,7 +91,7 @@ Page({
     delComnt: function(comntId) {
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delComnt',
+            url: 'https://www.kingco.tech/api/campus/delComnt',
             method: 'GET',
             data: {
                 comntId: comntId
@@ -113,7 +113,7 @@ Page({
 
     toMemberAdd: function(){
         var projId = this.data.projId
-        var fileName = 'venture_proj_member_' + projId
+        var fileName = 'venture-proj-member-' + projId
         var that = this
         wx.showToast({
             title: '数据加载中',
@@ -121,7 +121,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 3,
@@ -135,7 +135,7 @@ Page({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -166,7 +166,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/delProjMember',
+            url: 'https://www.kingco.tech/api/campus/delProjMember',
             method: 'GET',
             data: {
                 appType: 3,

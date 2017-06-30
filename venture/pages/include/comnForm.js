@@ -50,7 +50,7 @@ Page({
     updProgContent: function(content){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/venture/updProgContent',
+            url: 'https://www.kingco.tech/api/venture/updProgContent',
             method: 'POST',
             data: {
                 projId: this.data.projId,
@@ -74,7 +74,7 @@ Page({
 
     addComnt: function(content){
         wx.request({
-            url: 'http://www.campus.com/api/campus/addComnt',
+            url: 'https://www.kingco.tech/api/campus/addComnt',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId,
@@ -101,7 +101,7 @@ Page({
 
     addReply: function(content){
         wx.request({
-            url: 'http://www.campus.com/api/campus/addReply',
+            url: 'https://www.kingco.tech/api/campus/addReply',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId,

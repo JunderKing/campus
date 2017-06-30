@@ -41,7 +41,7 @@ App({
         console.log('loginData=>')
         console.log(loginData)
         wx.request({
-            url: 'http://www.campus.com/api/campus/login',
+            url: 'https://www.kingco.tech/api/campus/login',
             method: 'POST',
             data: loginData,
             success: function (res) {
@@ -68,7 +68,7 @@ App({
     updateUserInfo: function(callback){
         var that = this;
         wx.request({
-            url: 'http://www.campus.com/api/campus/getUserInfo',
+            url: 'https://www.kingco.tech/api/campus/getUserInfo',
             method: 'GET',
             data: {
                 appType: 2,
@@ -92,9 +92,9 @@ App({
         options.role = parseInt(options.role)
         options.campId = parseInt(options.campId)
         options.projId = parseInt(options.projId)
-        options.schoolId = parseInt(options.schoolId)
+        options.schlId = parseInt(options.schlId)
         if (options.role === 4) {
-            this.addOrger(options.schoolId, isLoading, callback)
+            this.addOrger(options.schlId, isLoading, callback)
         } else if (options.role === 3 && options.campId > 0) {
             this.addMentor(options.campId, isLoading, callback)
         } else if (options.role === 2 && options.campId > 0) {
@@ -108,14 +108,14 @@ App({
         }
     },
 
-    addOrger: function(schoolId, isLoading, callback){
+    addOrger: function(schlId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/addOrger',
+            url: 'https://www.kingco.tech/api/campus/addOrger',
             method: 'GET',
             data: {
                 appType: 2,
-                schoolId: schoolId,
+                schlId: schlId,
                 userId: this.gdata.userId
             },
             success: function(res){
@@ -151,7 +151,7 @@ App({
     addMentor: function(campId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/speedup/addCampMentor',
+            url: 'https://www.kingco.tech/api/speedup/addCampMentor',
             method: 'GET',
             data: {
                 userId: this.gdata.userId,
@@ -187,7 +187,7 @@ App({
     addProject: function(campId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getAvlProjList',
+            url: 'https://www.kingco.tech/api/campus/getAvlProjList',
             method: 'GET',
             data: {
                 appType: 2,
@@ -230,7 +230,7 @@ App({
     addMember: function(projId, isLoading, callback){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/addProjMember',
+            url: 'https://www.kingco.tech/api/campus/addProjMember',
             method: 'GET',
             data: {
                 appType: 2,

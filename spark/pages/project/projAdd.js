@@ -22,7 +22,7 @@ Page({
             provinceId: index,
             province: this.data.provinceList[index]
         })
-    },  
+    },
 
     formSubmit: function(e) {
         var formData = e.detail.value
@@ -36,7 +36,7 @@ Page({
         })
         if (isCorrect === 1) {
             wx.request({
-                url: 'http://www.campus.com/api/campus/addProject',
+                url: 'https://www.kingco.tech/api/campus/addProject',
                 method: 'POST',
                 data: {
                     appType: 1,
@@ -70,7 +70,7 @@ Page({
             })
         } else if (isCorrect === 2){
             wx.uploadFile({
-                url: "http://www.campus.com/api/campus/addProject",
+                url: "https://www.kingco.tech/api/campus/addProject",
                 filePath: this.data.logo,
                 name: 'projLogo',
                 formData: {

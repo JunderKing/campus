@@ -11,7 +11,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getActProjList',
+            url: 'https://www.kingco.tech/api/campus/getActProjList',
             method: 'POST',
             data: {
                 appType: 3,

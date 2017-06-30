@@ -29,7 +29,7 @@ Page({
             })
         }
         wx.request({
-            url: 'http://www.campus.com/api/campus/getUserProjInfo',
+            url: 'https://www.kingco.tech/api/campus/getUserProjInfo',
             method: 'GET',
             data: {
                 appType: 1,
@@ -56,7 +56,7 @@ Page({
     getComnt: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getComnt',
+            url: 'https://www.kingco.tech/api/campus/getComnt',
             method: 'GET',
             data: {
                 tarType: 11,
@@ -79,7 +79,7 @@ Page({
     getProjList: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/getUserProjList',
+            url: 'https://www.kingco.tech/api/campus/getUserProjList',
             method: 'GET',
             data: {
                 appType: 1,
@@ -114,7 +114,7 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/chgCurProject',
+            url: 'https://www.kingco.tech/api/campus/chgCurProject',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId,
@@ -138,7 +138,7 @@ Page({
 
     toMemberAdd: function(){
         var projId = this.data.projId
-        var fileName = 'spark_proj_member_' + projId
+        var fileName = 'spark-proj-member-' + projId
         var that = this
         wx.showToast({
             title: '数据加载中',
@@ -146,7 +146,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 1,
@@ -160,7 +160,7 @@ Page({
                     return getApp().showError(3)
                 }
                 wx.hideToast()
-                var url = 'http://www.campus.com/static/qrcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/qrcode/' + fileName + '.png'
                 wx.navigateTo({
                     url: '/pages/include/qrpage?url=' + url
                 })
@@ -191,7 +191,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/delProjMember',
+            url: 'https://www.kingco.tech/api/campus/delProjMember',
             method: 'GET',
             data: {
                 appType: 1,
@@ -244,7 +244,7 @@ Page({
     delComnt: function(comntId) {
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/campus/delComnt',
+            url: 'https://www.kingco.tech/api/campus/delComnt',
             method: 'GET',
             data: {
                 comntId: comntId
@@ -264,4 +264,3 @@ Page({
         })
     },
 })
-

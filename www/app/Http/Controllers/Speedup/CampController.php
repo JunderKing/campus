@@ -21,16 +21,16 @@ class CampController extends Controller
             return self::$ERROR1;
         }
         extract($params);
-        $fileName = "speedup_camp_" . time() . ".png";
+        $schlId = Model\ScUser::where('user_id', $userId)->first()->schl_id;
+        $fileName = "speedup-camp-$schlId-" . time() . ".png";
         $result = $request->file('campLogo')->storeAs('logo', $fileName, 'public');
-        $schoolId = Model\ScUser::where('user_id', $userId)->first()->school_id;
         $campObj = Model\ScCamp::create([
             'orger_id' => $userId,
-            'school_id' => $schoolId,
+            'schl_id' => $schlId,
             'name' => $name,
             'intro' => $intro,
             'sponsor' => $sponsor,
-            'logo_url' => "http://www.campus.com/storage/logo/$fileName" 
+            'logo_url' => "https://www.kingco.tech/storage/logo/$fileName" 
         ]);
         $campId = $campObj->camp_id;
         Model\ScUser::where('user_id', $userId)->update(['cur_camp_id' => $campId]);

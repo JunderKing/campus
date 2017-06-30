@@ -22,7 +22,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/speedup/addCard',
+      url: 'https://www.kingco.tech/api/speedup/addCard',
       method: 'POST',
       data: {
         gridId: this.data.gridId,

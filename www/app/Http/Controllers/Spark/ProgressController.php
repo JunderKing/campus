@@ -34,9 +34,9 @@ class ProgressController extends Controller
             return self::$ERROR1;
         }
         extract($params);
-        $fileName = "spark_proj_step" . time() . ".png";
+        $fileName = "spark-proj-step-$stepNum-" . time() . ".png";
         $result = $request->file('progImage')->storeAs('progress', $fileName, 'public');
-        $imageUrl = "http://www.campus.com/storage/progress/$fileName";
+        $imageUrl = "https://www.kingco.tech/storage/progress/$fileName";
         $isExist = Model\SfProjProgress::where([['proj_id', $projId], ['step_num', $stepNum]])->count();
         if (!$isExist) {
             Model\SfProjProgress::create([

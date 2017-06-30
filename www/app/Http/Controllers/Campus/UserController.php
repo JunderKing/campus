@@ -54,7 +54,6 @@ class UserController extends Controller
         } 
         $data = json_decode($data, true);
         $unionId = isset($data['unionId']) ? $data['unionId'] : $data['openId'];
-        $openId = $data['openId'];
         $userInfo = Model\User::updateOrCreate(['union_id' => $unionId], [
             'nick_name' => $data['nickName'],
             'avatar_url' => $data['avatarUrl']
@@ -95,18 +94,23 @@ class UserController extends Controller
         switch ($appType) {
         case 1:
             $appUserInfo = Model\SfUser::where('user_id', $userId)
-                ->select('school_id', 'cur_fest_id', 'cur_proj_id')
+                ->select('schl_id', 'cur_fest_id', 'cur_proj_id')
                 ->first()->toArray();
             break;
         case 2:
             $appUserInfo = Model\ScUser::where('user_id', $userId)
-                ->select('school_id', 'cur_camp_id', 'cur_proj_id')
+                ->select('schl_id', 'cur_camp_id', 'cur_proj_id')
                 ->first()->toArray();
             break;
         case 3:
             $appUserInfo = Model\VmUser::where('user_id', $userId)
-                ->select('school_id', 'cur_meet_id', 'cur_proj_id')
+                ->select('schl_id', 'cur_meet_id', 'cur_proj_id')
                 ->first()->toArray();
+            break;
+        case 4:
+            $appUserInfo = Model\SchlAdmin::where('user_id', $userId)
+                ->pluck('schl_id')->toArray();
+            $appUserInfo = isset($appUserInfo[0]) ? ['schlId' => $appUserInfo[0]] : ['schlId' => 0];
             break;
         default:
             $appUserInfo = [];
@@ -114,6 +118,34 @@ class UserController extends Controller
         }
         $userInfo = array_merge($userInfo, $appUserInfo);
         return $this->output(['userInfo' => $userInfo]);
+    }
+
+    public function addAdmin(Request $request)
+    {
+        $params = $this->validation($request, [
+            'userId' => 'required|numeric',
+            'adminId' => 'required|numeric'
+        ]);
+        if ($params === false) {
+            return self::$ERROR1;
+        }
+        extract($params);
+        $result = Model\User::where('user_id', $userId)->update(['role' => 1]);
+        return $this->output(['updated' => $result]);
+    }
+
+    public function delAdmin(Request $request)
+    {
+        $params = $this->validation($request, [
+            'userId' => 'required|numeric',
+            'adminId' => 'required|numeric'
+        ]);
+        if ($params === false) {
+            return self::$ERROR1;
+        }
+        extract($params);
+        $result = Model\User::where('user_id', $userId)->update(['role' => 0]);
+        return $this->output(['updated' => $result]);
     }
 
     public function chgCurProject(Request $request)

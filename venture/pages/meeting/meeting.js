@@ -3,7 +3,7 @@ Page({
         userId: 0,
         orgerId: 0,
         role: 0,
-        schoolId: 0,
+        schlId: 0,
         meetId: 0,
         name: '',
         intro: '',
@@ -25,7 +25,7 @@ Page({
         this.setData({
             userId: getApp().gdata.userId,
             role: getApp().gdata.role,
-            schoolId: getApp().gdata.schoolId
+            schlId: getApp().gdata.schlId
         })
         this.getMeetInfo()
     },
@@ -45,7 +45,7 @@ Page({
         }
         var that = this
         wx.request({
-            url: "http://www.campus.com/api/venture/getUserMeetInfo",
+            url: "https://www.kingco.tech/api/venture/getUserMeetInfo",
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId
@@ -79,7 +79,7 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/venture/chgCurMeetival',
+            url: 'https://www.kingco.tech/api/venture/chgCurMeetival',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId,

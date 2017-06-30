@@ -26,7 +26,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/speedup/getRecInfo',
+      url: 'https://www.kingco.tech/api/speedup/getRecInfo',
       method: 'GET',
       data: {
         recId: this.data.recId
@@ -59,7 +59,7 @@ Page({
       duration: 10000
     })
     wx.request({
-      url: 'http://www.campus.com/api/speedup/delRecord',
+      url: 'https://www.kingco.tech/api/speedup/delRecord',
       method: 'GET',
       data: {
         recId: this.data.recId

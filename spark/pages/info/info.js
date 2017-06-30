@@ -12,7 +12,7 @@ Page({
         var roleStr = '创业者'
         if (gdata.role === 1) {
             roleStr = '管理员'
-        } else if (gdata.schoolId === 1){
+        } else if (gdata.schlId === 1){
             roleStr = '组织者'
         } else if (gdata.isMentor === 1) {
             roleStr = '创业导师'
@@ -44,7 +44,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getQrcode',
+            url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
             data: {
                 appType: 1,
@@ -58,7 +58,7 @@ Page({
                     return getApp().showError(3)
                 }
                 wx.hideToast()
-                var url = 'http://www.campus.com/static/qrcode/spark_orger.png'
+                var url = 'https://www.kingco.tech/static/qrcode/spark_orger.png'
                 wx.previewImage({
                     urls: [url]
                 })
@@ -79,7 +79,7 @@ Page({
             duration: 10000
         })
         wx.request({
-            url: 'http://www.campus.com/api/campus/getWxcode',
+            url: 'https://www.kingco.tech/api/campus/getWxcode',
             method: 'GET',
             data: {
                 appType: appType,
@@ -93,7 +93,7 @@ Page({
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)
                 }
-                var url = 'http://www.campus.com/static/wxcode/' + fileName + '.png'
+                var url = 'https://www.kingco.tech/static/wxcode/' + fileName + '.png'
                 var title = '小程序'
                 if (appType === 1) {
                     title = '火种节小程序'

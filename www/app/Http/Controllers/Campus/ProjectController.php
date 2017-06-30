@@ -24,9 +24,9 @@ class ProjectController extends Controller
         }
         extract($params);
         if ($request->hasFile('projLogo') && $request->file('projLogo')->isValid()) {
-            $fileName = "projLogo-$appType-$actId-" . time() . ".png";
+            $fileName = "project-$appType-$userId-" . time() . ".png";
             $request->file('projLogo')->storeAs('logo', $fileName, 'public');
-            $logoUrl = "http://www.campus.com/storage/logo/$fileName";
+            $logoUrl = "https://www.kingco.tech/storage/logo/$fileName";
         } else {
             $result = Model\User::where('user_id', $userId)->pluck('avatar_url');
             $logoUrl = $result[0];

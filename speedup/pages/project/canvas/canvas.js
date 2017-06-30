@@ -18,7 +18,7 @@ Page({
     getCanvasInfo: function(){
         var that = this
         wx.request({
-            url: 'http://www.campus.com/api/speedup/getCanvasInfo',
+            url: 'https://www.kingco.tech/api/speedup/getCanvasInfo',
             method: 'GET',
             data: {
                 projId: this.data.projId

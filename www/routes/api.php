@@ -24,12 +24,16 @@ Route::group(['prefix' => 'campus', 'namespace' => 'Campus'], function(){
     Route::any('chgCurActivity', 'UserController@chgCurActivity');
     Route::any('getWxcode', 'UserController@getWxcode');
     Route::any('getQrcode', 'UserController@getQrcode');
+    Route::any('addAdmin', 'UserController@addAdmin');
+    Route::any('delAdmin', 'UserController@delAdmin');
     //SchoolController
     Route::any('addSchool', 'SchoolController@addSchool');
     Route::any('delSchool', 'SchoolController@delSchool');
-    Route::any('updSchoolInfo', 'SchoolController@updSchoolInfo');
-    Route::any('getSchoolInfo', 'SchoolController@getSchoolInfo');
-    Route::any('addSchoolAdmin', 'SchoolController@addSchoolAdmin');
+    Route::any('updSchlInfo', 'SchoolController@updSchlInfo');
+    Route::any('getSchlInfo', 'SchoolController@getSchlInfo');
+    Route::any('getSchlList', 'SchoolController@getSchlList');
+    Route::any('addSchlAdmin', 'SchoolController@addSchlAdmin');
+    Route::any('delSchlAdmin', 'SchoolController@delSchlAdmin');
     Route::any('addOrger', 'SchoolController@addOrger');
     Route::any('delOrger', 'SchoolController@delOrger');
     Route::any('getOrgerInfo', 'SchoolController@getOrgerInfo');
