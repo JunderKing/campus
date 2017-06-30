@@ -85,7 +85,7 @@ Page({
             icon: 'loading',
             duration: 10000
         })
-        var fileName = 'school_add-' + getApp().gdata.userId
+        var fileName = 'school-add-' + getApp().gdata.userId
         wx.request({
             url: 'https://www.kingco.tech/api/campus/getQrcode',
             method: 'GET',
