@@ -207,7 +207,7 @@ class UserController extends Controller
         default:
             return self::$ERROR1;
         }
-        $myProjIds = Model\ProjMember::whereIn('proj_id', $projIds)->where([['user_id', $userId], ['appType', $appType]])->pluck('proj_id');
+        $myProjIds = Model\ProjMember::whereIn('proj_id', $actProjIds)->where([['user_id', $userId], ['appType', $appType]])->pluck('proj_id');
         if (count($myProjIds) > 0) {
             switch ($appType) {
             case 1:

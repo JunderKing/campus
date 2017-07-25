@@ -79,14 +79,15 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/speedup/chgCurCamp',
+            url: 'https://www.kingco.tech/api/campus/chgCurActivity',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId,
-                campId: campId
+                actId: campId,
+                appType: 2
             },
             success: function(res){
-                console.log('chgCurCamp=>')
+                console.log('chgCurActivity=>')
                 console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)

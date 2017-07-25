@@ -106,7 +106,7 @@ view.header-nav {
 view.header-nav>view {
     flex: 1 1 auto;
     height: 100%;
-    font-size: 18px;
+    font-size: 14px;
     color: #888;
     background-color: #fff;
     line-height: 40px;
@@ -114,7 +114,7 @@ view.header-nav>view {
 }
 view.header-nav>view.cur {
     color: green;
-    background-color: #f0f0f0;
+    /*background-color: #f0f0f0;*/
     border-bottom: 1px solid green;
 }
 /*
@@ -545,7 +545,7 @@ view.info-main>view.info-prog {
     text-align: center;
 }
 view.info-prog>text.score {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 20px;
 }
 view.info-extra {
@@ -565,10 +565,11 @@ view.tag-box>text {
     box-sizing: border-box;
     display: inline-block;
     height: 16px;
-    padding: 3px 2px;
+    padding: 0px 2px;
     margin: 0 2px;
     border-radius: 3px;
     font-size: 10px;
+    line-height: 16px;
     color: #f0f0f0;
     background-color: #E46C53;
 }

@@ -21,10 +21,12 @@ Page({
         var formData = e.detail.value
         var isCorrect = this.checkForm(formData)
         if (!isCorrect) { return }
-        var startTimeStr = this.data.startDate + ' ' + this.data.startTime
-        var startTime = Date.parse(new Date(startTimeStr))/1000
-        var endTimeStr = this.data.endDate + ' ' + this.data.endTime
-        var endTime = Date.parse(new Date(endTimeStr))/1000
+        var dateArr = this.data.startDate.split('-')
+        var timeArr = this.data.startTime.split(':')
+        var startTime = Date.parse(new Date(dateArr[0], dateArr[1], dateArr[2], timeArr[0], timeArr[1]))/1000
+        var dateArr = this.data.endDate.split('-')
+        var timeArr = this.data.endTime.split(':')
+        var endTime = Date.parse(new Date(dateArr[0], dateArr[1], dateArr[2], timeArr[0], timeArr[1]))/1000
         var that = this
         wx.showToast({
             title: '提交中……',

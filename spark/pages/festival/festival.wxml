@@ -54,12 +54,13 @@
                 </view>
                 <view class="score-bar project" wx:if="{{true}}">
                     <view class="score-red" style="width:{{item.projScore * 20}}%"></view>
+                   <!--<view class="score-red" style="width:50%"></view>-->
                     <view class="score-star-box">
-                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
-                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
-                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
-                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
-                        <image style="width:14px;height:16px;" mode="aspectFill" src="/img/icon/scorestar.png"></image>
+                        <image mode="scaleToFill" src="/img/icon/scorestar.png"></image>
+                        <image mode="scaleToFill" src="/img/icon/scorestar.png"></image>
+                        <image mode="scaleToFill" src="/img/icon/scorestar.png"></image>
+                        <image mode="scaleToFill" src="/img/icon/scorestar.png"></image>
+                        <image mode="scaleToFill" src="/img/icon/scorestar.png"></image>
                     </view>
                 </view>
             </view>

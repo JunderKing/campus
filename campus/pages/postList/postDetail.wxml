@@ -30,7 +30,7 @@
         </view>
     </view>
     <template is="comment" data="{{comnts: comnts}}"/>
-    <view class="btn-area">
+    <view class="btn-area" wx:if="{{role===1}}">
         <button type="warn" bindtap="delPost">删除资源</button>
     </view>
     <view class="bottom-anchor">

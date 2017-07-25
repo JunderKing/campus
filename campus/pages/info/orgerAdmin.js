@@ -86,7 +86,7 @@ Page({
         console.log(e)
         var appType = parseInt(e.currentTarget.dataset.type)
         var that = this
-        var name ='school-orger-' + getApp().gdata.schlId
+        var name ='school-orger-' + appType + '-' + getApp().gdata.schlId
         wx.showToast({
             title: '数据加载中...',
             icon: 'loading',
@@ -213,13 +213,13 @@ Page({
                     duration: 10000
                 })
                 wx.request({
-                    url: 'https://www.kingco.tech/api/campus/delSchl',
+                    url: 'https://www.kingco.tech/api/campus/delSchool',
                     method: 'POST',
                     data: {
                         schlId: that.data.schlId
                     },
                     success: function(res){
-                        console.log('delSchl=>')
+                        console.log('delSchool=>')
                         console.log(res)
                         if (res.statusCode !== 200 || res.data.errcode !== 0) {
                             return getApp().showError(3)

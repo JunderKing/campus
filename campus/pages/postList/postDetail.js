@@ -5,7 +5,8 @@ Page({
 
     onLoad: function(options){
         this.setData({
-            postId: options.postId
+            postId: options.postId,
+            role: getApp().gdata.role
         })
     },
 

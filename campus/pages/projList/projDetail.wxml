@@ -24,7 +24,7 @@
         <!--<view class="avatar-box" wx:for="{{[1,2,3,4,5,6,7,8]}}"></view>-->
         <!--</view>-->
     <template is="comment" data="{{comnts: comnts}}"/>
-    <view class="btn-area">
+    <view class="btn-area" wx:if="{{role===1}}">
         <button type="warn" bindtap="delProject">删除项目</button>
     </view>
     <view class="bottom-anchor">

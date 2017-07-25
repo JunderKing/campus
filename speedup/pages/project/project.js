@@ -117,6 +117,7 @@ Page({
             url: 'https://www.kingco.tech/api/campus/chgCurProject',
             method: 'POST',
             data: {
+                appType: 2,
                 userId: getApp().gdata.userId,
                 projId: projId
             },

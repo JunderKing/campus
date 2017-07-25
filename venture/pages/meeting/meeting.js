@@ -79,14 +79,15 @@ Page({
         })
         var that = this
         wx.request({
-            url: 'https://www.kingco.tech/api/venture/chgCurMeetival',
+            url: 'https://www.kingco.tech/api/campus/chgCurActivity',
             method: 'GET',
             data: {
                 userId: getApp().gdata.userId,
-                meetId: meetId
+                actId: meetId,
+                appType: 3
             },
             success: function(res){
-                console.log('chgCurMeetival=>')
+                console.log('chgCurActivity=>')
                 console.log(res)
                 if (res.statusCode !== 200 || res.data.errcode !== 0) {
                     return getApp().showError(3)

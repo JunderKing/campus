@@ -33,9 +33,9 @@ view.canvas-row{
     height: 16px;
     min-width: 16px;
     border-radius: 8px;
-    background-color: red;
+    /*background-color: red;*/
     text-align: center;
-    color: #fff;
+    color: #888;
 }
 navigator.canvas-item{
   width: 50%;
