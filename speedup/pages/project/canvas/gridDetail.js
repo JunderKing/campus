@@ -24,32 +24,32 @@ Page({
     },
 
     setTitle: function(){
-        var title = '画布'
+        var title = '画格'
         switch (this.data.gridNum) {
             case 1:
-                title = '用户细分'
+                title = '为什么有用户和需求'
                 break;
             case 2:
-                title = '痛点问题'
+                title = '凭什么是我和我的团队'
                 break;
             case 3:
-                title = '价值主张'
+                title = '核心产品是什么'
                 break;
             case 4:
-                title = '解决方案'
+                title = '到现在发展怎样了'
                 break;
             case 5:
-                title = '衡量指标'
+                title = '下一步将如何发展'
                 break;
             case 6:
-                title = '收入模型'
+                title = '计划融资多少'
                 break;
-            case 7:
-                title = '渠道通路'
-                break;
-            case 8:
-                title = '增长引擎'
-                break;
+            //case 7:
+                //title = '渠道通路'
+                //break;
+            //case 8:
+                //title = '增长引擎'
+                //break;
         }
         this.setData({
             title: title

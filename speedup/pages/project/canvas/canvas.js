@@ -1,7 +1,7 @@
 Page({
     data:{
         projId: 0,
-        cardNum: [0,0,0,0,0,0,0,0]
+        cardNum: [0,0,0,0,0,0]
     },
 
     onLoad: function(options){

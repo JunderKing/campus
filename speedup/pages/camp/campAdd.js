@@ -23,7 +23,8 @@ Page({
                 userId: getApp().gdata.userId,
                 name: formData.name,
                 sponsor: formData.sponsor,
-                intro: formData.intro
+                intro: formData.intro,
+                formId: e.detail.formId
             },
             success: function(res){
                 wx.hideToast()

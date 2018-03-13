@@ -6,11 +6,6 @@ App({
     login: function (options) {
         console.log('loginOptions=>')
         console.log(options)
-        //wx.showToast({
-            //title: '数据处理中...',
-            //icon: 'loading',
-            //duration: 10000
-        //})
         var that = this
         wx.login({
             success: function (res) {

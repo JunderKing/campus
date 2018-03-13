@@ -1,6 +1,6 @@
 <view class="container" wx:if="{{true}}">
   <view class="page-title">
-    <text>{{title}}画格</text>
+    <text>{{title}}</text>
   </view>
   <view class="interval-title">
     画格内容

@@ -44,7 +44,8 @@ Page({
                 startTime: startTime,
                 endTime: endTime,
                 addr: formData.addr,
-                intro: formData.intro
+                intro: formData.intro,
+                formId: e.detail.formId
             },
             success: function(res){
                 console.log('addFestival=>')

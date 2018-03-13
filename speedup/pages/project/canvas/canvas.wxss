@@ -9,7 +9,7 @@ view.canvas-area{
 }
 view.canvas-row{
   width: 100%;
-  height: 25%;
+  height: 33.33%;
   display: flex;
   flew-flow: row nowrap;
   justify-content: center;

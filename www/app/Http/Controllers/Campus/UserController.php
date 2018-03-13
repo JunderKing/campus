@@ -55,21 +55,22 @@ class UserController extends Controller
         $data = json_decode($data, true);
         $unionId = isset($data['unionId']) ? $data['unionId'] : $data['openId'];
         $userInfo = Model\User::updateOrCreate(['union_id' => $unionId], [
+            'open_id' => '',
             'nick_name' => $data['nickName'],
             'avatar_url' => $data['avatarUrl']
         ]);
         $userId = $userInfo->user_id;
         switch ($appType) {
         case 1:
-            Model\SfUser::firstOrCreate(['user_id' => $userId]);
+            Model\SfUser::updateOrCreate(['user_id' => $userId], ['open_id' => $data['openId']]);
             Model\User::where([['user_id', $userId], ['festStage', '<', 1]])->update(['festStage' => 1]);
             break;
         case 2:
-            Model\ScUser::firstOrCreate(['user_id' => $userId]);
+            Model\ScUser::updateOrCreate(['user_id' => $userId], ['open_id' => $data['openId']]);
             Model\User::where([['user_id', $userId], ['campStage', '<', 1]])->update(['campStage' => 1]);
             break;
         case 3:
-            Model\VmUser::firstOrCreate(['user_id' => $userId]);
+            Model\VmUser::updateOrCreate(['user_id' => $userId], ['open_id' => $data['openId']]);
             Model\User::where([['user_id', $userId], ['meetStage', '<', 1]])->update(['meetStage' => 1]);
             break;
         }
@@ -207,7 +208,7 @@ class UserController extends Controller
         default:
             return self::$ERROR1;
         }
-        $myProjIds = Model\ProjMember::whereIn('proj_id', $actProjIds)->where([['user_id', $userId], ['appType', $appType]])->pluck('proj_id');
+        $myProjIds = Model\ProjMember::whereIn('proj_id', $actProjIds)->where([['user_id', $userId], ['app_type', $appType]])->pluck('proj_id')->toArray();
         if (count($myProjIds) > 0) {
             switch ($appType) {
             case 1:
@@ -221,7 +222,8 @@ class UserController extends Controller
                 break;
             }
         } 
-        return $this->output(['curProjId' => $myProjIds[0]]);
+        $curProjId = isset($myProjIds[0]) ? $myProjIds[0] : 0;
+        return $this->output(['curProjId' => $curProjId]);
     }
 
     public function getQrcode(Request $request){
@@ -265,7 +267,6 @@ class UserController extends Controller
         if ($accessToken){
             $url = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=$accessToken";
             $data = json_encode(array('path'=>$path, 'width'=>200));
-            //var_dump($data);
             $opts = array(
                 'http'=> array(
                     'method'=>'POST',

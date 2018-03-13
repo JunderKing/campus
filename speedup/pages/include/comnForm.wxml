@@ -1,5 +1,5 @@
 <view class="container">
-  <form bindsubmit="formSubmit" bindreset="formReset">
+  <form report-submit bindsubmit="formSubmit" bindreset="formReset">
     <view class="form-group">
       <view class="form-item">
         <textarea class="" name="content" placeholder="{{holder}}" value="{{content}}" auto-height maxlength="-1"/>

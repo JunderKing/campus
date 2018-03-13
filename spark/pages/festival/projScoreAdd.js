@@ -75,6 +75,7 @@ Page({
                 tarId: this.data.projId,
                 userId: getApp().gdata.userId,
                 content: formData.content,
+                formId: e.detail.formId,
                 scores: {
                     tScore: this.data.tScore,
                     aScore: this.data.aScore,

@@ -35,13 +35,13 @@
                     <text class="{{cur<1 ? 'cur' : ''}}">组建团队</text>
                 </view>
                 <view class="text" data-stepid="step2" bindtap="toStep">
-                    <text class="{{cur>=1 && cur<3 ? 'cur' : ''}}">对的问题</text>
+                    <text class="{{cur>=1 && cur<3 ? 'cur' : ''}}">用户需求</text>
                 </view>
                 <view class="text" data-stepid="step4" bindtap="toStep">
-                    <text class="{{cur>=3 &&cur<5 ? 'cur' : ''}}">对的主意</text>
+                    <text class="{{cur>=3 &&cur<5 ? 'cur' : ''}}">创意想法</text>
                 </view>
                 <view class="text" data-stepid="step6" bindtap="toStep">
-                    <text class="{{cur>=5 ? 'cur' : ''}}">对的产品</text>
+                    <text class="{{cur>=5 ? 'cur' : ''}}">产品研发</text>
                 </view>
             </view>
         </view>

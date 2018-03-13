@@ -45,7 +45,8 @@ Page({
                     name: formData.name,
                     province: this.data.provinceId,
                     tag: formData.tag,
-                    intro: formData.intro
+                    intro: formData.intro,
+                    formId: e.detail.formId
                 },
                 success: function(res){
                     wx.hideToast()
@@ -80,7 +81,8 @@ Page({
                     name: formData.name,
                     province: this.data.provinceId,
                     tag: formData.tag,
-                    intro: formData.intro
+                    intro: formData.intro,
+                    formId: e.detail.formId
                 },
                 success: function(res){
                     wx.hideToast()

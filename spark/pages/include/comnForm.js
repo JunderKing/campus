@@ -31,6 +31,7 @@ Page({
 
     formSubmit: function(e){
         var content = e.detail.value.content
+        var formId = e.detail.formId
         if (!content) {
             return wx.showToast({
                 title: '内容不可为空',
@@ -44,18 +45,18 @@ Page({
         })
         switch (this.data.type) {
             case 'progress':
-                this.updProgContent(content)
+                this.updProgContent(content, formId)
                 break;
             case 'addComnt':
-                this.addComnt(content)
+                this.addComnt(content, formId)
                 break;
             case 'addReply':
-                this.addReply(content)
+                this.addReply(content, formId)
                 break;
         }
     },
 
-    updProgContent: function(content){
+    updProgContent: function(content, formId){
         var that = this
         wx.request({
             url: 'https://www.kingco.tech/api/spark/updProgContent',
@@ -63,7 +64,8 @@ Page({
             data: {
                 projId: this.data.projId,
                 stepNum: this.data.stepNum,
-                content: content
+                content: content,
+                formId: formId
             },
             success: function(res){
                 console.log('updProgContent=>')
@@ -80,7 +82,7 @@ Page({
         })
     },
 
-    addComnt: function(content){
+    addComnt: function(content, formId){
         wx.request({
             url: 'https://www.kingco.tech/api/campus/addComnt',
             method: 'POST',
@@ -88,6 +90,7 @@ Page({
                 tarType: 11,
                 tarId: this.data.projId,
                 userId: getApp().gdata.userId,
+                formId: formId,
                 content: content
             },
             success: function(res){
@@ -108,13 +111,14 @@ Page({
         })
     },
 
-    addReply: function(content){
+    addReply: function(content, formId){
         wx.request({
             url: 'https://www.kingco.tech/api/campus/addReply',
             method: 'POST',
             data: {
                 userId: getApp().gdata.userId,
                 comntId: this.data.comntId,
+                formId: formId,
                 content: content
             },
             success: function(res){
