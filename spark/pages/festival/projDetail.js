@@ -120,6 +120,18 @@ Page({
                 url: "/pages/festival/projDetailProg?projId=" + this.data.projId
             })
         }
+    },
+
+    toComnt: function () {
+        if (this.data.isMember) {
+            wx.showToast({
+                title: '小组成员不可以发表评论'
+            })
+        } else {
+            wx.navigateTo({
+                url: "/pages/include/comnForm?type=addComnt&projId=" + this.data.projId
+            })
+        }
     }
 })
 

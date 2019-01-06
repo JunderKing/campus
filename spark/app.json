@@ -21,7 +21,7 @@
         "navigationBarTitleText": "火种节",
         "backgroundColor": "#ffffff",
         "backgroundTextStyle": "dark",
-        "enablePullDownRefresh": "true"
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "color": "#000",

@@ -5,7 +5,7 @@
     <view class="proj-list choose" data-projid="{{item.projId}}" wx:for="{{projList}}" bindtap="addFestProject">
         {{item.name}}
     </view>
-    <view class="btn-area">
-        <button type="primary" size="primary" bindtap="toProjAdd">创建项目</button>
-    </view>
+    <!--<view class="btn-area">-->
+        <!--<button type="primary" size="primary" bindtap="toProjAdd">创建项目</button>-->
+    <!--</view>-->
 </view>
